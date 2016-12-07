@@ -5,15 +5,17 @@
     <title>Statistical challenges in high-dimensional neuroscience</title>
     <meta name="viewport"
 	  content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <link rel="stylesheet" href="reveal/css/reveal.min.css">
-    <link rel="stylesheet" href="pkgwtheme.css" id="theme">
-    <link rel="stylesheet" href="reveal/lib/css/zenburn.css">
+    <!--<link rel="stylesheet" href="reveal.js/css/reveal.min.css">-->
+    <link rel="stylesheet" href="reveal.js/css/reveal.min.css">
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/black.css" id="theme">-->
+    <link rel="stylesheet" href="cust_black.css" id="theme">
+    <link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
     <script>
-      document.write('<link rel="stylesheet" href="reveal/css/print/'+(window.location.search.match(/print-pdf/gi) ? 'pdf' : 'paper')+'.css" type="text/css" media="print">');
+      document.write('<link rel="stylesheet" href="reveal.js/css/print/'+(window.location.search.match(/print-pdf/gi) ? 'pdf' : 'paper')+'.css" type="text/css" media="print">');
     </script>
     <script src="js/three.js"></script>
     <!--[if lt IE 9]>
-    <script src="reveal/lib/js/html5shiv.js"></script>
+    <script src="reveal.js/lib/js/html5shiv.js"></script>
     <![endif]-->
   </head>
 
@@ -64,7 +66,6 @@
 	  <div class="fragment">
 	    <blockquote>"...there is no computation without representation" — Fodor 1981</blockquote>
 	  </div>
-	  <br>
 	  <div class="fragment">
 		<p>Neural activity encodes features of stimuli and behavior</p>
 	    <ul id="blanklist">
@@ -87,10 +88,9 @@
 	      Let $Y(t)$ count spikes up to time $t$. <br>
 	      In discrete time bins, $\mathbf{t}=(0, h, 2h, \dots, T)$, let $y_i$ be number of spikes $\in(t_{i-1}, t_i]$:
 	       $$\begin{align*}y_t &\sim \text{Poisson}(\lambda_t),\\
-	       \lambda_t &= f[\mathbf{x}_t] = f\left(\mu + \sum_i k_i x_{t-i} + \alpha_i y_{t-i}\right)\end{align*}$$<br>
-	  </div>
+	       \lambda_t &= f[\mathbf{x}_t] = f\left(\mu + \sum_i k_i x_{t-i} + \alpha_i y_{t-i}\right)\end{align*}$$	  </div>
 	    <p>Visual system the canonical example</p>
-	    <img src="assets/glmuncoupled_white.svg" width="65%">
+	    <img src="assets/glmuncoupled_white.svg" width="60%">
 	    <p class="rcred">Adapted from Aljadeff, Lansdell, Fairhall, Kleinfeld Neuron 2016</p>
 	  <aside class="notes">
 	    <span style="color: red"></span> •
@@ -142,7 +142,7 @@
 	    	Assume $\mathbf{z}_t\in\mathbb{R}^P$ is common to all $J$ units and $P\ll J$<br>
 	    	$\Rightarrow$ Recording from large populations of neurons allows inference of $\mathbf{z}_t$<br>
 	    	$\Rightarrow$ Estimate $\mathbf{z}_t$ through dimensionality reduction, state-space models, etc</p>
-	    <img src="assets/intrinsic_manifold_white.svg" width="60%">
+	    <img src="assets/intrinsic_manifold_white.svg" width="55%">
 	  <aside class="notes">
 	    <span style="color: red"></span> •
 	    • <span style="color: green"></span>
@@ -360,13 +360,13 @@
 
 <!-- ----------------------------------------------------------------------- -->
 
-	<section data-background-video="assets/hydra_feeding_short.mp4">
+	<section data-background-video="assets/tracking_video.mp4">
 		<!--<div class="stretch">
   		<iframe src="assets/hydra_feeding_short.mp4" height="100%" width="100%">
 	    </div>-->
-		<h2>Hydra: a model system for neural control</h2>
+		<!--<h2>Hydra: a model system for neural control</h2>
 		  <video src="assets/hydra_feeding_short.mp4" id="bgvid" muted
-		 controls loop class="stretch slideautostart"></video>
+		 controls loop class="stretch slideautostart"></video>-->
 		  <div id="left" class="fragment" style="margin-top: 30px; margin-left: 50px; background-color: rgba(0, 80, 50, .85); ">
 	  	<ul>
   			<li> Cnidaria: LCA with humans ~800MYA
@@ -561,7 +561,8 @@
 	  </aside>
 	</section>
 
-    <script src="reveal/js/reveal.min.js"></script>
+    <!--<script src="reveal.js/js/reveal.min.js"></script>-->
+    <script src="reveal.js/js/reveal.js"></script>
     <script src="pdfjs/compatibility.js"></script>
     <script src="pdfjs/pdf.js"></script>
 
@@ -625,15 +626,15 @@
         },
 
         dependencies: [
-          { src: 'reveal/lib/js/classList.js',
+          { src: 'reveal.js/lib/js/classList.js',
 	    condition: function() { return !document.body.classList; }},
-          { src: 'reveal/plugin/markdown/marked.js',
+          { src: 'reveal.js/plugin/markdown/marked.js',
 	    condition: function() { return !!document.querySelector ('[data-markdown]'); }},
-          { src: 'reveal/plugin/markdown/markdown.js',
+          { src: 'reveal.js/plugin/markdown/markdown.js',
 	    condition: function() { return !!document.querySelector ('[data-markdown]'); }},
-          { src: 'reveal/plugin/highlight/highlight.js', async: true,
+          { src: 'reveal.js/plugin/highlight/highlight.js', async: true,
 	    callback: function() { hljs.initHighlightingOnLoad (); }},
-          { src: 'reveal/plugin/notes/notes.js', async: true,
+          { src: 'reveal.js/plugin/notes/notes.js', async: true,
 	    condition: function() { return !!document.body.classList; }},
           { src: 'mymath.js', async: true },
 	  { src: 'pdfimgs.js', async: true },
