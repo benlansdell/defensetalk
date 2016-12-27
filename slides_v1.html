@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Statistical challenges in high-dimensional neuroscience</title>
+    <title>Revealing principles of motor control from nerve nets to neural prosthetics</title>
     <meta name="viewport"
 	  content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <!--<link rel="stylesheet" href="reveal.js/css/reveal.min.css">-->
@@ -25,7 +25,7 @@
     <div class="reveal">
       <div class="slides">
         <section data-background="assets/dst2_background.png">
-          <h1>Statistical challenges in <br>high-dimensional neuroscience</h1>
+          <h1>Revealing principles of motor control from nerve nets to neural prosthetics</h1>
 	  <br><br>
 	  <p style="text-align: center; font-size: larger">Computational neuroscience seminar<br>Ben Lansdell</p>
 
@@ -34,6 +34,7 @@
 	    • <span style="color: green"></span>
 	  </aside>
         </section>
+
 
 
 	<!--<section data-background="assets/computer.jpg">-->
@@ -66,14 +67,12 @@
 	  <div class="fragment">
 	    <blockquote>"...there is no computation without representation" — Fodor 1981</blockquote>
 	  </div>
-	  <div class="fragment">
+	  <div class="fragment" style="text-align: left">
 		<p>Neural activity encodes features of stimuli and behavior</p>
-	    <ul id="blanklist">
-	      <li>If an individual neuron spikes at times $\{t_i\}$: $$y(t)=\sum_{i=1}^{Y(T)}\delta(t-t_{i}),$$
-	      <li>then in general $$y(t)\sim f[x(t)].$$</li>
-	      <li>But starting simply $$y(t)\sim f(k*x(t)),$$</li>
-	      <li>where $k(\tau)$ are <em>feature vectors</em>.</li>
-	    </ul>
+	      If an individual neuron spikes at times $\{t_i\}$: $$y(t)=\sum_{i=1}^{Y(T)}\delta(t-t_{i}),$$
+	      then, in general $$y(t)\sim f[x(t)].$$
+	      But, starting simply, $$y(t)\sim f(k*x(t)),$$
+	      where $k(\tau)$ are <em>feature vectors</em>.
 	  </div>
 
 	  <aside class="notes">
@@ -84,14 +83,13 @@
 
 	<section>
 	  <h2>Linear non-linear Poisson models</h2>
+	    <img src="assets/glmuncoupled_white.svg" width="60%">
+	    <p class="rcred">Adapted from Aljadeff, Lansdell, Fairhall, Kleinfeld Neuron 2016</p>
 	  	<div style="text-align: left;">
 	      Let $Y(t)$ count spikes up to time $t$. <br>
 	      In discrete time bins, $\mathbf{t}=(0, h, 2h, \dots, T)$, let $y_i$ be number of spikes $\in(t_{i-1}, t_i]$:
 	       $$\begin{align*}y_t &\sim \text{Poisson}(\lambda_t),\\
-	       \lambda_t &= f[\mathbf{x}_t] = f\left(\mu + \sum_i k_i x_{t-i} + \alpha_i y_{t-i}\right)\end{align*}$$	  </div>
-	    <p>Visual system the canonical example</p>
-	    <img src="assets/glmuncoupled_white.svg" width="60%">
-	    <p class="rcred">Adapted from Aljadeff, Lansdell, Fairhall, Kleinfeld Neuron 2016</p>
+	       \lambda_t &= f[\mathbf{x}_t, y_t] = f\left(\mu + \sum_i k_i x_{t-i} + \alpha_i y_{t-i}\right)\end{align*}$$	  </div>
 	  <aside class="notes">
 	    <span style="color: red"></span> •
 	    • <span style="color: green"></span>

@@ -84,8 +84,8 @@ body {
 .reveal h6 {
   margin: 0 0 20px 0;
   color: #fff;
-  /*font-family: "Source Sans Pro", Helvetica, sans-serif;*/
-  font-family: "Open Sans", Impact, sans-serif;
+  font-family: "Source Sans Pro", Helvetica, sans-serif;
+  /*font-family: "Open Sans", Impact, sans-serif;*/
   font-weight: 600;
   line-height: 0.9em;
   letter-spacing: normal;
@@ -365,8 +365,9 @@ body {
 .reveal h6 {
   margin: 0 0 20px 0;
   color: #eeeeee;
-  font-family: "Open Sans", Impact, sans-serif;
-  font-variant: small-caps;
+  /*font-family: "Open Sans", Impact, serif;*/
+  font-family: "Montserrat", Impact, serif;
+  /*font-variant: small-caps*/;
   line-height: 0.9em;
   letter-spacing: -0.02em;
   text-transform: none;
@@ -448,15 +449,15 @@ body {
 
 
 .reveal h1 {
-    font-size: 2.5em;
+    font-size: 2em;
     margin-top: 280px;
 }
 
 .reveal h2 {
     font-size: 1.5em;
     text-align: left;
-    border-bottom: 7px solid;
-    border-color: rgba(220, 102, 29, 1);
+    border-bottom: 0px solid;
+    border-color: rgba(129, 102, 220, 1);
     width: 100%;
     padding-bottom: 10px;
     margin-bottom: 15px;
