@@ -451,6 +451,7 @@ body {
 .reveal h1 {
     font-size: 2em;
     margin-top: 280px;
+    text-shadow: 0px 0px 8px #000000;
 }
 
 .reveal h2 {
@@ -548,7 +549,34 @@ body {
 */
 
 html.intro body {
-  background:url("assets/computer.jpg");
+  background:url("assets/octopus.jpg");
+  background-repeat: no-repeat;
+  background-color: #000000;
+  background-size: 1000px;
+  background-position: bottom right;
+}
+
+html.intro2 body {
+  background-repeat: no-repeat;
+  background-color: #000000;
+  background-size: 1000px;
+  background-position: bottom right;
+}
+
+html.neurons body {
+  background:url("assets/allen_brain2.jpg");
+  background-repeat: no-repeat;
+  background-color: #000000;
+  background-size: 1000px;
+  background-position: center;
+}
+
+html.neurons2 body {
+  background:url("assets/allen_brain3.jpg");
+  background-repeat: no-repeat;
+  background-color: #000000;
+  background-size: 1000px;
+  background-position: center;
 }
 
 video#bgvid { 
@@ -588,6 +616,33 @@ video#bgvid {
   width:50%;
 }
 
+#left3 {
+  left:-8.33%;
+  top: 75px;
+  text-align: left;
+  float: left;
+  width:33%;
+  z-index:-10;
+}
+
+#center3 {
+  left:-8.33%;
+  top: 75px;
+  text-align: left;
+  float: middle;
+  width:33%;
+  z-index:-10;
+}
+
+#right3 {
+  left:31.25%;
+  top: 75px;
+  float: right;
+  text-align: right;
+  z-index:-10;
+  width:33%;
+}
+
 video#centervid {
    margin: 0;
    /*position: absolute;               /* 2 */
@@ -606,6 +661,10 @@ img#centerim {
     line-height: 0px;
     font-size: 0px;
 }
+
+.column-left{ float: left; width: 33%; }
+.column-right{ float: right; width: 33%; }
+.column-center{ display: inline-block; width: 33%; }
 
 /* Fix for trailing line in MathJax renderings */
 .MathJax nobr>span.math>span{border-left-width:0 !important};

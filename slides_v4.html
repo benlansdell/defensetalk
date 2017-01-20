@@ -1,0 +1,1066 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Unraveling principles of motor control: from nerve nets to neural prosthetics</title>
+    <meta name="viewport"
+	  content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!--<link rel="stylesheet" href="reveal.js/css/reveal.min.css">-->
+    <link rel="stylesheet" href="reveal.js/css/reveal.min.css">
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/black.css" id="theme">-->
+    <link rel="stylesheet" href="cust_black.css" id="theme">
+    <link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
+    <script>
+      document.write('<link rel="stylesheet" href="reveal.js/css/print/'+(window.location.search.match(/print-pdf/gi) ? 'pdf' : 'paper')+'.css" type="text/css" media="print">');
+    </script>
+    <script src="js/three.js"></script>
+    <!--[if lt IE 9]>
+    <script src="reveal.js/lib/js/html5shiv.js"></script>
+    <![endif]-->
+
+<!-- Printing and PDF exports -->
+<script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+</script>
+  </head>
+
+  <body>
+    <!-- Slides! -->
+
+    <div class="reveal">
+      <div class="slides">
+        <section data-background="assets/dst2_background.png">
+          <h1>Unraveling principles of motor control: from nerve nets to neural prosthetics</h1>
+	  <br><br>
+	  <p style="text-align: center; font-size: larger; text-shadow: 0px 0px 6px #000000;">Computational neuroscience seminar<br>Ben Lansdell</p>
+
+	  <aside class="notes">
+	    <span style="color: red">
+	    </span> •
+	    • <span style="color: green"></span>
+	  </aside>
+        </section>
+
+<!-- ----------------------------------------------------------------------- -->
+
+	<section>
+		<h2>Motor encoding and BCI design</h2>
+Some figure about motor encoding and design of BCIs
+	    <aside class="notes">
+	    <span style="color: red"></span> •
+Broad application of brain-computer interfaces for control of neural prostheses requires understanding how brain circuits can simultaneously engage in competing tasks. For example, for BCIs to benefit people with significant cortical damage due to stroke or traumatic brain injury, neural circuits in spared areas of cortex may need to simultaneously control the BCIs and ongoing residual movement.  The complexity of motor cortical neuron representations, however, creates uncertainty about how BCI control could be decoupled from ongoing motor control. The brain’s solution to this challenging ‘dual control’ task may depend greatly on the flexibility of motor cortical activity. 
+	    • <span style="color: green"></span>
+	  </aside>	</section>
+
+	<section>
+		<h2>Intracortical arrays provide state-of-the-art BCI control</h2>
+	    <img src="assets/DrinkingMoment.jpg" width="50%">
+	    <p>Monkeys (and humans) can be trained to volitionally control individual neurons through feedback and conditioning</p>
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+Current state-of-the-art BCI control is achieved via intra-cortical brain signals. Studies demonstrate that monkeys can be trained to volitionally control individual neurons through a process of biofeedback and operant conditioning. Similar results have also been observed in humans. In these tasks, there is evidence that neural activity can be chosen independently of natural movement association, reflecting the remarkable adaptability of motor cortical activity. However despite this adaptability, other BCI studies observe that brain-control mappings which utilize activity observed during the natural motor repertoire are most effective. These contrasting findings suggest that, provided basic neuronal constraints imposed by existing circuitry are understood, next-generation BCI design may be able to better leverage the brain’s inherent adaptability.
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section>
+		<h2>Dual-control BCIs</h2>
+	    <img src="assets/dualcontrolBCI.png" width="50%">
+	    <ul>
+	  		<li> Allow stroke patients to regain functionality through co-opting
+	  			healthy motor cortex to control BCI in conjunection with residual movement 
+   		</ul> 
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+Most BCI studies to date focus on control of external devices alone. These do not require concurrent motor output of the subject, which frees the neurons or single units controlling the BCI (henceforth control units) to modify their activity as needed to perform the task. Indeed, in these cases, continued use of motor cortex cells to control a BCI has resulted in initially correlated movements dropping out, suggesting decoupling of the cells from motor control. It is unknown how this decoupling occurs in concurrent control BCI tasks. Concurrent control of natural movement and BCI output may be useful in cases of brain injury. For example, when the motor cortex of one hemisphere is damaged by stroke or trauma, a BCI-controlled neural prosthetic may be driven by the intact hemisphere. In this case cortical circuits in the intact hemisphere may be tasked with both producing movement of the unaffected limb, while also restoring function to the affected, ipsilateral limb using a BCI. Even in the absence of injury, future industrial applications may seek to control supernumerary artificial limbs or external tools using cortex presumably already involved in normal behaviour.
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section>
+		<h2>Dual-control BCIs</h2>
+	    <img src="assets/easyharddiag2.png" width="50%">
+	    <p class="rcred">Milovanovic et al 2015</p>
+	    <ul>
+   		<li> Sub population encoding ipsilateral motion are candidate control source
+    	<li> Performance affected by unit tuning to wrist?
+   		</ul>
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+While subpopulations of neurons encoding ipsilateral motion are a candidate control source for the BCI following stroke [2 -- Sharma et al 2009], a robust interface may require recording from the larger population of neurons involved in natural, contralateral control.  When a single brain region must simultaneously control a BCI and ongoing limb movement,   do neurons strongly associated with contralateral motion make poor control units due to the potential interference imposed by concurrent hand movement? Assuming that the brain area recorded from has some causal role in motor control, it seems that at least some neurons could present challenges for BCI control for this reason.
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section>
+		<h2>Dual-control BCIs</h2>
+	  <div style="text-align: left">
+	  	<ul>
+	  		<li> BCIs induce widespread changes in activity and tuning in variety of tasks and task perturbations
+  			<li> Some studies show control unit specific changes in tuning
+	  	</ul> 
+	  	<p class="fragment">How do these effects manifest in a BCI paradigm where control units may be constrained by their role in ongoing movement?</p>
+
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+Previous studies of the behavior of control and non-control unit activity reveal widespread changes in activity and tuning preferences in a variety of tasks and task perturbations observed changes in preferred direction of both BCI and non-BCI units when a BCI decoder’s output is rotated, suggesting a global reconfiguration of the motor cortical network. In addition to these changes other studies showed specific changes for the control units compared with those not involved in the control. How do these unit specific effects manifest in a BCI paradigm where control units may be additionally constrained by their role in ongoing movement?
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section>
+		<h2>Dual-control BCIs</h2>
+		<img src="assets/dc_perf.png" width="55%">
+		<p class="rcred">Milovanovic et al 2015</p>
+	    <ul>
+	    	<li> Previous studies show performance independent of unit tuning
+	    	<li> Examine activity of control and non-control units
+	    </ul>
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+In this study we directly address these questions using a ‘dual-control’ BCI task. In this task both BCI control and ongoing motor output are driven by the same cortical region, requiring control units to dissociate their activity from the circuits controlling the movement. The task requires that a monkey acquire a target in two dimensions, one dimension controlled by a BCI while the other is controlled using natural motor control of the wrist contralateral to the recorded hemisphere (Figure 1).
+
+In a previous study, we observed that a monkey was able to use all tested pairs of single cortical units to control a BCI task, independently of ongoing contralateral limb movement. Overall performance in this dual-control task was similar, regardless of the control units’ directional tuning.
+
+This task allows us to investigate how primary motor cortical neural activity can be decoupled from natural motion. A previous dual-control BCI study demonstrated that control units can be selected regardless of their prior association to wrist motion. Other concurrent-use BCIs demonstrate similar robustness, albeit often with some adaptation period required. Here we extend these studies by recording activity of both control and non-control units during dual control. We examine whether dissociation from wrist motion occurs specifically for control units, or whether this dissociation is associated with changes in tuning, functional connectivity and intrinsic variability at the population level. We also compare the motor cortical activity observed during the dual-control task to a standard brain-control task which requires the monkey acquire targets only through BCI control.
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section>
+<img src="assets/Figure 1_monkey_ver2.png">
+	<ul>
+		<li> Utah multi-electrode array implanted in hand/wrist area of primary motor cortex
+		<li> Random target pursuit task:
+			<ul>
+				<li> Target appears randomly radius outside given cursor position
+				<li> Acquire target within 5s
+			</ul>
+	</ul>
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+To determine baseline tuning, variability and connectivity of the recorded population, the monkey first performed a manual control (MC) target-pursuit task that only involved acquiring targets through wrist motion. When compared to this manual control task, we observe widespread changes in tuning of both control and non-control units for the brain-control and dual-control tasks.
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section>
+	  		<p>Simple linear tuning model:
+	  		$$ n^i_t = \alpha_x x_t + \alpha_y y_t + c + \epsilon_t$$</p>
+	  		<ul>
+	  		<li>Provides measure of preferred tuning angle $\theta$ and tuning strength<br>
+	  		<li>Units chosen with preferred tuning 90 rotated from dual control direction
+	  		</ul>
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+During both the brain control and dual control tasks we measure how units change their tuning to wrist motion, and compared this tuning to that observed during the manual control task. Our goal was to understand the overall differences in neural activity that underlie performance of the brain-control task compared to the dual-control task where wrist motion is also required. By fitting a linear tuning model to each unit throughout a session, we first analyzed changes in tuning to wrist motion between different tasks. The linear model provides a simple measure of a unit’s preferred wrist velocity, given by a tuning angle and tuning strength (see Methods). 
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section>
+	    <img src="assets/fig2a.png">
+	    <ul>
+	    	<li>Widespread changes in unit tuning between conditions
+    		<li>For control and non-control units alike
+	    </ul> 
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+When comparing to the manual control task, we observed significant changes in average tuning angle (p < 0.001; two sided t-test, Figure 2A,B) and average tuning strength (p < 0.001, Figure 2C) for units in both the brain control and dual control task. To minimize the possibility that 90o of visual feedback rotation could by itself result in observed changes in tuning angle, we also conducted a control task, where visual feedback was not rotated, and observed similar results (Figure S2).
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section>
+	    <img src="assets/fig2bII.png" width="70%">
+	    <ul>
+	    	<li> Brain-control:<ul>
+	    		<li>56% control units do not significantly change tuning
+	    		<li>72% non-control units do not significantly change tuning
+	    	</ul>
+	    	<li> Dual-control:<ul>
+	    		<li>79% control units do not significantly change tuning
+	    		<li>81% non-control units do not significantly change tuning
+	    	</ul>
+	    </ul> 
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+We found that during the brain control task, 56% of control units and 72% of non-control units did not significantly change their tuning angle compared to the manual control task. However, in dual control, unit tuning angles were more constrained by wrist motion, with 79% of control units and 81% of the non-control units having a similar tuning angle as in manual control (Figure 2 A,B). Indeed, during the brain control task there was a significantly greater change in the tuning angle of the control units compared to non-control units (p=0.008, two sided t-test). In contrast, specific modification of control unit tuning was not observed in dual control, where preferred direction changed similarly for both types of units (p=0.699, two sided t-test). 
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section>
+	    <img src="assets/fig2c.png" width="70%">
+	    <ul>
+	    <li>No control unit specific changes in tuning strength
+	    </ul> 
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+To assess possible lasting effects of previous brain control trials, the monkey performed another manual control task after the dual control task. During this manual control session, hereafter the post-manual control session, the majority of units had the same tuning angle as in the first manual control task (correlation coefficient 0.99; Figure 2A). 
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section>
+	    <img src="assets/connectivity_all.png" width="70%">
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+We next considered how the relationships between pairs of units depended on the task. To evaluate this, we used a measure of functional connectivity, transfer entropy. The transfer entropy of two random processes, from x_t to y_t, measures the information about y_t obtained by observing the history of x_t, conditioned on the history of y_t (see methods). We note that functional connectivity is a statistical relationship and should not be taken to imply synaptic connection.,
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section>
+	    <img src="assets/connectivity_to_one.png" width="70%">
+
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+We investigated the relation between control units and co-tuned unit activity during the dual control task. As described above, in dual control most units maintain their association with wrist motion observed in manual control. However, the control units are required to modulate their activity independently of this association. Thus we might expect that they will subsequently exhibit less of a relation with units with which they were previously co-tuned with, and that this will manifest as a change in the functional connectivity between control and co-tuned units. According to this hypothesis the dual-control task requires control unit activity to become specifically less dependent on co-tuned neural activity. We therefore used a directed measure of functional connectivity, transfer entropy, to measure this independence.
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section>
+		<p>
+	  	For a fixed network of units, compute transfer entropy between units in each condition:
+	  	$$
+	  	H_{X\to Y} = I(Y_t|Y_{t-1}, \dots, Y_{t-T}) - I(Y_t|Y_{t-1}, \dots, Y_{t-T},X_{t-1}, \dots, X_{t-T})
+	  	$$
+	  	for Shannon entropy $I$. <br><br>
+
+	  	Study differences in connectivity between brain-, dual- conditions and manual condition.<p>
+	    
+	    <p style="text-align: center"><img src="assets/te_changes.png" width="70%" style="text-align: center"></p>
+
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+We focused on changes in connectivity that occurred between manual control and brain or dual control tasks for different subpopulations of unit pairs (see Methods). Overall, we observed a widespread change in the transfer entropy between manual control and the brain and dual control conditions. This change was smallest between the pre- and post- manual recordings, with the brain and dual control conditions showing larger changes in functional connectivity (Figure 3A). The changes for both brain control (R2 = 0.212) and dual control (R2 = 0.221) were similar (Figure 3A). 
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section>
+	    <img src="assets/TE_part1.png" width="70%">
+
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+We then compared the change in connectivity for control units versus non-control units. We observed that between brain and manual control, control units decreased their connectivity significantly more than non-control units. We observed the same trend when comparing changes in connectivity between dual and manual control (Figure 3B). Thus in both brain and dual control tasks, the control units become more independent from units than non-control units -- both tasks result in some control unit-specific dissociation.
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section>
+	    <img src="assets/TE_part2.png" width="70%">
+
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+We wondered if this control unit dissociation was specific to units that were co-tuned with the control unit. Indeed, comparing changes in connectivity to the control unit between brain and manual control showed a significant difference in the connectivity change for co-tuned units versus randomly selected units (p-value << 0.001 (1.5288x10-6) [rank sum] ; Figure 3C). However, comparing such changes in connectivity to the control unit between dual control and manual control does not reveal a significant difference (p-value = 0.5287 [rank sum]). Thus control units become more independent from co-tuned units than to other units in the brain control task, but not in the dual control task. 
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section>
+	    <img src="assets/TE_part3.png" width="70%">
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+This result is counterintuitive, given that the structure of the dual-control task was designed to effect the opposite result -- control unit specific independence. The possibility remains, however, that the brain control task leads to a higher degree of change in co-tuned units in general, and that the effect has nothing to do with whether or not a control unit is involved. Thus we also examined changes in connectivity to non-control units, from either co-tuned units or from non-co-tuned units (Figure 3D). In the brain control task, connectivity decreases significantly more for co-tuned units than for non-co-tuned units. This is similar to the result obtained in Figure 3C for control units. In dual control, however, connectivity changes significantly less for co-tuned units than for non-co-tuned units. In fact, between manual and dual control the overall change in connectivity for co-tuned units to non-control units is not significantly different from zero (p-value = 0.145). Thus, in dual control functional connectivity between co-tuned units is maintained, unless one of the units is a control unit, while in brain control there is an overall decrease in connectivity for co-tuned units, regardless independently of whether a control unit is involved.
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section>
+	  <h2>Changes in functional connectivity of population</h2>
+	  	<ul>
+	  		<li> Brain-control: overall decrease in functional connectivity to control units
+	  		<li> Dual-control: functional connectivity between co-tuned units does not change, except when control unit involved
+	  	</ul>
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+This result is consistent with the tuning angle findings of the previous section, in which greater changes in tuning angle were observed in brain control compared to the changes in dual control (Figure 2B). Together these findings suggest that the manual component of the dual-control task holds both the tuning angles and connectivities between co-tuned units in similar states to that observed in manual control, except for connectivities involving the control units.
+• <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section>
+		<h2>Intrinsic variability predicts performance</h2>
+	    <img src="assets/intrinsic_manifold_white.png" width="70%">
+
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+Despite the insight that the connectivity and tuning analysis provide into the neural activity that underlies the dual control task, neither analysis was predictive of task proficiency. This is consistent with previous studies showing remarkable flexibility of motor cortical activity. Previous studies also demonstrate that neural variability measured during natural behavior -- intrinsic variability -- is a constraint on learning and proficiency of brain control tasks [11 -- Sadtler et al 2014]. Thus we investigated the role of intrinsic variability of the control neurons in relation to the variability of the entire neural population.
+• <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section>
+		<h2>Intrinsic variability predicts performance</h2>
+<ul>
+<li> GPFA used to identify low-dimensional subspace
+<li> Identify when spaces are significantly non-orthogonal
+</ul>
+	    <img src="assets/gpfa_perf.png" width="30%">
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+We began by identifying a low-dimensional space that characterizes a high proportion of the variance observed during natural movements from the manual control recordings. We used Gaussian process factor analysis (GPFA) to identify this space, which we term the intrinsic space (similar to the intrinsic manifold proposed by Sadtler et al 2014 [11 -- Sadtler et al 2014]). In line with this terminology, we term the variance of each recorded unit during the manual control task its intrinsic variability. When a brain control task is performed, the activity from just two neurons determines the cursor position. The activity of these two neurons thus comprises a brain-control space (Figure 4A). Based on [11 -- Sadtler et al 2014], we hypothesized that more proficient brain-control and dual-control would occur when the brain-control space and the intrinsic space share some amount of alignment. We observed that in the brain control task, but not in the dual control task, performance is significantly higher when the brain-control and intrinsic spaces are indeed non-orthogonal (Figure 4B).	
+
+Need to mention that when we try GLM type encoding models, as well as linear models,
+we observe no relation between tuning and performance.<br>
+    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+<!-- ----------------------------------------------------------------------- -->
+
+	<section>
+	  <h2>Which control unit contributes more to cursor control?</h2>
+<img src="assets/Figure5_ver2a.png" width="55%">
+	  	<p>
+	  		BCI cursor control:
+	  		$$
+	  		x_t = \sum_{n=1}^N \alpha_n(y_t^n - \beta_t^n)
+	  		$$
+	  		<ul>
+	  		<li>$\beta_t^n$ moving estimate of baseline firing of unit $n$.
+	  		<li>Use Granger causality to quantify unit contributions to cursor control, $\mathcal{G}$</ul>
+	  	</p>
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+Given this result, we sought further insight into how the task was being performed by focusing specifically on the intrinsic variability of the control units. In both the brain control and dual control tasks, the decoder (Equation 1) is set up so that neurons which have a high variance exert more effect on the cursor trajectory. We hypothesized that a high amount of variance is necessary for control over the cursor. If that is the case then, when control units are selected with lower intrinsic variability, the monkey is required to increase unit variance in order to accurately perform the target pursuit task. If the monkey is unable to volitionally modulate the control units’ variance then we might expect that in these cases he will be less able to control the cursor and will acquire targets at a lower rate.
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section>
+	  <h2>Which control unit contributes more to cursor control?</h2>
+	    <img src="assets/Figure5_ver2b.png" width="60%">
+	    <ul>
+	    	<li> Cursor position determined more by unit with higher intrinsic variance 
+	    </ul> 
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+In addition, we observed that a high control metric is related to a high intrinsic variability of the control unit (Figure 5B). This indicates that the task is predominantly controlled by the unit with higher intrinsic variation. As suggested by the relation to cursor control and performance, there is a significant, positive relation between control unit intrinsic variability and performance, in both brain control (not shown) and dual control (Figure 5C).
+These results suggest that a control unit’s intrinsic variability is a harder constraint on both brain-control and dual-control task performance than either its tuning or its functional connectivity with other units. Therefore, when selecting units to control a BCI, intrinsic variability should be given greater consideration than tuning or connectivity to other units.
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section>
+	  <h2>Which control unit contributes more to cursor control?</h2>
+	    <img src="assets/Figure5_ver2c.png" width="60%">
+	    <ul>
+	    	<li> High performance requires at least one unit with high intrinsic variance
+	    </ul> 
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+To measure each unit’s contribution to the target acquisition task, we constructed a metric which quantifies the amount of influence each control unit has over the cursor trajectory. Since the cursor trajectory was determined through a moving average model weighing the contribution from each control unit, we selected a Granger causality-type metric (see methods). We validated this metric using synthetic cursor data generated through a weighted contribution of two neurons (Figure S4). Not surprisingly, we observed that a high value of this control metric for at least one of the control neurons is required for dual control task proficiency (Figure 5A).
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+
+
+	<section>
+	  <h2>Summary</h2>
+	  	<ul>
+	  		<li> Tuning and connectivity analysis suggest dual-control task generates cortical activity more similar to that observed in manual control task
+	  		<li> Intrinsic variance of control units only variable found to predict performance and control unit contributions -- motor unit tuning does not constrain how the task is performed
+	  	</ul>
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section data-background-color="#000000">
+	<h2>Whole-animal imaging in unconstrained Hydra</h2>
+	  <div>
+	<video src="assets/hydra_feeding_short.mp4" muted controls loop
+	 poster="assets/dst2.png" class="slideautostart" width="70%"></video>
+	 <div class="fragment">
+	<p>Why?</p>
+	 <ol>
+	 	<li> Small (0.5mm -- 1.5cm) -- can fit into FOV of traditional microscope
+	 	<li> Translucent; nerve net, easier imaging
+	 	<li> Does not age, and can regenerate
+	 </ol>
+	</div>
+	  </div>
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+	    The Hydra has a diffuse nerve net, one of the simplest nervous systems.
+
+	    As part of a collaboration with Yuste lab at Columbia, among others, we
+	    are working on obtaining this level of knowledge in the cnidarian Hydra.
+
+	    For this, the Hydra has the advantages that:
+	    -it is transparent, making imaging simpler
+	    -it is small, allowing it to fit into the FOV of a traditional scope
+	    -it consists of a nerve net, meaning that neurons are spread throughout
+	    the organism and can be imaged more or less without obstructing one another
+	    -it can be constrained to lie in a 2D plane, meaning more or less the organism
+	    can be in focus all at once, without the need for z-slicing, which permits a high
+	    temporal resolution recording.
+
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section>
+	<h2>Hydra anatomy</h2>
+	  <div>
+	    <img src="assets/hydra_layers_white.png" width="100%" position="left">
+	    <p class="rcred">Adapted from Technau and Steele 2011</p>
+	  </div>
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+	    Describe Hydra anatomy
+
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section>
+	<h2>Aims</h2>
+<hr>Understand (and control) neuronal basis of simple behavior such as contracting and expelling
+	    water.</p>
+	     <div>
+<hr><p>Sub-aims:</p>
+	  	<ol>
+	  	<li class="fragment highlight-green">Track Hydra pose</li>
+	  	<li>Register and track neurons</li>
+	  	<li>Record neural activity</li>
+	  </ol>
+	  </div>
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+	    • Aims: understand (and control) simple behavior such as contracting and expelling
+	    water.
+
+	    Hydra periodically absorbs water (possibly through osmosis) and expells it all at once
+	    once reaching a certain size. Nerve free Hydra do not expell fluid, so we know this is
+	    a nervous system function.	
+
+	    Sub aim:
+	    In achieving this, a sub-aim is to be able to track the Hydra's pose and neurons throughout
+	    unconstrained behavior. This allows analysis of the Hydra's behavior, it's neural activity,
+	    and of course the relationship between the two.
+
+	    I will spend the 1st half of this talk describing a method for performing this tracking in
+	    videos of Hydra in which neurons have been tagged with GCamp6, allowing for their neural
+	    activity to be imaged. 
+
+	    Mention this is a collaboration with Rafa Yuste lab in Columbia
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section>
+	<h2>Experiment</h2>
+	  <div id="left">
+	    <img src="assets/hydrasetup.jpg" width="50%">
+	    <p class="rcred"></p>
+	  </div>
+	  <div id="right">
+	    <img src="assets/hydrasetup3.jpg" width="100%" position="left">
+	    <p class="rcred">C. Dupre, Yuste lab</p>
+	  </div>
+	    <p>Methods</p>
+	    <ul>
+	    <li> Create Act-GCaMP6s transgenic Hydra
+		<li> Mount between coverslips separated by .1mm spacer
+		<li> Image calcium transients
+		</ul>
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+	    Methods
+	    - Hydra details
+	    Genetic calcium indicator. Modified plasmid which expresses GFP, to express GCaMP6.
+	    Injected in Hydra fertilized eggs. (Act-GCaMP6s transgenic Hydra)
+	    - imaging methods
+	    mounted specimens between two coverslips separated by .1mm spacer. Hollow cylinder
+	    imaged from the side. Transparent means can image activity of every one of its neurons.
+	    - experiment details:
+	    transients digital -- all or none -- fast risetimes and slow decays. Hydra neurons have
+	    action potentials, express sodium channels in their genome, simplest explanation
+	    of changes in flouresence is due to calcium influx due to action potential activity.
+	    As in mammalian neurons. Did not record Ca signals of intermediate amplitude suggests that
+	    capturing individual action potentials.
+
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+<!-- ----------------------------------------------------------------------- -->
+
+	<section>
+	<h2>Whole-body calcium imaging in Hydra</h2>
+	<video src="assets/hydra_gcamp.mp4" muted controls loop
+	 poster="assets/dst2.png" class="slideautostart" width="70%"></video>
+	 <p class="rcred">C. Dupre, Yuste lab</p>
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+
+	    How do we go about doing this tracking?
+
+	    Some issues:
+	    - neuron tracking (which if reliable would provide information about neural
+	    activity and body position) is problematic since not all neurons are visible
+	    at all times.
+	    - particle tracking thus has a track association problem
+	    - how are neurons reassociated once they become inactive then active again?
+
+	    As an aside, note that in the future we may have access to labeled neurons
+	    through the use of nanoparticles or genetic labels. This would greatly aid in the
+	    neuron tracking and body tracking by provided clear fiducial markers that can be consistently
+	    tracked. However, this is not available yet and remains an experimental
+	    challenge. Further, not all Hydra strains may have such labeling, and we would like
+	    methods that can tracking Hydra body in cases when we have flourescent labels for
+	    activity in epithelial cells which show muscle activity. In these datasets, individual
+	    cells may be hard to track and make out. Since we would like to do behavior analysis on
+	    these dataseta also, we will here tackle the problem of performing body tracking
+	    in cases where explicit fiducial markers are not present.
+
+	    For today let's take this as our problem.
+
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section data-background-color="#000000">
+	<h2>Deformable object tracking</h2>
+	<div id="left">
+	<video src="assets/kalmanfilter_slow.mp4" muted controls
+	 poster="assets/dst2.png" class="slideautostart"></video>
+	</div>
+	<div id="right">
+		<p>Extended Kalman filter tracking
+
+			$$\begin{align}y_t &= h(x_t) +\nu_t \\
+			x_t &= f(x_{t-1}) +\epsilon_t\end{align} $$ 
+
+			Where $x_t$ is the Hydra positions and velocities, $y_t$ is the generated
+			image.<br> <br>
+		</p>
+		<ul>
+			<li>High-dimensional -- slow<br>
+			<li>Unstable -- once tracking lost, difficult to recover
+		</ul>
+
+	</div>
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+
+	    How do we go about doing this tracking?
+
+	    A solution is to then fit a parameterization or mesh to the body explicitly
+	    and to use this to perform neuron tracking.
+
+	    We can do this by adapting methods from deformable object tracking.
+
+	    However, as a very high dimensional state space model. these methods are slow, unstable, and difficult to recover from difficult Hydra motion. Once it's lost the Hydra, it can't recover.
+
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section>
+	<h2>Multi-frame optic flow image registration</h2>
+	<img src="assets/mfsf_white.svg">
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section>
+	<h2>Multi-frame optic flow image registration</h2>
+	<ul id="blanklist">
+	<li> Dense optic flow with subspace constraints
+	<li> For each pixel find linear combination of basis paths, $L$, that minimize energy<br>
+	<img src="assets/energyeq.png">
+	<li> $I_f$ = image at frame $f$,
+	<li> $I_0$ = reference frame (need not be first frame of video),
+	<li> $Q_f^u$, $Q_f^v$ = basis paths at frame $f$, 
+	<li> $\alpha$ = smoothness regularizer
+	</ul>
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section>
+	<h2>Tracking with optic flow</h2>
+	<video src="assets/warp_neurons_nref100.mp4" muted controls loop
+	 poster="assets/dst2.png" class="slideautostart"></video>
+	 <ul> 
+	 <li> blue = hand tracked neurons
+	 <li> green = w/in 6px of 'true', red = >6px of 'true'
+	 </ul>
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+	   	We can see that this work fairly well for short sequences of video.
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section>
+	<h2>Tracking with optic flow: performance</h2>
+		<div id="left">
+		<p>Comparison to hand annotated neuron tracks<br>
+		Per frame:</p>
+		<ul>
+		<li> at least 52% neurons are tracked within 6px
+		<li> on average 82% neurons tracked within 6px
+		</ul>
+		Per neuron:
+		<ul>
+		<li> 42% neurons tracked within 6 px throughout all video
+		</ul>
+		</div>
+		<div id="right">
+		<img src="assets/tracking_errors.png">
+		</div>
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+	    This method works fairly well for short sequences of video. Tracking 42%
+	    of all neurons is high enough to start to be useful, even if there's plenty
+	    of room for improvement.
+
+	    Further, it is fast and stable.
+
+	    However, it is not always appropriate to use the one reference frame for the
+	    Hydra, since it changes position quite significantly throughout a recording.
+	    (show video)
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section>
+	<h2>Extending to longer sequences</h2>
+		<img src="assets/mfsf_stitch_white.svg" width="70%">
+		<div class="fragment">
+		How to mitigate accumulation of errors from video to video?
+		</div>
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+		Changing appearance/pose in a long sequence → multiple reference frames
+		Simplest approach: split into multiple stacks and run independently
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section>
+	<h2>Choosing which paths to extend</h2>
+	Measure image registration error
+		<img src="assets/combined.png">
+		<div>
+		<div class="column-left">Forward map $$g_{1,2}(\mathbf{x})$$</div>
+		<div class="column-center">Reverse map $$g_{2,1}(\mathbf{x})$$</div>
+		<div class="column-right">Error $$f_{1,2}(\mathbf{x}) = \left|g_{2,1}(g_{1,2}(\mathbf{x}))\right|$$</div>
+		</div>
+		<br><img src="assets/colorwheel.png" align="left">
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+
+	<section>
+	<h2>Exploiting periodicity in Hydra behavior</h2>
+	<div id="left">
+	<ul> 
+	<br><br><br>
+	Stereotyped Hydra behavior:<br>elongate then contract<br><br>
+	Measure optic flow error, $f_{ij}(x)$, between frames with regular spacing
+	<br><br>'iframes' -- every 250 frames
+	</ul>
+	</div>
+	<div id="right" style="text-align: center;">
+		$\langle f_{ij}(x)\rangle_\Omega$
+		<img src="assets/similarity_orig.png">
+		Frame index
+	</div>
+
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section>
+	<h2>Exploiting periodicity in Hydra behavior</h2>
+	<div id="left">
+	<p> 
+	Two clusters: contracted and elongated<br>
+	$\Rightarrow$ By registering regions of each iframe with a ref. frame we extend paths into temporally distant but positionally related frames<br>
+	$\Rightarrow$ A mechanism to handle arbitrarily long videos without accumulation of tracking error
+	</p>
+	</div>
+	<div id="right" style="text-align: center;">
+		$\langle f_{ij}(x)\rangle_\Omega$<br>
+		<img src="assets/dendrogram.png" width="70%">
+	</div>
+		<img src="assets/dend_d1_tile_c1.png" width="80%">
+		<img src="assets/dend_d1_tile_c2.png" width="80%">
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section>
+	<h2>Segmenting regions to extend from each reference frame</h2>
+		<p>For $K$ reference frames and $L$ iframes, let $f_{ij}(x)$ represent the optic flow error in using reference image $i$ to construct image $j$.  
+		$$\begin{align}\min_{u}\sum_{l=1}^L\left(\sum_{k=1}^K\langle \nabla u_{kl}, p_{kl} \rangle +\langle u_{kl}, f_{kl} \rangle \right) +\delta_U(u)\end{align}$$
+		</p>
+	<p>
+		Want number of ref frames to balance global registration vs registration error<br>
+		$\Rightarrow$ Add a group LASSO penalty for number of reference frames used:
+		$$\begin{align}\min_{u} \sum_{l=1}^L\left(\sum_{k=1}^K \langle u_{kl}, f_{kl} \rangle \right) +\delta_U(u) + \frac{\lambda_2}{2}\sum_{k=1}^K\left(\sum_{l=1}^L \|u_{kl}\|^2_2 \right)^{1/2} \end{align}$$
+	</p>
+	Solve with Chambolle algorithm, easily implementable on GPU.
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section>
+	<h2>Proposed method</h2>
+		<p> 
+			1. Select very sparse set of reference frames (ref frames)<br>
+			2. Select regular set of inter-frames (iframes)<br>
+			<img src="assets/dend_d1_tile_c1_hl.png" width="90%"><br>
+			<img src="assets/dend_d1_tile_c2_hl.png" width="90%"><br>
+			3. Use optic flow+image segmentation to label regions mapping to reference frames<br>
+			<img src="assets/mfsf_extend1.png" width="90%"><br>
+		</p>
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section>
+	<h2>Proposed method</h2>
+		<p> 
+			4. Within each iframe block run MFSF for dense registration<br>
+			<img src="assets/mfsf_extend2.png" width="90%"><br>
+		</p>
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section>
+	<h2>Proposed method</h2>
+		<p> 
+			5. Associate each path from (4) with a ref frame using segmentation (3)<br>
+			<img src="assets/mfsf_extend3.png" width="90%"><br>
+		</p>
+		<p class="fragment">
+			Thus every tracked path is associated with a point in a reference frame
+		</p>
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+		Thus every tracked path is associated with a point in a reference frame
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section>
+	<h2>Extending with $K=2; L = 8$</h2>
+	<video src="assets/mfsf_dm_combined.mp4" muted controls loop
+	 poster="assets/dst2.png" class="slideautostart" width="55%"></video>
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+	   	We can see that this work fairly well for short sequences of video.
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<!-- <section>
+	<h2>Combining reference frames through temporal continuity of neuron tracking</h2>
+	<video src="assets/mfsf_dm_combined.mp4" muted controls loop
+	 poster="assets/dst2.png" class="slideautostart"></video>
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+	Allows for registration of neurons over videos of indefinite length
+	    • <span style="color: green"></span>
+	  </aside>
+	</section> -->
+
+	<section>
+	<h2>Future work</h2>
+	<ul>
+		<li> Create larger hand annotated datasets for performance evaluation
+		<li> Use temporal continuity between adjacent blocks to relate reference frames to one another
+	</ul>
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+	    This approach has utility as a general optic flow technique that can handle occlusions -- an important problem in computer vision.
+
+	    We've seen how this method can be used to track Hydra, which we believe will
+	    form an important component of determining the neural basis of its behavior.
+
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section>
+	  <h2>Acknowledgments</h2>
+	  	<hr>
+	  <div id="left">
+	  	<ul>
+         <li> Adrienne Fairhall</li>
+         <li> Chet Moritz</li>
+         <li> Ivana Milovanovic</li>
+         <li> Cooper Mellema</li>
+         <li> Eberhard Fetz</li>
+	  	</ul>
+   	  </div>
+	  <div id="left">
+	  	<ul>
+         <li> Fairhall lab</li><ul>
+         	<li> Anatoly Buchin </li></ul>
+         <li> Moritz lab</li><ul>
+         	<li> Charlie Matlack </li>
+         	<li> Robert Robinson</li></ul>
+         <li> Yuste lab</li><ul>
+         <li> Christophe Dupre</li>
+         <li> John Szymanski</li></ul>
+	  	</ul>
+   	  </div>
+	  	<hr>
+	  	Funding:
+	  	?
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+
+	<section>
+	<h2>Segmenting regions to extend</h2>
+	<div id="left">
+		Mumford-Shah image segmention: divide into $k$ regions of constant color, while trying to minimize perimeter of region boundaries
+	</div>
+	<div id="right"><img src="assets/butterfly_together.png"></div>
+		$$\begin{align*}\min_{(R_l),c_l}\frac{1}{2}\sum_{l=1}^k \text{Per}(R_l;\Omega)
+			+ \frac{\lambda}{2}\sum_{l=1}^k \int_{R_l} |g(x)-c_l|^2\,dx\end{align*}$$
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section>
+	<h2>Segmenting regions to extend</h2>
+	<div id="left">
+		Mumford-Shah image segmention: divide into $k$ regions of constant color, while trying to minimize perimeter of region boundaries
+	</div>
+	<div id="right"><img src="assets/butterfly_together.png"></div>
+	<p>
+		$$\begin{align*}\min_{u_l}\frac{1}{2}\sum_{l=1}^k \int_\Omega |\nabla u_l|\,dx
+			+ \frac{\lambda}{2}\sum_{l=1}^k \int_{\Omega} u_l(x)f_l(x)\,dx\end{align*}
+		$$
+		with $f_l(x) = |g(x)-c_l|^2$. Assume $c_l$ are known and $\mathbf{u}\in U$:
+		$$
+		U = \left\{u_l:\sum_l^k u_l(x) = 1, \quad u_l(x) \ge 0, \forall x\in\Omega\right\}
+		$$
+		Convex in $\mathbf{u}$<br>
+		Select color via $v(x) = \text{argmax}_l u_l(x)$ 
+	</p>
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section>
+	<h2>Mumford-Shah image segmentation</h2>
+	<p>
+		Chambolle algorithm solves problems:
+		$$\min_{x\in X}F(Kx) + G(x)$$
+		for convex $F(\cdot):Y\to [0,\infty]$ and $G(\cdot):X\to [0,\infty]$, 
+		<br>in primal-dual form:
+		$$\min_{x\in X}\max_{y\in Y} \langle Kx, y\rangle - F^*(y) + G(x)$$
+		<em>Algorithm:</em>
+	</p>
+	<ol>
+	<li> Initialization: $\tau, \sigma > 0, \theta \in [0,1], (x^0,y^0)\in X\times Y$. Set $\bar{x}^0 = x^0$
+	<li> Iterate until convergence: ($n\ge 0$)
+		$$\begin{align}
+		y^{n+1} &= \pi_{F^*}(y^n + \sigma K \bar{x}^n; \sigma)\\
+		x^{n+1} &= \pi_G(x^n - \tau K^* {y}^{n+1}; \tau)\\
+		\bar{x}^{n+1} &= x^{n+1} +\theta(x^{n+1} - x^n)
+		\end{align}$$
+	</ol>
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section>
+	<h2>Mumford-Shah image segmentation</h2>
+	<p>
+		With proximal operator
+		$$
+		\pi_G(y;\tau) = \text{argmin}_{x}\frac{\|x-y\|_2^2}{2\tau}+G(x)
+		$$
+		<br>
+		Primal-dual MS image segmentation:  
+		$$\begin{align}\min_{u=(u_l)_{l=1}^k} \max_{p=(p_l)_{l=1}^k} &\left(\sum_{l=1}^k\langle \nabla u_l, p_l \rangle +\langle u_l, f_l \rangle \right) +\delta_U(u) - \delta_P(p) \end{align}$$
+		So,
+		<ul>
+		<li> $K = \nabla$ (first order forward difference)
+		<li> $K^* = -\text{div}$ (first order backward difference)
+		<li> $F^*(p) = \delta_P(p)$ with $P=\left\{ p\in Y^k:\|p_l\|_\infty \le \frac{1}{2}\right\}$
+		<li> $G(u) = \delta_U(u)$
+		</ul>
+		Proximal operaters $\pi_{F^*}$ and $\pi_G$ are pixel-wise projection onto convex sets $P$ and $U$
+		$\Rightarrow$ Easy to implement on GPU
+	</p>
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<!-- <section>
+	<h2>Mumford-Shah image segmentation</h2>
+	<div id="left">
+		Proximal operaters $\pi_{F^*}$ and $\pi_G$ are pixel-wise projection onto convex sets $P$ and $U$<br>
+		$\Rightarrow$ Easy to implement on GPU
+	</div>
+	<div id="right"></div>
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+	    • <span style="color: green"></span>
+	  </aside>
+	</section> -->
+
+	<section>
+	<h2>Segmentation of label tracked regions</h2>
+
+		<p>For $K$ reference frames and $L$ iframes, let $f_{ij}(x)$ represent the optic flow error in using reference image $i$ to construct image $j$.  
+		$$\begin{align}\min_{u} \max_{p} \sum_{l=1}^L\left(\sum_{k=1}^K\langle \nabla u_{kl}, p_{kl} \rangle +\langle u_{kl}, f_{kl} \rangle \right) +\delta_U(u) - \delta_P(p) \end{align}$$
+		</p>
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section>
+	<h2>Choosing ref frames</h2>
+	<p>
+		Want number of ref frames to balance global registration vs registration error <br><br>
+		Add a group LASSO penalty for number of reference frames used:
+		$$\begin{align}\min_{u=(u_l)_{l=1}^k} \max_{p=(p_l)_{l=1}^k} &\left(\sum_{l=1}^k\langle \nabla u_l, p_l \rangle +\langle u_l, f_l \rangle \right) +\delta_U(u) - \delta_P(p) +\frac{\lambda_2}{2}\sum_{k=1}^K\left(\sum_{l=1}^L \|u_{kl}\|^2_2 \right)^{1/2} \end{align}$$
+		The proximal operator $\pi_G$ now becomes:
+		$$
+		\pi_G(y;\tau) = \text{argmin}_{x}\frac{\|x-y\|_2^2}{2\tau}+\frac{\lambda_2}{2}\sum_{k=1}^K\left(\sum_{l=1}^L \|y_{kl}\|^2_2 \right)^{1/2}+\delta_U(y)
+		$$
+		Compute $\pi_G$ with ADMM
+	</p>
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+    <!--<script src="reveal.js/js/reveal.min.js"></script>-->
+    <script src="reveal.js/js/reveal.js"></script>
+    <script src="pdfjs/compatibility.js"></script>
+    <script src="pdfjs/pdf.js"></script>
+
+    <script src="lib/js/head.min.js"></script>
+    <script>
+      head.js(
+        "lib/js/jquery.min.js",
+        "lib/js/jquery.hotkeys.js",
+        "lib/js/underscore.min.js",
+        "lib/js/swfobject.js",
+        "lib/js/dat.gui.js",
+        "lib/js/EventEmitter.js",
+
+        "lib/js/three.js",
+        "lib/js/three/EffectComposer.js",
+        "lib/js/three/RenderPass.js",
+        "lib/js/three/BloomPass.js",
+        "lib/js/three/ShaderPass.js",
+        "lib/js/three/MaskPass.js",
+
+        // three shaders
+        "lib/js/three/shaders/CopyShader.js",
+        "lib/js/three/shaders/BasicShader.js",
+        "lib/js/three/shaders/DotScreenShader.js",
+        "lib/js/three/shaders/UnpackDepthRGBAShader.js",
+        "lib/js/three/shaders/HorizontalBlurShader.js",
+        "lib/js/three/shaders/VerticalBlurShader.js",
+
+        // js files needed for WebGL specific samples (excluding three js)
+        "lib/js/J3DI.js",
+        "lib/js/J3DIMath.js",
+        "lib/js/webgl-utils.js",
+        "lib/js/webgl-debug.js",
+
+        // App specific js
+        //"js/reveal.min.js",
+        "js/stats_bootstrap.js",
+        "js/samples.js",
+        //"js/dat.gui.bootstrap.js",
+
+		function() {
+      Reveal.initialize({
+        controls: false,
+        progress: true,
+        history: true,
+        center: false,
+        keyboard: true,
+        touch: false,
+        overview: true,
+        mouseWheel: false,
+        width: 960,
+        height: 720,
+
+        theme: false, // hardcoded with CSS import in <head>
+        transition: 'fade', // default/cube/page/concave/zoom/linear/fade/none
+        transitionSpeed: 'default', // default/fast/slow
+
+        math: {
+          mathjax: 'mathjax/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+        },
+
+        dependencies: [
+          { src: 'reveal.js/lib/js/classList.js',
+	    condition: function() { return !document.body.classList; }},
+          { src: 'reveal.js/plugin/markdown/marked.js',
+	    condition: function() { return !!document.querySelector ('[data-markdown]'); }},
+          { src: 'reveal.js/plugin/markdown/markdown.js',
+	    condition: function() { return !!document.querySelector ('[data-markdown]'); }},
+          { src: 'reveal.js/plugin/highlight/highlight.js', async: true,
+	    callback: function() { hljs.initHighlightingOnLoad (); }},
+          { src: 'reveal.js/plugin/notes/notes.js', async: true,
+	    condition: function() { return !!document.body.classList; }},
+          { src: 'mymath.js', async: true },
+	  { src: 'pdfimgs.js', async: true },
+	  { src: 'slideautostart.js', async: true },
+        ],
+      });
+    });
+    </script>
+  </body>
+</html>
