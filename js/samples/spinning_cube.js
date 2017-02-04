@@ -19,8 +19,10 @@
       var renderer = new THREE.WebGLRenderer({canvas: canvas, antialias: true});
       renderer.setSize( sample_defaults.width, sample_defaults.height );
 
+      var controls = new THREE.OrbitControls( camera, renderer.domElement );
+
       var instance = { active: false };
-      function animate() {
+      /*function animate() {
         requestAnimationFrame( animate, canvas );
         if(!instance.active || sample_defaults.paused) return;
 
@@ -29,7 +31,7 @@
         renderer.render( scene, camera );
       }
 
-      animate();
+      animate();*/
       return instance;
     }
   };
