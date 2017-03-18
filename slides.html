@@ -2,8 +2,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Unraveling principles of motor control: from nerve nets to neural prosthetics</title>
-    <meta name="viewport"
+    <title>Moving models of motor control forward, in theory and application</title>
+      <meta name="viewport"
 	  content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <!--<link rel="stylesheet" href="reveal.js/css/reveal.min.css">-->
     <link rel="stylesheet" href="reveal.js/css/reveal.min.css">
@@ -34,9 +34,10 @@
     <div class="reveal">
       <div class="slides">
         <section data-background="assets/dst2_background.png">
-          <h1>Unraveling principles of motor control: from nerve nets to neural prosthetics</h1>
-	  <br><br>
-	  <p style="text-align: center; font-size: larger; text-shadow: 0px 0px 6px #000000;">Ben Lansdell<br> University of Washington - Applied Mathematics</p>
+          <h1>Moving models of motor control forward, in theory and application</h1>
+	  <br>
+	  <p style="text-align: center; font-size: larger; text-shadow: 0px 0px 6px #000000;">Ben Lansdell<br> University of Washington - Applied Mathematics<br><br>
+	  	Flatiron Institute, March 24th 2017</p>
 	  <aside class="notes">
 	    <span style="color: red">
 	    </span> •
@@ -46,20 +47,59 @@
 
 <!-- ----------------------------------------------------------------------- -->
 
-	<section data-transition="fade-in">
-		<h2>Outline</h2>
-		<ol>
-			<li class="fragment highlight-green"> Motor encoding in concurrent use brain-computer interfaces
-			<li> Whole-animal imaging analysis in cnidarian Hydra
-		</ol>
+
+	<section data-background-video="assets/nervous_noaudio.mp4">
 	  <aside class="notes">
 	    <span style="color: red"></span> •
+While we often think of neurons and brains as mediating our thoughts, decisions, memories, and perceptions, ultimately nervous systems exist to control and coordinate body movements rapidly over large distances. Motor control principles are widely varied throughout the animal kingdom, of course. From nerve nets in jellyfish to finely articulated hand and finger manipulations in primates. 
+
+The role nervous systems play in an organism’s behavior increases as we move to higher-organisms. Indeed, in simple organisms such as the cnidarian Hydra, which I’ll be talking about later, its behavior, while surprisingly complicated, can still be, to a large extent, significantly characterized by whole-body contractions and relaxations -- without a large degree of fine control. As one of the most distant organisms to ourselves to possess a nervous system, it appears largely as a thin veneer of control placed over an intricate chemical signalling system. Animals more closely related to ourselves, on the other hand, become significantly more neuron centric. It’s well known that our own brains consume a disproportionate amount of energy, and that neurons have the most diverse transcriptome of any cell type. 
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+	
+		<section>
+    <img src="assets/monkey_activity.png" width="70%">
+	  <div style="text-align: left">
+	      In general $$y(t)\sim n[x(t)].$$
+	      But, starting simply: $$y(t)\sim n(\lambda(t)) = n(k*x(t)),$$
+	      where $k(\tau)$ are <em>feature vectors</em>.
+	  </div>
+
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+	    Of course, the nervous system of higher animals is vastly more structured than the nervous systems of something like a jelly fish, and it is also a lot larger. This means that determining mechanisms for particular behaviors involves many technical challenges. In general we simply don’t have the ability to simultaneously observe all relevant parts of the nervous system’s activity, at high enough temporal and spatial resolution, in order to piece things together. 
+
+		Thus, when studying the function of neural circuits in animals such as primates, an important component of determining a neuron’s role in particular behaviors is a characterization of the relationship its spiking activity with external variables, either motor outputs or sensory inputs. 
+
+		We can ask what its neural activity encodes.
 	    • <span style="color: green"></span>
 	  </aside>
 	</section>
 
 	<section>
-		<h2>Motor cortical encoding and brain-computer interface (BCI) design</h2>
+	  <h2>Linear non-linear Poisson models</h2>
+	    <img src="assets/glmuncoupled_white.svg" width="60%">
+	    <p class="rcred">Adapted from Aljadeff, Lansdell, Fairhall, Kleinfeld Neuron 2016</p>
+	  	<div style="text-align: left;">
+	      Let $Y(t)$ count spikes up to time $t$. <br>
+	      In discrete time bins, $\mathbf{t}=(0, h, 2h, \dots, T)$, let $y_i$ be number of spikes $\in(t_{i-1}, t_i]$:
+	       $$\begin{align*}y_t &\sim \text{Poisson}(\lambda_t),\\
+	       \lambda_t &= f[\mathbf{x}_t, y_t] = f\left(\mu + \sum_i k_i x_{t-i} + \alpha_i y_{t-i}\right)\end{align*}$$	  </div>
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+Roughly, we can think of these models as characterizing the input/output relationships that capture how spiking activity, generally at the single-neuron level, is related to external variables: either sensory signals or motor output. These models focus on a description of the statistical nature of this relationship without any direct attempt to establish mechanisms; rather, they provide a compact representation of the components in a stimulus that cause a neuron to spike.
+
+These models have been particularly successful in studying sensory systems, I would argue. 
+
+The form of the feature vectors, nonlinearity, and history dependencies can reveal properties of the system that test theoretical concepts, such as how efficiently the stimulus is encoded by a neuron and how robust the encoding is to noise. For example, changes in the feature under different stimulus conditions can reveal the system’s ability to adapt to, or cancel out, correlations in the sensory input. Further, changes in the nonlinearity reveal how the system can modulate its dynamic range as the intensity of the stimulus evolves. While representing neuronal spiking through a predictive statistical model is only a limited aspect of neural computation, it is a fundamental first step in establishing function and guiding predictions as to the structure of neural circuitry. The key to any predictive model of a complex input/output relationship is dimensionality reduction, i.e., a simplification of the number of relevant variables that are needed to describe the stimulus.
+
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section>
+		<h2>Encoding models and motor cortex</h2>
 	    <img src="assets/soccer.png" width="50%">
 
 <ul>
@@ -69,8 +109,55 @@
 </ul>
 	    <aside class="notes">
 	    <span style="color: red"></span> •
+Just a simple characterization of this relationship in motor cortex, however, becomes more controversial. 
 
-Encoding of kinetic and kinematic parameters of motor output in primary motor cortex are known to be complex. The source of this complexity is an interesting scientific question, but also one of relevance to the design of brain computer interfaces for the purpose of neural prosthetic control. Optimal BCI performance is likely to be acheived through a mix of how we decode neural activity and an understanding of the adaptation processes that take place within the user.
+In the first half of the talk today I’ll be discussing encoding models of motor cortex in primates and their application in brain computer interfaces. In the second half I’ll be talking about efforts in lower-organisms such as cnidaria to record and measure comprehensively an organisms neural activity and its behavior, insights from which may one day be used to help study more sophisticated nervous systems, like those of mammals. 
+
+	    • <span style="color: green"></span>
+	  </aside>	</section>
+
+	<section data-background-color="#ffffff">
+		<h2>Encoding models and motor cortex</h2>
+		Grip and reach task<br>
+	    <img src="assets/glm_motor_vaadia.png" width="45%">
+	    <p class="rcred">Aljadeff et al 2016</p>
+	  	<div style="text-align: left;">
+	  		Network GLM:
+	       $$
+	       \lambda_t^j = f[\mathbf{x}_t, \mathbf{y}_t] = f\left(\mu + \sum_i k_i x_{t-i} + \sum_{j=1}^N\alpha_i^j y_{t-i}^j\right)
+	       $$
+	       </div>
+
+	    <aside class="notes">
+	    <span style="color: red"></span> •
+
+	    • <span style="color: green"></span>
+	  </aside>	</section>
+
+	<section data-background-color="#ffffff">
+		<h2>Encoding models and motor cortex</h2>
+	    <img src="assets/glm_motor.png" width="65%">
+
+	    <aside class="notes">
+	    <span style="color: red"></span> •
+
+	    • <span style="color: green"></span>
+	  </aside>	</section>
+
+	<section>
+		<h2>Latent variable models</h2>
+		<ul>
+			<li> Shortcomings of direct connectivity models (Macke et al 2011)
+		</ul>
+	    <div style="text-align: left;">
+	       $$
+	       \lambda_t^j = f[\mathbf{x}_t, \mathbf{z}_t] = f\left(\mu^j + \sum_i k_i^j x_{t-i} + \sum_{k=1}^K\beta_k^j z_{t}^k\right)
+	       $$
+	   </div>
+	    <img src="assets/intrinsic_manifold_white.svg" width="70%">
+
+	    <aside class="notes">
+	    <span style="color: red"></span> •
 
 	    • <span style="color: green"></span>
 	  </aside>	</section>
@@ -91,11 +178,6 @@ Encoding of kinetic and kinematic parameters of motor output in primary motor co
 	    </ul>
 	  <aside class="notes">
 	    <span style="color: red"></span> •
-So I'll be talking today about brain computer interfaces that do rely on adaptation of activity of motor cortical activity 
-
-Current state-of-the-art BCI control is achieved via intra-cortical brain signals. With these signals, studies have shown that monkeys can be trained to volitionally control individual neurons through a process of biofeedback and operant conditioning. Thus such BCIs rely on adapation processes.
-
-In these tasks, there is evidence that neural activity can be chosen independently of natural movement association, reflecting the remarkable adaptability of motor cortical activity. However despite this adaptability, other BCI studies observe that brain-control mappings which utilize activity observed during the natural motor repertoire are most effective. These contrasting findings suggest that, provided basic neuronal constraints imposed by existing circuitry are understood, next-generation BCI design may be able to better leverage the brain’s inherent adaptability.
 	    • <span style="color: green"></span>
 	  </aside>
 	</section>
@@ -109,9 +191,6 @@ In these tasks, there is evidence that neural activity can be chosen independent
    		</ul> 
 	  <aside class="notes">
 	    <span style="color: red"></span> •
-Most BCI studies to date focus on control of external devices alone. These do not require concurrent motor output of the subject, which frees the neurons or single units controlling the BCI (henceforth control units) to modify their activity as needed to perform the task. In concurrent use cases, however, in which both motor output and brain control are required to perform a task, much less is known about how control units are able to modify their activity to peform the task. 
-
-Concurrent control of natural movement and BCI output may be useful in cases of brain injury. For example, when the motor cortex of one hemisphere is damaged by stroke or trauma, a BCI-controlled neural prosthetic may be driven by the intact hemisphere. In this case cortical circuits in the intact hemisphere may be tasked with both producing movement of the unaffected limb, while also restoring function to the affected, ipsilateral limb using a BCI. 
 	    • <span style="color: green"></span>
 	  </aside>
 	</section>
@@ -125,7 +204,6 @@ Concurrent control of natural movement and BCI output may be useful in cases of 
    		</ul>
 	  <aside class="notes">
 	    <span style="color: red"></span> •
-While subpopulations of neurons encoding ipsilateral motion are a candidate control source for the BCI following stroke, a robust interface may require recording from the larger population of neurons involved in natural, contralateral control. Do neurons strongly associated with contralateral motion make poor control units due to the potential interference imposed by concurrent hand movement? Assuming that the brain area recorded from has some causal role in motor control, it seems that at least some neurons could present challenges for BCI control for this reason.
 	    • <span style="color: green"></span>
 	  </aside>
 	</section>
@@ -139,7 +217,6 @@ While subpopulations of neurons encoding ipsilateral motion are a candidate cont
 	    </ul>
 	  <aside class="notes">
 	    <span style="color: red"></span> •
-In a previous study we observed that a monkey was able to use all tested pairs of single cortical units to control a BCI task. Overall performance in this dual-control task was similar, regardless of the control units’ directional tuning. Explain figure.
 	    • <span style="color: green"></span>
 	  </aside>
 	</section>
@@ -156,14 +233,11 @@ In a previous study we observed that a monkey was able to use all tested pairs o
 
 	  <aside class="notes">
 	    <span style="color: red"></span> •
-How is this control achieved? Does this adaptability occur only for the control units? Or it requires population changes in activity?
-
-Previous studies of the behavior of control and non-control unit activity reveal widespread changes in activity and tuning preferences in a variety of tasks and task perturbations. In addition to these changes other studies showed specific changes for the control units compared with those not involved in the control. How do these unit specific effects manifest in a BCI paradigm where control units may be additionally constrained by their role in ongoing movement?
 	    • <span style="color: green"></span>
 	  </aside>
 	</section>
 
-	<section>
+	<section data-background-color="#ffffff">
 	<h2>Experiment</h2>
 <img src="assets/Figure 1_monkey_ver3.png">
 	<ul>
@@ -173,11 +247,6 @@ Previous studies of the behavior of control and non-control unit activity reveal
 	</ul>
 	  <aside class="notes">
 	    <span style="color: red"></span> •
-In this study we design a dual-control BCI that requires both BCI control and ongoing motor output are driven by the same cortical region, requiring control units to dissociate their activity from the circuits controlling the movement. The task requires that a monkey acquire a target in two dimensions, one dimension controlled by a BCI while the other is controlled using natural motor control of the wrist contralateral to the recorded hemisphere (Figure 1).
-
-This task allows us to investigate how primary motor cortical neural activity can be decoupled from natural motion. Other concurrent-use BCIs demonstrate similar robustness, albeit often with some adaptation period required. Here we examine whether dissociation from wrist motion occurs specifically for control units, or whether this dissociation is associated with changes in tuning, functional connectivity at the population level. 
-
-We also compare the motor cortical activity observed during the dual-control task to a standard brain-control task which requires the monkey acquire targets only through BCI control. To determine baseline tuning, variability and connectivity of the recorded population, the monkey first performed a manual control (MC) target-pursuit task that only involved acquiring targets through wrist motion. When compared to this manual control task, we observe widespread changes in tuning of both control and non-control units for the brain-control and dual-control tasks.
 	    • <span style="color: green"></span>
 	  </aside>
 	</section>
@@ -196,77 +265,6 @@ We also compare the motor cortical activity observed during the dual-control tas
 	</section>
 
 	<section>
-	  		<p>Simple linear tuning model:
-	  		$$ n^i_t = \alpha_x x_t + \alpha_y y_t + c + \epsilon_t$$</p>
-	  		<ul>
-	  		<li>Provides measure of preferred tuning angle $\theta$ and tuning strength<br>
-	  		<li>Units chosen with preferred tuning 90 rotated from dual control direction
-	  		</ul>
-	    <img src="assets/fig2a.png">
-	    <ul>
-	    	<li>Widespread changes in unit tuning between conditions, for control and non-control units alike
-	    </ul> 
-	  <aside class="notes">
-	    <span style="color: red"></span> •
-During both the brain control and dual control tasks we measure how units change their tuning to wrist motion, and compared this tuning to that observed during the manual control task. Our goal was to understand the overall differences in neural activity that underlie performance of the brain-control task compared to the dual-control task where wrist motion is also required. By fitting a linear tuning model to each unit throughout a session, we first analyzed changes in tuning to wrist motion between different tasks. The linear model provides a simple measure of a unit’s preferred wrist velocity, given by a tuning angle and tuning strength (see Methods). 
-
-When comparing to the manual control task, we observed significant changes in average tuning angle (p < 0.001; two sided t-test, Figure 2A,B) and average tuning strength (p < 0.001, Figure 2C) for units in both the brain control and dual control task. To minimize the possibility that 90o of visual feedback rotation could by itself result in observed changes in tuning angle, we also conducted a control task, where visual feedback was not rotated, and observed similar results (Figure S2).
-	    • <span style="color: green"></span>
-	  </aside>
-	</section>
-
-	<section>
-	    <img src="assets/fig2bII.png" width="70%">
-	    <p>Compared to activity during manual control</p>
-	    <ul>
-	    	<li> Brain-control:<ul>
-	    		<li>44% control units significantly change tuning angle
-	    		<li>28% non-control units significantly change tuning angle
-	    	</ul>
-	    	<li> Dual-control:<ul>
-	    		<li>21% control units significantly change tuning angle 
-	    		<li>19% non-control units significantly change tuning angle
-	    	</ul>
-	    </ul> 
-	  <aside class="notes">
-	    <span style="color: red"></span> •
-We found that during the brain control task, 56% of control units and 72% of non-control units did not significantly change their tuning angle compared to the manual control task. However, in dual control, unit tuning angles were more constrained by wrist motion, with 79% of control units and 81% of the non-control units having a similar tuning angle as in manual control (Figure 2 A,B). Indeed, during the brain control task there was a significantly greater change in the tuning angle of the control units compared to non-control units (p=0.008, two sided t-test). In contrast, specific modification of control unit tuning was not observed in dual control, where preferred direction changed similarly for both types of units (p=0.699, two sided t-test). 
-	    • <span style="color: green"></span>
-	  </aside>
-	</section>
-
-	<section>
-	    <img src="assets/fig2c.png" width="70%">
-	    <ul>
-	    <li>No control unit specific changes in tuning strength
-	    </ul> 
-	  <aside class="notes">
-	    <span style="color: red"></span> •
-To assess possible lasting effects of previous brain control trials, the monkey performed another manual control task after the dual control task. During this manual control session, hereafter the post-manual control session, the majority of units had the same tuning angle as in the first manual control task (correlation coefficient 0.99; Figure 2A). 
-	    • <span style="color: green"></span>
-	  </aside>
-	</section>
-
-	<section>
-	    <img src="assets/connectivity_all.png" width="70%">
-	  <aside class="notes">
-	    <span style="color: red"></span> •
-We next considered how the relationships between pairs of units depended on the task. To evaluate this, we used a measure of functional connectivity, transfer entropy. The transfer entropy of two random processes, from x_t to y_t, measures the information about y_t obtained by observing the history of x_t, conditioned on the history of y_t (see methods). We note that functional connectivity is a statistical relationship and should not be taken to imply synaptic connection.,
-	    • <span style="color: green"></span>
-	  </aside>
-	</section>
-
-	<section>
-	    <img src="assets/connectivity_to_one.png" width="70%">
-
-	  <aside class="notes">
-	    <span style="color: red"></span> •
-We investigated the relation between control units and co-tuned unit activity during the dual control task. As described above, in dual control most units maintain their association with wrist motion observed in manual control. However, the control units are required to modulate their activity independently of this association. Thus we might expect that they will subsequently exhibit less of a relation with units with which they were previously co-tuned with, and that this will manifest as a change in the functional connectivity between control and co-tuned units. According to this hypothesis the dual-control task requires control unit activity to become specifically less dependent on co-tuned neural activity. We therefore used a directed measure of functional connectivity, transfer entropy, to measure this independence.
-	    • <span style="color: green"></span>
-	  </aside>
-	</section>
-
-	<section>
 		<p>
 	  	For a fixed network of units, compute transfer entropy between units in each condition:
 	  	$$
@@ -275,41 +273,34 @@ We investigated the relation between control units and co-tuned unit activity du
 	  	for Shannon entropy $I$. <br><br>
 
 	  	Study differences in connectivity between brain-, dual- conditions and manual condition.<p>
-	    
-	    <p style="text-align: center"><img src="assets/te_changes.png" width="70%" style="text-align: center"></p>
-
 	  <aside class="notes">
 	    <span style="color: red"></span> •
-We focused on changes in connectivity that occurred between manual control and brain or dual control tasks for different subpopulations of unit pairs (see Methods). Overall, we observed a widespread change in the transfer entropy between manual control and the brain and dual control conditions. This change was smallest between the pre- and post- manual recordings, with the brain and dual control conditions showing larger changes in functional connectivity (Figure 3A). The changes for both brain control (R2 = 0.212) and dual control (R2 = 0.221) were similar (Figure 3A). 
 	    • <span style="color: green"></span>
 	  </aside>
 	</section>
 
-	<section>
+	<section data-background-color="#ffffff">
 	    <img src="assets/TE_part1.png" width="70%">
 
 	  <aside class="notes">
 	    <span style="color: red"></span> •
-We then compared the change in connectivity for control units versus non-control units. We observed that between brain and manual control, control units decreased their connectivity significantly more than non-control units. We observed the same trend when comparing changes in connectivity between dual and manual control (Figure 3B). Thus in both brain and dual control tasks, the control units become more independent from units than non-control units -- both tasks result in some control unit-specific dissociation.
 	    • <span style="color: green"></span>
 	  </aside>
 	</section>
 
-	<section>
+	<section data-background-color="#ffffff">
 	    <img src="assets/TE_part2.png" width="70%">
 
 	  <aside class="notes">
 	    <span style="color: red"></span> •
-We wondered if this control unit dissociation was specific to units that were co-tuned with the control unit. Indeed, comparing changes in connectivity to the control unit between brain and manual control showed a significant difference in the connectivity change for co-tuned units versus randomly selected units (p-value << 0.001 (1.5288x10-6) [rank sum] ; Figure 3C). However, comparing such changes in connectivity to the control unit between dual control and manual control does not reveal a significant difference (p-value = 0.5287 [rank sum]). Thus control units become more independent from co-tuned units than to other units in the brain control task, but not in the dual control task. 
 	    • <span style="color: green"></span>
 	  </aside>
 	</section>
 
-	<section>
+	<section data-background-color="#ffffff">
 	    <img src="assets/TE_part3.png" width="70%">
 	  <aside class="notes">
 	    <span style="color: red"></span> •
-This result is counterintuitive, given that the structure of the dual-control task was designed to effect the opposite result -- control unit specific independence. The possibility remains, however, that the brain control task leads to a higher degree of change in co-tuned units in general, and that the effect has nothing to do with whether or not a control unit is involved. Thus we also examined changes in connectivity to non-control units, from either co-tuned units or from non-co-tuned units (Figure 3D). In the brain control task, connectivity decreases significantly more for co-tuned units than for non-co-tuned units. This is similar to the result obtained in Figure 3C for control units. In dual control, however, connectivity changes significantly less for co-tuned units than for non-co-tuned units. In fact, between manual and dual control the overall change in connectivity for co-tuned units to non-control units is not significantly different from zero (p-value = 0.145). Thus, in dual control functional connectivity between co-tuned units is maintained, unless one of the units is a control unit, while in brain control there is an overall decrease in connectivity for co-tuned units, regardless independently of whether a control unit is involved.
 	    • <span style="color: green"></span>
 	  </aside>
 	</section>
@@ -322,7 +313,6 @@ This result is counterintuitive, given that the structure of the dual-control ta
 	  	</ul>
 	  <aside class="notes">
 	    <span style="color: red"></span> •
-This result is consistent with the tuning angle findings of the previous section, in which greater changes in tuning angle were observed in brain control compared to the changes in dual control (Figure 2B). Together these findings suggest that the manual component of the dual-control task holds both the tuning angles and connectivities between co-tuned units in similar states to that observed in manual control, except for connectivities involving the control units.
 • <span style="color: green"></span>
 	  </aside>
 	</section>
@@ -334,12 +324,11 @@ This result is consistent with the tuning angle findings of the previous section
 
 	  <aside class="notes">
 	    <span style="color: red"></span> •
-Despite the insight that the connectivity and tuning analysis provide into the neural activity that underlies the dual control task, neither analysis was predictive of task proficiency. This is consistent with previous studies showing remarkable flexibility of motor cortical activity. Previous studies also demonstrate that neural variability measured during natural behavior -- intrinsic variability -- is a constraint on learning and proficiency of brain control tasks [11 -- Sadtler et al 2014]. Thus we investigated the role of intrinsic variability of the control neurons in relation to the variability of the entire neural population.
 • <span style="color: green"></span>
 	  </aside>
 	</section>
 
-	<section>
+	<section data-background-color="#ffffff">
 		<h2>Intrinsic variability predicts performance</h2>
 <ul>
 <li> GPFA used to identify low-dimensional subspace
@@ -348,17 +337,13 @@ Despite the insight that the connectivity and tuning analysis provide into the n
 	    <img src="assets/gpfa_perf.png" width="30%">
 	  <aside class="notes">
 	    <span style="color: red"></span> •
-We began by identifying a low-dimensional space that characterizes a high proportion of the variance observed during natural movements from the manual control recordings. We used Gaussian process factor analysis (GPFA) to identify this space, which we term the intrinsic space (similar to the intrinsic manifold proposed by Sadtler et al 2014 [11 -- Sadtler et al 2014]). In line with this terminology, we term the variance of each recorded unit during the manual control task its intrinsic variability. When a brain control task is performed, the activity from just two neurons determines the cursor position. The activity of these two neurons thus comprises a brain-control space (Figure 4A). Based on [11 -- Sadtler et al 2014], we hypothesized that more proficient brain-control and dual-control would occur when the brain-control space and the intrinsic space share some amount of alignment. We observed that in the brain control task, but not in the dual control task, performance is significantly higher when the brain-control and intrinsic spaces are indeed non-orthogonal (Figure 4B).	
-
-Need to mention that when we try GLM type encoding models, as well as linear models,
-we observe no relation between tuning and performance.<br>
     • <span style="color: green"></span>
 	  </aside>
 	</section>
 
 <!-- ----------------------------------------------------------------------- -->
 
-	<section>
+	<section data-background-color="#ffffff">
 	  <h2>Intrinsic variability predicts performance</h2>
 	    <img src="assets/Figure5_ver2c.png" width="60%">
 	    <ul>
@@ -366,7 +351,6 @@ we observe no relation between tuning and performance.<br>
 	    </ul> 
 	  <aside class="notes">
 	    <span style="color: red"></span> •
-To measure each unit’s contribution to the target acquisition task, we constructed a metric which quantifies the amount of influence each control unit has over the cursor trajectory. Since the cursor trajectory was determined through a moving average model weighing the contribution from each control unit, we selected a Granger causality-type metric (see methods). We validated this metric using synthetic cursor data generated through a weighted contribution of two neurons (Figure S4). Not surprisingly, we observed that a high value of this control metric for at least one of the control neurons is required for dual control task proficiency (Figure 5A).
 	    • <span style="color: green"></span>
 	  </aside>
 	</section>
@@ -378,18 +362,6 @@ To measure each unit’s contribution to the target acquisition task, we constru
 	  		<li> Intrinsic variance of control units only variable found to predict performance and control unit contributions &#8212; motor unit tuning does not constrain how the task is performed
 	  	</ul>
 	  	<p>$\Rightarrow$ As observed with other BCIs: provided basic neuronal constraints imposed by existing circuitry are taken into consideration, BCI design is able to leverage motor cortical adaptability.</p>
-	  <aside class="notes">
-	    <span style="color: red"></span> •
-	    • <span style="color: green"></span>
-	  </aside>
-	</section>
-
-	<section data-transition="fade-in">
-		<h2>Outline</h2>
-		<ol>
-			<li> Motor encoding in concurrent use brain-computer interfaces
-			<li class="fragment highlight-green"> Whole-animal imaging analysis in cnidarian Hydra
-		</ol>
 	  <aside class="notes">
 	    <span style="color: red"></span> •
 	    • <span style="color: green"></span>
@@ -448,7 +420,7 @@ To measure each unit’s contribution to the target acquisition task, we constru
 	<section>
 	<h2>Aims</h2>
 <hr>Understand (and control) neuronal basis of simple behavior such as contracting/elongating and expelling
-	    fluid</p>
+	    fluid (egestion)</p>
 	     <div>
 <hr><p>Sub-aims:</p>
 	  	<ol>
@@ -459,28 +431,11 @@ To measure each unit’s contribution to the target acquisition task, we constru
 	  </div>
 	  <aside class="notes">
 	    <span style="color: red"></span> •
-	    • Aims: understand (and control) simple behavior such as contracting and expelling
-	    water.
-
-	    Hydra periodically absorbs water (possibly through osmosis) and expells it all at once
-	    once reaching a certain size. Nerve free Hydra do not expell fluid, so we know this is
-	    a nervous system function.	
-
-	    Sub aim:
-	    In achieving this, a sub-aim is to be able to track the Hydra's pose and neurons throughout
-	    unconstrained behavior. This allows analysis of the Hydra's behavior, it's neural activity,
-	    and of course the relationship between the two.
-
-	    I will spend the 1st half of this talk describing a method for performing this tracking in
-	    videos of Hydra in which neurons have been tagged with GCamp6, allowing for their neural
-	    activity to be imaged. 
-
-	    Mention this is a collaboration with Rafa Yuste lab in Columbia
 	    • <span style="color: green"></span>
 	  </aside>
 	</section>
 
-	<section>
+	<section >
 	<h2>Experiment</h2>
 	  <div id="left">
 	    <img src="assets/hydrasetup.jpg" width="50%">
@@ -498,19 +453,6 @@ To measure each unit’s contribution to the target acquisition task, we constru
 		</ul>
 	  <aside class="notes">
 	    <span style="color: red"></span> •
-	    Methods
-	    - Hydra details
-	    Genetic calcium indicator. Modified plasmid which expresses GFP, to express GCaMP6.
-	    Injected in Hydra fertilized eggs. (Act-GCaMP6s transgenic Hydra)
-	    - imaging methods
-	    mounted specimens between two coverslips separated by .1mm spacer. Hollow cylinder
-	    imaged from the side. Transparent means can image activity of every one of its neurons.
-	    - experiment details:
-	    transients digital -- all or none -- fast risetimes and slow decays. Hydra neurons have
-	    action potentials, express sodium channels in their genome, simplest explanation
-	    of changes in flouresence is due to calcium influx due to action potential activity.
-	    As in mammalian neurons. Did not record Ca signals of intermediate amplitude suggests that
-	    capturing individual action potentials.
 
 	    • <span style="color: green"></span>
 	  </aside>
@@ -526,27 +468,6 @@ To measure each unit’s contribution to the target acquisition task, we constru
 	  <aside class="notes">
 	    <span style="color: red"></span> •
 
-	    How do we go about doing this tracking?
-
-	    Some issues:
-	    - neuron tracking (which if reliable would provide information about neural
-	    activity and body position) is problematic since not all neurons are visible
-	    at all times.
-	    - particle tracking thus has a track association problem
-	    - how are neurons reassociated once they become inactive then active again?
-
-	    As an aside, note that in the future we may have access to labeled neurons
-	    through the use of nanoparticles or genetic labels. This would greatly aid in the
-	    neuron tracking and body tracking by provided clear fiducial markers that can be consistently
-	    tracked. However, this is not available yet and remains an experimental
-	    challenge. Further, not all Hydra strains may have such labeling, and we would like
-	    methods that can tracking Hydra body in cases when we have flourescent labels for
-	    activity in epithelial cells which show muscle activity. In these datasets, individual
-	    cells may be hard to track and make out. Since we would like to do behavior analysis on
-	    these dataseta also, we will here tackle the problem of performing body tracking
-	    in cases where explicit fiducial markers are not present.
-
-	    For today let's take this as our problem.
 
 	    • <span style="color: green"></span>
 	  </aside>
@@ -575,15 +496,6 @@ To measure each unit’s contribution to the target acquisition task, we constru
 	</div>
 	  <aside class="notes">
 	    <span style="color: red"></span> •
-
-	    How do we go about doing this tracking?
-
-	    A solution is to then fit a parameterization or mesh to the body explicitly
-	    and to use this to perform neuron tracking.
-
-	    We can do this by adapting methods from deformable object tracking.
-
-	    However, as a very high dimensional state space model. these methods are slow, unstable, and difficult to recover from difficult Hydra motion. Once it's lost the Hydra, it can't recover.
 
 	    • <span style="color: green"></span>
 	  </aside>
@@ -649,15 +561,6 @@ To measure each unit’s contribution to the target acquisition task, we constru
 		</div>
 	  <aside class="notes">
 	    <span style="color: red"></span> •
-	    This method works fairly well for short sequences of video. Tracking 42%
-	    of all neurons is high enough to start to be useful, even if there's plenty
-	    of room for improvement.
-
-	    Further, it is fast and stable.
-
-	    However, it is not always appropriate to use the one reference frame for the
-	    Hydra, since it changes position quite significantly throughout a recording.
-	    (show video)
 	    • <span style="color: green"></span>
 	  </aside>
 	</section>
@@ -813,17 +716,6 @@ To measure each unit’s contribution to the target acquisition task, we constru
 	  </aside>
 	</section>
 
-	<!-- <section>
-	<h2>Combining reference frames through temporal continuity of neuron tracking</h2>
-	<video src="assets/mfsf_dm_combined.mp4" muted controls loop
-	 poster="assets/dst2.png" class="slideautostart"></video>
-	  <aside class="notes">
-	    <span style="color: red"></span> •
-	Allows for registration of neurons over videos of indefinite length
-	    • <span style="color: green"></span>
-	  </aside>
-	</section> -->
-
 	<section>
 	<h2>Summary</h2>
 	<ul>
@@ -878,6 +770,8 @@ To measure each unit’s contribution to the target acquisition task, we constru
          	<li> Charlie Matlack </li>
          	<li> Robert Robinson</li></ul>
          <li> Yuste lab</li><ul>
+         <li> Rafael Yuste</li>
+         <li> Thibault Lagache</li>
          <li> Christophe Dupre</li>
          <li> John Szymanski</li></ul>
 	  	</ul>
@@ -976,19 +870,6 @@ To measure each unit’s contribution to the target acquisition task, we constru
 	    • <span style="color: green"></span>
 	  </aside>
 	</section>
-
-	<!-- <section>
-	<h2>Mumford-Shah image segmentation</h2>
-	<div id="left">
-		Proximal operaters $\pi_{F^*}$ and $\pi_G$ are pixel-wise projection onto convex sets $P$ and $U$<br>
-		$\Rightarrow$ Easy to implement on GPU
-	</div>
-	<div id="right"></div>
-	  <aside class="notes">
-	    <span style="color: red"></span> •
-	    • <span style="color: green"></span>
-	  </aside>
-	</section> -->
 
 	<section>
 	<h2>Segmentation of tracked regions</h2>
