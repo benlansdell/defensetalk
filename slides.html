@@ -13,7 +13,12 @@
     <script>
       document.write('<link rel="stylesheet" href="reveal.js/css/print/'+(window.location.search.match(/print-pdf/gi) ? 'pdf' : 'paper')+'.css" type="text/css" media="print">');
     </script>
-    <script src="js/three.js"></script>
+    <!--<script src="js/three.js"></script>-->
+
+    <script src="js/three.min.js"></script>
+    <script src="js/OrbitControls.js"></script>
+    <script src="js/KeyboardState.js"></script>
+
     <!--[if lt IE 9]>
     <script src="reveal.js/lib/js/html5shiv.js"></script>
     <![endif]-->
@@ -80,9 +85,9 @@ The role nervous systems play in an organism’s behavior increases as we move t
 	<section>
 	  <h2>Linear non-linear Poisson models</h2>
 	    <img src="assets/glmuncoupled_white.svg" width="60%">
-	    <p class="rcred">Adapted from Aljadeff, Lansdell, Fairhall, Kleinfeld Neuron 2016</p>
+	    <p class="rcred">Adapted from Aljadeff et al <em>Neuron</em> 2016</p>
 	  	<div style="text-align: left;">
-	      Let $Y(t)$ count spikes up to time $t$. <br>
+	      Let $Y(t)$ count spikes up to time $t$. 
 	      In discrete time bins, $\mathbf{t}=(0, h, 2h, \dots, T)$, let $y_i$ be number of spikes $\in(t_{i-1}, t_i]$:
 	       $$\begin{align*}y_t &\sim \text{Poisson}(\lambda_t),\\
 	       \lambda_t &= f[\mathbf{x}_t, y_t] = f\left(\mu + \sum_i k_i x_{t-i} + \alpha_i y_{t-i}\right)\end{align*}$$	  </div>
@@ -98,15 +103,23 @@ The form of the feature vectors, nonlinearity, and history dependencies can reve
 	  </aside>
 	</section>
 
-	<section>
+	<section data-background-color="#ffffff">
 		<h2>Encoding models and motor cortex</h2>
-	    <img src="assets/soccer.png" width="50%">
-
+		<div id="left">
+	    <img src="assets/motorstim.png" width="90%">
+	    <p class="lcred">Phillips and Porter 1977</p>
+		</div>
+		<div id="right">
 <ul>
-	<li> Motor cortical neuron representations are complex
-	<li> Understanding motor encoding can inform design of BCIs for restoring function to paralyzed limbs, or for control of prosthetic limbs
-	<li> Optimal BCI performance likely a mix of decoder choice and user adaptation processes
+	<li> Motor cortical neuron representations are complex: 
+		<ul><li>kinetics &#8212; single-unit recordings, stimulation evoked responses (1960s)
+		<li> kinematics &#8212; center-out task (1980s)
+		<li> dynamics &#8212; high-dimensional recordings (2000s)</ul>
+			<hr>
+	<li class="fragment"> Understanding motor encoding can inform design of BCIs for control of prosthetic limbs
+	<li class="fragment"> Models are constrained by experimental paradigms and data 
 </ul>
+	</div>
 	    <aside class="notes">
 	    <span style="color: red"></span> •
 Just a simple characterization of this relationship in motor cortex, however, becomes more controversial. 
@@ -118,13 +131,13 @@ In the first half of the talk today I’ll be discussing encoding models of moto
 
 	<section data-background-color="#ffffff">
 		<h2>Encoding models and motor cortex</h2>
-		Grip and reach task<br>
+		Grip and reach task in monkey (Vaadia 2013)<br>
 	    <img src="assets/glm_motor_vaadia.png" width="45%">
-	    <p class="rcred">Aljadeff et al 2016</p>
+	    <p class="rcred">Aljadeff, <b>Lansdell</b>, Fairhall, Kleinfeld <em>Neuron</em> 2016</p>
 	  	<div style="text-align: left;">
-	  		Network GLM:
+	  		Network GLM (Pillow et al 2008, Kim et al 2011, Takahashi et al 2015):
 	       $$
-	       \lambda_t^j = f[\mathbf{x}_t, \mathbf{y}_t] = f\left(\mu + \sum_i k_i x_{t-i} + \sum_{j=1}^N\alpha_i^j y_{t-i}^j\right)
+	       \lambda_t^j = f[\mathbf{x}_t, \mathbf{y}_t] = f\left(\mu + \sum_i k_i x_{t-i} + \sum_{j=1}^N\alpha_i^j y_{t-i}^j\right),\quad N \text{ neurons}
 	       $$
 	       </div>
 
@@ -146,15 +159,15 @@ In the first half of the talk today I’ll be discussing encoding models of moto
 
 	<section>
 		<h2>Latent variable models</h2>
-		<ul>
-			<li> Shortcomings of direct connectivity models (Macke et al 2011)
-		</ul>
 	    <div style="text-align: left;">
 	       $$
-	       \lambda_t^j = f[\mathbf{x}_t, \mathbf{z}_t] = f\left(\mu^j + \sum_i k_i^j x_{t-i} + \sum_{k=1}^K\beta_k^j z_{t}^k\right)
+	       \lambda_t^j = f[\mathbf{x}_t, \mathbf{z}_t] = f\left(\mu^j + \sum_i k_i^j x_{t-i} + \sum_{k=1}^K\beta_k^j z_{t}^k\right),\quad K\ll N
 	       $$
 	   </div>
 	    <img src="assets/intrinsic_manifold_white.svg" width="70%">
+		<ul>
+			<li> e.g. Cunningham et al 2014, Sadtler et al 2014, Macke et al 2011
+		</ul>
 
 	    <aside class="notes">
 	    <span style="color: red"></span> •
@@ -162,15 +175,15 @@ In the first half of the talk today I’ll be discussing encoding models of moto
 	    • <span style="color: green"></span>
 	  </aside>	</section>
 
-	<section>
+	<section data-background-color="#000000">
 		<h2>Intracortical arrays provide state-of-the-art BCI control</h2>
 	  <div id="left">
-	    <img src="assets/utah.png" width="45%">
-	    <img src="assets/motorcortex.png" width="45%">
+	    <center><img src="assets/utah.png" width="45%">
 	    <p class="rcred"></p>
 	  </div>
 	  <div id="right">
-	    <img src="assets/DrinkingMoment.jpg" width="75%">
+	<video src="assets/refit_kalman.mp4" muted controls loop
+	 poster="assets/dst2.png" class="slideautostart" width="100%"></video>
 	  </div>
 	    <ul><li>Monkeys can be trained to volitionally control individual neurons through feedback and conditioning [Fetz 1969]
 	    	<li>Neurons chosen independently of natural movement association [Moritz and Fetz 2011]
@@ -182,12 +195,15 @@ In the first half of the talk today I’ll be discussing encoding models of moto
 	  </aside>
 	</section>
 
-	<section>
+	<section data-background-color="#ffffff">
 		<h2>Dual-control BCIs</h2>
-	    <img src="assets/dualcontrolBCI.png" width="50%">
+	    <img src="assets/dualcontrolBCI.png" width="40%">
+	    <img src="assets/easyharddiag2.png" width="50%">
+	    <p class="rcred">Milovanovic et al 2015</p>
 	    <ul>
 	  		<li> Allow stroke patients to regain functionality through co-opting
 	  			healthy motor cortex to control neural prosthetic in conjunction with residual movement 
+   		<li> Do neurons strongly associated with contralateral motion make poor control units due to the potential interference imposed by concurrent hand movement?
    		</ul> 
 	  <aside class="notes">
 	    <span style="color: red"></span> •
@@ -195,20 +211,7 @@ In the first half of the talk today I’ll be discussing encoding models of moto
 	  </aside>
 	</section>
 
-	<section>
-		<h2>Dual-control BCIs</h2>
-	    <img src="assets/easyharddiag2.png" width="50%">
-	    <p class="rcred">Milovanovic et al 2015</p>
-	    <ul>
-   		<li> Do neurons strongly associated with contralateral motion make poor control units due to the potential interference imposed by concurrent hand movement?
-   		</ul>
-	  <aside class="notes">
-	    <span style="color: red"></span> •
-	    • <span style="color: green"></span>
-	  </aside>
-	</section>
-
-	<section>
+	<section data-background-color="#ffffff">
 		<h2>Dual-control BCIs</h2>
 		<img src="assets/dc_perf.png" width="55%">
 		<p class="rcred">Milovanovic et al 2015</p>
@@ -229,7 +232,24 @@ In the first half of the talk today I’ll be discussing encoding models of moto
 	  		<li> BCIs induce widespread changes in activity and tuning in variety of tasks and task perturbations [e.g. Carmena et al 2003]
   			<li> Some studies show control unit specific changes in tuning [e.g. Law et al 2014]
 	  	</ul> 
-	  	<p class="fragment">How do these effects manifest in a BCI paradigm where control units may be constrained by their role in ongoing movement?</p>
+
+		<div class="fragment">
+			<hr>
+	  	<p>How do these effects manifest in a BCI paradigm where control units may be constrained by their role in ongoing movement?</p>
+	  	<p>"What are the units of volitional control?"</p>
+		</div>
+		<div class="fragment">
+		<div class="column4">
+			<img src="assets/Adrienne-Fairhall.jpg" height="200px">
+<p class="lcred">Adrienne Fairhall</div>
+		<div class="column4">
+			<img src="assets/Chet-Moritz.jpg" height="200px">
+<p class="lcred">Chet Moritz</p></div>
+		<div class="column4"><img src="assets/Cooper-Mellema.jpg" height="200px">
+<p class="lcred">Cooper Mellema</p></div>
+		<div class="column4-last"><img src="assets/Ivana-Milovanovic.jpg" height="200px"><br>
+<p class="lcred">Ivana Milovanovic</p></div>
+		</div>
 
 	  <aside class="notes">
 	    <span style="color: red"></span> •
@@ -242,8 +262,6 @@ In the first half of the talk today I’ll be discussing encoding models of moto
 <img src="assets/Figure 1_monkey_ver3.png">
 	<ul>
 		<li> Utah multi-electrode array implanted in hand/wrist area of primary motor cortex of Macaque monkey
-	  	<li class="fragment">
-	  	Chet Moritz, Ivana Milovanovic, Cooper Mellama, Adrienne Fairhall (UW)
 	</ul>
 	  <aside class="notes">
 	    <span style="color: red"></span> •
@@ -265,6 +283,7 @@ In the first half of the talk today I’ll be discussing encoding models of moto
 	</section>
 
 	<section>
+	  <h2>Changes in functional connectivity of population</h2>
 		<p>
 	  	For a fixed network of units, compute transfer entropy between units in each condition:
 	  	$$
@@ -280,7 +299,19 @@ In the first half of the talk today I’ll be discussing encoding models of moto
 	</section>
 
 	<section data-background-color="#ffffff">
-	    <img src="assets/TE_part1.png" width="70%">
+	  <h2>Changes in functional connectivity of population</h2>
+	    <img src="assets/TE_part1.png" width="65%">
+	    <p class="rcred"><b>Lansdell</b> et al <em>(submitted)</em></p>
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section data-background-color="#ffffff">
+	  <h2>Changes in functional connectivity of population</h2>
+	    <img src="assets/TE_part2.png" width="65%">
+	    <p class="rcred"><b>Lansdell</b> et al <em>(submitted)</em></p>
 
 	  <aside class="notes">
 	    <span style="color: red"></span> •
@@ -289,16 +320,9 @@ In the first half of the talk today I’ll be discussing encoding models of moto
 	</section>
 
 	<section data-background-color="#ffffff">
-	    <img src="assets/TE_part2.png" width="70%">
-
-	  <aside class="notes">
-	    <span style="color: red"></span> •
-	    • <span style="color: green"></span>
-	  </aside>
-	</section>
-
-	<section data-background-color="#ffffff">
-	    <img src="assets/TE_part3.png" width="70%">
+	  <h2>Changes in functional connectivity of population</h2>
+	    <img src="assets/TE_part3.png" width="65%">
+	    <p class="rcred"><b>Lansdell</b> et al <em>(submitted)</em></p>
 	  <aside class="notes">
 	    <span style="color: red"></span> •
 	    • <span style="color: green"></span>
@@ -361,15 +385,18 @@ In the first half of the talk today I’ll be discussing encoding models of moto
 	  		<li> Tuning and connectivity analysis suggest dual-control task generates cortical activity more similar to that observed in manual control task
 	  		<li> Intrinsic variance of control units only variable found to predict performance and control unit contributions &#8212; motor unit tuning does not constrain how the task is performed
 	  	</ul>
-	  	<p>$\Rightarrow$ As observed with other BCIs: provided basic neuronal constraints imposed by existing circuitry are taken into consideration, BCI design is able to leverage motor cortical adaptability.</p>
+	  	<hr>
+	  	<p>$\Rightarrow$ Provided basic neuronal constraints imposed by existing circuitry are taken into consideration, BCI design is able to leverage motor cortical adaptability.</p>
+		<p> $\Rightarrow$ Internal and latent dynamics reveal additional information, compared with direct encoding models
 	  <aside class="notes">
 	    <span style="color: red"></span> •
 	    • <span style="color: green"></span>
 	  </aside>
 	</section>
 
+
 	<section data-background-color="#000000">
-	<h2>Whole-animal imaging in unconstrained Hydra</h2>
+	<h2>Comprehensive measures of neural activity in cnidaria</h2>
 	  <div>
 	<video src="assets/hydra_feeding_short.mp4" muted controls loop
 	 poster="assets/dst2.png" class="slideautostart" width="60%"></video>
@@ -425,9 +452,25 @@ In the first half of the talk today I’ll be discussing encoding models of moto
 <hr><p>Sub-aims:</p>
 	  	<ol>
 	  	<li class="fragment highlight-green">Track Hydra pose</li>
+	  	<li>Behavioral analysis</li>
 	  	<li>Register and track neurons</li>
 	  	<li>Record neural activity</li>
 	  </ol>
+	  </div>
+	  <div class="fragment">
+	  	<hr>
+	  	<div class="column-left">
+			<img src="assets/Adrienne-Fairhall.jpg" height="200px">
+			<p class="lcred">Adrienne Fairhall</p>
+	  	</div>
+	  	<div class="column-center">
+			<img src="assets/yuste.jpg" height="200px">
+			<p class="lcred">Rafael Yuste</p>
+		</div>
+	  	<div class="column-right">
+			<img src="assets/dupre.jpg" height="200px">
+			<p class="lcred">Chistrophe Dupre</p>
+	  	</div>
 	  </div>
 	  <aside class="notes">
 	    <span style="color: red"></span> •
@@ -474,7 +517,7 @@ In the first half of the talk today I’ll be discussing encoding models of moto
 	</section>
 
 	<section data-background-color="#000000">
-	<h2>Deformable object tracking</h2>
+	<h2>A deformable object tracker</h2>
 	<div id="left">
 	<video src="assets/kalmanfilter_slow.mp4" muted controls
 	 poster="assets/dst2.png" class="slideautostart"></video>
@@ -489,8 +532,8 @@ In the first half of the talk today I’ll be discussing encoding models of moto
 			image, $f(\cdot)$ is mass-spring dynamics, $h(\cdot)$ observation.<br> <br>
 		</p>
 		<ul class="fragment">
-			<li>High-dimensional &#8212; slow, even if using OpenGL/CUDA<br>
-			<li>Unstable &#8212; once tracking lost, difficult to recover
+			<li>High-dimensional: novel implementation using OpenGL+CUDA
+			<li>Unstable: once tracking lost, difficult to recover
 		</ul>
 
 	</div>
@@ -513,7 +556,7 @@ In the first half of the talk today I’ll be discussing encoding models of moto
 	<section>
 	<h2>Multi-frame optic flow image registration</h2>
 	<ul id="blanklist">
-	<li> Dense optic flow with subspace constraints (MFSF)
+	<li> Dense optic flow with subspace constraints (MFSF, Garg et al 2013)
 	<li> For each pixel find linear combination of basis paths, $L$, that minimize energy<br>
 	<img src="assets/energyeq.png">
 	<li> $I_f$ = image at frame $f$,
@@ -527,22 +570,7 @@ In the first half of the talk today I’ll be discussing encoding models of moto
 	  </aside>
 	</section>
 
-	<section>
-	<h2>Tracking with optic flow</h2>
-	<video src="assets/warp_neurons_nref100.mp4" muted controls loop
-	 poster="assets/dst2.png" class="slideautostart"></video>
-	 <ul> 
-	 <li> blue = hand tracked neurons
-	 <li> green = w/in 6px of 'true', red = >6px of 'true'
-	 </ul>
-	  <aside class="notes">
-	    <span style="color: red"></span> •
-	   	We can see that this work fairly well for short sequences of video.
-	    • <span style="color: green"></span>
-	  </aside>
-	</section>
-
-	<section>
+	<section data-background-color="#ffffff">
 	<h2>Tracking with optic flow: performance</h2>
 		<div id="left">
 		<p>Comparison to hand annotated neuron tracks<br>
@@ -586,7 +614,7 @@ In the first half of the talk today I’ll be discussing encoding models of moto
 		<div>
 		<div class="column-left">Forward map $$g_{1,2}(\mathbf{x})$$</div>
 		<div class="column-center">Reverse map $$g_{2,1}(\mathbf{x})$$</div>
-		<div class="column-right">Error $$f_{1,2}(\mathbf{x}) = \left|g_{2,1}(g_{1,2}(\mathbf{x}))\right|$$</div>
+		<div class="column-right">Error $$f_{1,2}(\mathbf{x}) = \left|g_{2,1}(g_{1,2}(\mathbf{x}))-\mathbf{x}\right|$$</div>
 		</div>
 		<br><img src="assets/colorwheel.png" align="left">
 	  <aside class="notes">
@@ -595,15 +623,14 @@ In the first half of the talk today I’ll be discussing encoding models of moto
 	  </aside>
 	</section>
 
-
-	<section>
+	<section data-background-color="#ffffff">
 	<h2>Exploiting periodicity in Hydra behavior</h2>
 	<div id="left">
 	<ul> 
 	<br><br><br>
 	Stereotyped Hydra behavior:<br>elongate then contract<br><br>
 	Compute and measure optic flow error, $f_{ij}(x)$, between frames with regular spacing
-	<br><br>'iframes' &#8212; every 250 frames
+	<br><br>'interframes' &#8212; every 250 frames
 	</ul>
 	</div>
 	<div id="right" style="text-align: center;">
@@ -618,12 +645,12 @@ In the first half of the talk today I’ll be discussing encoding models of moto
 	  </aside>
 	</section>
 
-	<section>
+	<section data-background-color="#ffffff">
 	<h2>Exploiting periodicity in Hydra behavior</h2>
 	<div id="left">
-	<p> 
-	Two clusters: contracted and elongated<br>
-	$\Rightarrow$ By registering regions of each iframe with a ref. frame we extend paths into temporally distant but positionally related frames<br>
+	Two clusters: contracted and elongated
+	<p class="fragment"> 
+	$\Rightarrow$ By registering regions of each interframe with a ref. frame we extend paths into temporally distant but positionally related frames<br>
 	$\Rightarrow$ A mechanism to handle arbitrarily long videos without accumulation of tracking error
 	</p>
 	</div>
@@ -641,12 +668,12 @@ In the first half of the talk today I’ll be discussing encoding models of moto
 
 	<section>
 	<h2>Segmenting regions to register with each reference frame</h2>
-		<p>For $K$ reference frames and $L$ iframes, let $f_{ij}(x)$ represent the optic flow error in using reference image $i$ to construct image $j$.<br>
+		<p>For $K$ reference frames and $L$ interframes, let $f_{ij}(x)$ represent the optic flow error in using reference image $i$ to construct image $j$.<br>
 		Use total variation image segmentation:
 		$$\begin{align*}\min_{u_{kl}}\frac{1}{2}\sum_{k=1}^K\sum_{l=1}^L \int_\Omega |\nabla u_{kl}|\,dx
 			+ \frac{\lambda}{2}\sum_{k=1}^K\sum_{l=1}^L \int_{\Omega} u_{kl}(x)f_{kl}(x)\,dx\end{align*}
 		$$
-		Solve with Chambolle algorithm, implemented on GPU.
+		Solve with primal-dual algorithm (Chambolle and Pock 2011), accelerated on GPU.
 		</p>
 	<p class="fragment">
 		Want number of ref frames to balance global registration vs registration error<br>
@@ -662,10 +689,10 @@ In the first half of the talk today I’ll be discussing encoding models of moto
 	</section>
 
 	<section>
-	<h2>Proposed method</h2>
+	<h2>Method</h2>
 		<p> 
 			1. Select very sparse set of reference frames (ref frames)<br>
-			2. Select regular set of inter-frames (iframes)<br>
+			2. Select regular set of inter-frames<br>
 			<img src="assets/dend_d1_tile_c1_hl.png" width="90%"><br>
 			<img src="assets/dend_d1_tile_c2_hl.png" width="90%"><br>
 			3. Use optic flow+image segmentation to label regions mapping to reference frames<br>
@@ -678,9 +705,9 @@ In the first half of the talk today I’ll be discussing encoding models of moto
 	</section>
 
 	<section>
-	<h2>Proposed method</h2>
+	<h2>Method</h2>
 		<p> 
-			4. Within each iframe block run MFSF for dense registration<br>
+			4. Within each interframe block run MFSF for dense registration<br>
 			<img src="assets/mfsf_extend2.png" width="90%"><br>
 		</p>
 	  <aside class="notes">
@@ -690,7 +717,7 @@ In the first half of the talk today I’ll be discussing encoding models of moto
 	</section>
 
 	<section>
-	<h2>Proposed method</h2>
+	<h2>Method</h2>
 		<p> 
 			5. Associate each path from (4) with point in a ref frame using optic flow+segmentation (3)<br>
 			<img src="assets/mfsf_extend3.png" width="90%"><br>
@@ -719,7 +746,7 @@ In the first half of the talk today I’ll be discussing encoding models of moto
 	<section>
 	<h2>Summary</h2>
 	<ul>
-		<li> Registration between similar frames -- track Hydra pose throughout extended video sequences. Can be applied to other registration/tracking problems
+		<li> Registration between similar frames &#8212 track Hydra pose throughout extended video sequences. Can be applied to other registration/tracking problems
 		<li class="fragment"> Create larger hand annotated datasets for performance evaluation
 		<li class="fragment"> Exploit temporal continuity between adjacent blocks to relate reference frames to one another
 	</ul>
@@ -734,18 +761,17 @@ In the first half of the talk today I’ll be discussing encoding models of moto
 	</section>
 
 	<section>
-	<h2>Models of motor cortical function</h2>
-	<ul>
-		<li> Explicit encoding models of kinetics and kinematics only tell so much
-		<li> Internal and latent dynamics reveal additional functionality
-	</ul>
+	  <h2>Summary</h2>
 	<hr>
-	<p><br><br></p>
 	"Progress in science depends on new techniques, new discoveries and new ideas, probably in that order" <br>
 	&#8212; Sydney Brenner
+	<hr>
+	  <!--<div>
+		<canvas width="10%" data-sample="videostack"></canvas>
+	  </div>-->
+
 	  <aside class="notes">
 	    <span style="color: red"></span> •
-
 	    • <span style="color: green"></span>
 	  </aside>
 	</section>
@@ -764,12 +790,12 @@ In the first half of the talk today I’ll be discussing encoding models of moto
    	  </div>
 	  <div id="left">
 	  	<ul>
-         <li> Fairhall lab</li><ul>
+         <li> Fairhall lab (UW)</li><ul>
          	<li> Anatoly Buchin </li></ul>
-         <li> Moritz lab</li><ul>
+         <li> Moritz lab (UW)</li><ul>
          	<li> Charlie Matlack </li>
          	<li> Robert Robinson</li></ul>
-         <li> Yuste lab</li><ul>
+         <li> Yuste lab (Columbia)</li><ul>
          <li> Rafael Yuste</li>
          <li> Thibault Lagache</li>
          <li> Christophe Dupre</li>
@@ -916,7 +942,7 @@ In the first half of the talk today I’ll be discussing encoding models of moto
         "lib/js/dat.gui.js",
         "lib/js/EventEmitter.js",
 
-        "lib/js/three.js",
+        //"lib/js/three.js",
         "lib/js/three/EffectComposer.js",
         "lib/js/three/RenderPass.js",
         "lib/js/three/BloomPass.js",

@@ -5,8 +5,8 @@
     addListener: function(event, listener) {
       eventEmitter.addListener(event, listener);
     },
-    width: 320,
-    height: 240,
+    width: 600,
+    height: 500,
     paused: false,
     wireframe: false,
     current_normal_map: "normal_map_tile.jpg",
@@ -55,6 +55,8 @@
     "js/samples/todo_lighted_spinning_textured_cube.js",
     "js/samples/todo_lighted_spinning_cube.js",
     "js/samples/particles.js",
+    "js/samples/videostack.js",
+    "js/samples/scatter3.js",
     "js/samples/particle_height_map.js",
     "js/samples/particle_height_map_vertex_texture.js",
     "js/samples/shadow_map.js",
