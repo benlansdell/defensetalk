@@ -1,0 +1,1015 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Moving models of motor control forward, in theory and application</title>
+      <meta name="viewport"
+	  content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!--<link rel="stylesheet" href="reveal.js/css/reveal.min.css">-->
+    <link rel="stylesheet" href="reveal.js/css/reveal.min.css">
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/black.css" id="theme">-->
+    <link rel="stylesheet" href="cust_black.css" id="theme">
+    <link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
+    <script>
+      document.write('<link rel="stylesheet" href="reveal.js/css/print/'+(window.location.search.match(/print-pdf/gi) ? 'pdf' : 'paper')+'.css" type="text/css" media="print">');
+    </script>
+    <!--<script src="js/three.js"></script>-->
+
+    <script src="js/three.min.js"></script>
+    <script src="js/OrbitControls.js"></script>
+    <script src="js/KeyboardState.js"></script>
+
+    <!--[if lt IE 9]>
+    <script src="reveal.js/lib/js/html5shiv.js"></script>
+    <![endif]-->
+
+<!-- Printing and PDF exports -->
+<script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+</script>
+  </head>
+
+  <body>
+    <!-- Slides! -->
+
+    <div class="reveal">
+      <div class="slides">
+        <section data-background="assets/dst2_background.png">
+          <h1>Moving models of motor control forward, in theory and application</h1>
+	  <br>
+	  <p style="text-align: center; font-size: larger; text-shadow: 0px 0px 6px #000000;">Ben Lansdell<br> University of Washington - Applied Mathematics<br><br>
+	  	Flatiron Institute, March 24th 2017</p>
+	  <aside class="notes">
+	    <span style="color: red">
+	    </span> •
+	    • <span style="color: green"></span>
+	  </aside>
+        </section>
+
+<!-- ----------------------------------------------------------------------- -->
+
+	<section>
+	  <h2>Overview</h2>
+	<hr>
+	"Progress in science depends on new techniques, new discoveries and new ideas, probably in that order" <br>
+	&#8212; Sydney Brenner
+	<hr>
+	  <div class="fragment">
+	  	<ol>
+	  		<li class="fragment highlight-green"> Shifting models of primary motor encoding and concurrent-use BCIs
+	  		<li> Towards whole-animal calcium imaging in unrestrained cnidaria
+	  	</ol>
+	  </div>
+
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+<!--	<section data-background-video="assets/nervous_noaudio.mp4">
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+While we often think of neurons and brains as mediating our thoughts, decisions, memories, and perceptions, ultimately nervous systems exist to control and coordinate body movements rapidly over large distances. Motor control principles are widely varied throughout the animal kingdom, of course. From nerve nets in jellyfish to finely articulated hand and finger manipulations in primates. 
+
+The role nervous systems play in an organism’s behavior increases as we move to higher-organisms. Indeed, in simple organisms such as the cnidarian Hydra, which I’ll be talking about later, its behavior, while surprisingly complicated, can still be, to a large extent, significantly characterized by whole-body contractions and relaxations -- without a large degree of fine control. As one of the most distant organisms to ourselves to possess a nervous system, it appears largely as a thin veneer of control placed over an intricate chemical signalling system. Animals more closely related to ourselves, on the other hand, become significantly more neuron centric. It’s well known that our own brains consume a disproportionate amount of energy, and that neurons have the most diverse transcriptome of any cell type. 
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>-->
+	
+		<section>
+    <img src="assets/monkey_activity.png" width="70%">
+	  <div style="text-align: left">
+	      In general $$y(t)\sim f[x(t)].$$
+	      But, starting simply: $$y(t)\sim f(\lambda(t)) = f(g(k*x(t))),$$
+	      where $k(\tau)$ are <em>feature vectors</em>.
+	  </div>
+
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+	    Of course, the nervous system of higher animals is vastly more structured than the nervous systems of something like a jelly fish, and it is also a lot larger. This means that determining mechanisms for particular behaviors involves many technical challenges. In general we simply don’t have the ability to simultaneously observe all relevant parts of the nervous system’s activity, at high enough temporal and spatial resolution, in order to piece things together. 
+
+		Thus, when studying the function of neural circuits in animals such as primates, an important component of determining a neuron’s role in particular behaviors is a characterization of the relationship its spiking activity with external variables, either motor outputs or sensory inputs. 
+
+		We can ask what its neural activity encodes.
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section>
+	  <h2>Linear non-linear Poisson models</h2>
+	    <img src="assets/glmuncoupled_white.svg" width="60%">
+	    <p class="rcred">Adapted from Aljadeff et al <em>Neuron</em> 2016</p>
+	  	<div style="text-align: left;">
+	      Let $Y(t)$ count spikes up to time $t$. 
+	      In discrete time bins, $\mathbf{t}=(0, h, 2h, \dots, T)$, let $y_i$ be number of spikes $\in(t_{i-1}, t_i]$:
+	       $$\begin{align*}y_t &\sim \text{Poisson}(\lambda_t),\\
+	       \lambda_t &= g[\mathbf{x}_t, y_t] = g\left(\mu + \sum_i k_i x_{t-i} + \alpha_i y_{t-i}\right)\end{align*}$$	  </div>
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+Roughly, we can think of these models as characterizing the input/output relationships that capture how spiking activity, generally at the single-neuron level, is related to external variables: either sensory signals or motor output. These models focus on a description of the statistical nature of this relationship without any direct attempt to establish mechanisms; rather, they provide a compact representation of the components in a stimulus that cause a neuron to spike.
+
+These models have been particularly successful in studying sensory systems, I would argue. 
+
+The form of the feature vectors, nonlinearity, and history dependencies can reveal properties of the system that test theoretical concepts, such as how efficiently the stimulus is encoded by a neuron and how robust the encoding is to noise. For example, changes in the feature under different stimulus conditions can reveal the system’s ability to adapt to, or cancel out, correlations in the sensory input. Further, changes in the nonlinearity reveal how the system can modulate its dynamic range as the intensity of the stimulus evolves. While representing neuronal spiking through a predictive statistical model is only a limited aspect of neural computation, it is a fundamental first step in establishing function and guiding predictions as to the structure of neural circuitry. The key to any predictive model of a complex input/output relationship is dimensionality reduction, i.e., a simplification of the number of relevant variables that are needed to describe the stimulus.
+
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section data-background-color="#ffffff">
+		<h2>Encoding models and motor cortex</h2>
+		<div id="left">
+	    <img src="assets/motorstim.png" width="90%">
+	    <p class="lcred">Phillips and Porter 1977</p>
+		</div>
+		<div id="right">
+<ul>
+	<li> Motor cortical neuron representations are complex: 
+		<ul><li>kinetics &#8212; single-unit recordings, stimulation evoked responses (1960s)
+		<li> kinematics &#8212; center-out task (1980s)
+		<li> dynamics &#8212; high-dimensional recordings (2000s)</ul>
+			<hr>
+	<li class="fragment"> Understanding motor encoding can inform design of BCIs for control of prosthetic limbs
+	<li class="fragment"> Models are constrained by experimental paradigms and data 
+</ul>
+	</div>
+	    <aside class="notes">
+	    <span style="color: red"></span> •
+Just a simple characterization of this relationship in motor cortex, however, becomes more controversial. 
+
+In the first half of the talk today I’ll be discussing encoding models of motor cortex in primates and their application in brain computer interfaces. In the second half I’ll be talking about efforts in lower-organisms such as cnidaria to record and measure comprehensively an organisms neural activity and its behavior, insights from which may one day be used to help study more sophisticated nervous systems, like those of mammals. 
+
+	    • <span style="color: green"></span>
+	  </aside>	</section>
+
+	<section data-background-color="#ffffff">
+		<h2>Encoding models and motor cortex</h2>
+		Grip and reach task in monkey (Vaadia 2013)<br>
+	    <img src="assets/glm_motor_vaadia.png" width="45%">
+	    <p class="rcred">Aljadeff, <b>Lansdell</b>, Fairhall, Kleinfeld <em>Neuron</em> 2016</p>
+	  	<div style="text-align: left;">
+	  		Network GLM (Pillow et al 2008, Kim et al 2011, Takahashi et al 2015):
+	       $$
+	       \lambda_t^j = g[\mathbf{x}_t, \mathbf{y}_t] = g\left(\mu + \sum_i k_i x_{t-i} + \sum_{j=1}^N\alpha_i^j y_{t-i}^j\right),\quad N \text{ neurons}
+	       $$
+	       </div>
+
+	    <aside class="notes">
+	    <span style="color: red"></span> •
+
+	    • <span style="color: green"></span>
+	  </aside>	</section>
+
+	<section data-background-color="#ffffff">
+		<h2>Encoding models and motor cortex</h2>
+	    <img src="assets/glm_motor.png" width="65%">
+
+	    <aside class="notes">
+	    <span style="color: red"></span> •
+
+	    • <span style="color: green"></span>
+	  </aside>	</section>
+
+	<section>
+		<h2>Latent variable models</h2>
+	    <div style="text-align: left;">
+	       $$
+	       \lambda_t^j = g[\mathbf{x}_t, \mathbf{z}_t] = g\left(\mu^j + \sum_i k_i^j x_{t-i} + \sum_{k=1}^K\beta_k^j z_{t}^k\right),\quad K\ll N
+	       $$
+	   </div>
+	    <img src="assets/intrinsic_manifold_white.svg" width="70%">
+		<ul>
+			<li> e.g. Cunningham et al 2014, Sadtler et al 2014, Macke et al 2011
+		</ul>
+
+	    <aside class="notes">
+	    <span style="color: red"></span> •
+
+	    • <span style="color: green"></span>
+	  </aside>	</section>
+
+	<section data-background-color="#000000">
+		<h2>Intracortical arrays provide state-of-the-art BCI control</h2>
+	  <div id="left">
+	    <center><img src="assets/utah.png" width="45%">
+	    <p class="rcred"></p>
+	  </div>
+	  <div id="right">
+	<video src="assets/refit_kalman.mp4" muted controls loop
+	 poster="assets/dst2.png" class="slideautostart" width="100%"></video>
+	  </div>
+	    <ul><li>Monkeys can be trained to volitionally control individual neurons through feedback and conditioning [Fetz 1969]
+	    	<li>Neurons chosen independently of natural movement association [Moritz and Fetz 2011]
+	    	<li>Conversely, other studies report brain-control mappings which utilize activity observed during the natural motor repertoire are most effective [Sadtler et al 2014]
+	    </ul>
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section data-background-color="#ffffff">
+		<h2>Dual-control BCIs</h2>
+	    <img src="assets/dualcontrolBCI.png" width="40%">
+	    <img src="assets/easyharddiag2.png" width="50%">
+	    <p class="rcred">Milovanovic et al 2015</p>
+	    <ul>
+	  		<li> Allow stroke patients to regain functionality through co-opting
+	  			healthy motor cortex to control neural prosthetic in conjunction with residual movement 
+   		<li> Do neurons strongly associated with contralateral motion make poor control units due to the potential interference imposed by concurrent hand movement?
+   		</ul> 
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section data-background-color="#ffffff">
+		<h2>Dual-control BCIs</h2>
+		<img src="assets/dc_perf.png" width="55%">
+		<p class="rcred">Milovanovic et al 2015</p>
+	    <ul>
+	    	<li> Previous studies show performance independent of unit tuning [Milovanovic et al 2015]
+	    </ul>
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section>
+		<h2>Dual-control BCIs</h2>
+	  <div style="text-align: left">
+	    <p>Activity of control and non-control units</p>
+	  	<ul>
+	  		<li> BCIs induce widespread changes in activity and tuning in variety of tasks and task perturbations [e.g. Carmena et al 2003]
+  			<li> Some studies show control unit specific changes in tuning [e.g. Law et al 2014]
+	  	</ul> 
+
+		<div class="fragment">
+			<hr>
+	  	<p>How do these effects manifest in a BCI paradigm where control units may be constrained by their role in ongoing movement?</p>
+	  	<p>"What are the units of volitional control?"</p>
+		</div>
+		<div class="fragment">
+		<div class="column4">
+			<img src="assets/Adrienne-Fairhall.jpg" height="200px">
+<p class="lcred">Adrienne Fairhall</div>
+		<div class="column4">
+			<img src="assets/Chet-Moritz.jpg" height="200px">
+<p class="lcred">Chet Moritz</p></div>
+		<div class="column4"><img src="assets/Cooper-Mellema.jpg" height="200px">
+<p class="lcred">Cooper Mellema</p></div>
+		<div class="column4-last"><img src="assets/Ivana-Milovanovic.jpg" height="200px"><br>
+<p class="lcred">Ivana Milovanovic</p></div>
+		</div>
+
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section data-background-color="#ffffff">
+	<h2>Experiment</h2>
+<img src="assets/Figure 1_monkey_ver3.png">
+	<ul>
+		<li> Utah multi-electrode array implanted in hand/wrist area of primary motor cortex of Macaque monkey
+	</ul>
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section>
+		<h2>Random target pursuit task</h2>
+			<ul>
+				<li> Target appears randomly outside radius from cursor position
+				<li> Acquire target within fixed time, hold for 1s
+			</ul>
+	    <img src="assets/targettask.png" width="70%">
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section>
+	  <h2>Changes in functional connectivity of population</h2>
+		<p>
+	  	For a fixed network of units, compute transfer entropy between units in each condition:
+	  	$$
+	  	H_{X\to Y} = I(Y_t|Y_{t-1}, \dots, Y_{t-T}) - I(Y_t|Y_{t-1}, \dots, Y_{t-T},X_{t-1}, \dots, X_{t-T})
+	  	$$
+	  	for Shannon entropy $I$. <br><br>
+
+	  	Study differences in connectivity between brain-, dual- conditions and manual condition.<p>
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section data-background-color="#ffffff">
+	  <h2>Changes in functional connectivity of population</h2>
+	    <img src="assets/TE_part1.png" width="65%">
+	    <p class="rcred"><b>Lansdell</b> et al <em>(submitted)</em></p>
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section data-background-color="#ffffff">
+	  <h2>Changes in functional connectivity of population</h2>
+	    <img src="assets/TE_part2.png" width="65%">
+	    <p class="rcred"><b>Lansdell</b> et al <em>(submitted)</em></p>
+
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section data-background-color="#ffffff">
+	  <h2>Changes in functional connectivity of population</h2>
+	    <img src="assets/TE_part3.png" width="65%">
+	    <p class="rcred"><b>Lansdell</b> et al <em>(submitted)</em></p>
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section>
+	  <h2>Changes in functional connectivity of population</h2>
+	  	<ul>
+	  		<li> Brain-control: overall decrease in functional connectivity to control units
+	  		<li> Dual-control: functional connectivity between co-tuned units does not change, except when control unit involved
+	  	</ul>
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+• <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section>
+		<h2>Intrinsic variability predicts performance</h2>
+		<p>Inspired by Sadtler et al 2014</p>
+	    <img src="assets/intrinsic_manifold_white.png" width="70%">
+
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+• <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section data-background-color="#ffffff">
+		<h2>Intrinsic variability predicts performance</h2>
+<ul>
+<li> GPFA used to identify low-dimensional subspace
+<li> Identify when spaces are significantly non-orthogonal
+</ul>
+	    <img src="assets/gpfa_perf.png" width="30%">
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+<!-- ----------------------------------------------------------------------- -->
+
+	<section data-background-color="#ffffff">
+	  <h2>Intrinsic variability predicts performance</h2>
+	    <img src="assets/Figure5_ver2c.png" width="60%">
+	    <ul>
+	    	<li> High performance requires at least one unit with high intrinsic variance
+	    </ul> 
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section>
+	  <h2>Summary</h2>
+	  	<ul>
+	  		<li> Tuning and connectivity analysis suggest dual-control task generates cortical activity more similar to that observed in manual control task
+	  		<li> Intrinsic variance of control units only variable found to predict performance and control unit contributions &#8212; motor unit tuning does not constrain how the task is performed
+	  	</ul>
+	  	<hr>
+	  	<p>$\Rightarrow$ Provided basic neuronal constraints imposed by existing circuitry are taken into consideration, BCI design is able to leverage motor cortical adaptability.</p>
+		<p> $\Rightarrow$ Internal and latent dynamics reveal additional information, compared with direct encoding models
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+
+	<section data-background-color="#000000">
+	<h2>Comprehensive measures of neural activity in cnidaria &#8212 "breaking the neural code"</h2>
+	  <div>
+	<video src="assets/hydra_feeding_short.mp4" muted controls loop
+	 poster="assets/dst2.png" class="slideautostart" width="60%"></video>
+	 <p class="rcred">https://www.youtube.com/watch?v=dl_oVns2oa8</p>
+	 <div class="fragment">
+	<p>Why Hydra?</p>
+	 <ol>
+	 	<li> Small (0.5mm-1.5cm) &#8212; can fit into field of view of traditional microscope
+	 	<li> Translucent; nerve net, easier imaging
+	 	<li> Does not age, and can regenerate
+	 </ol>
+	</div>
+	  </div>
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+	    The Hydra has a diffuse nerve net, one of the simplest nervous systems.
+
+	    As part of a collaboration with Yuste lab at Columbia, among others, we
+	    are working on obtaining this level of knowledge in the cnidarian Hydra.
+
+	    For this, the Hydra has the advantages that:
+	    -it is transparent, making imaging simpler
+	    -it is small, allowing it to fit into the FOV of a traditional scope
+	    -it consists of a nerve net, meaning that neurons are spread throughout
+	    the organism and can be imaged more or less without obstructing one another
+	    -it can be constrained to lie in a 2D plane, meaning more or less the organism
+	    can be in focus all at once, without the need for z-slicing, which permits a high
+	    temporal resolution recording.
+
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section>
+	<h2>Hydra anatomy</h2>
+	  <div>
+	    <img src="assets/hydra_layers_white.png" width="100%" position="left">
+	    <p class="rcred">Adapted from Technau and Steele 2011</p>
+	  </div>
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+	    Describe Hydra anatomy
+
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section>
+	<h2>Aims</h2>
+<hr>Understand (and control) neuronal basis of simple behavior such as contracting/elongating and expelling
+	    fluid (egestion)</p>
+	     <div>
+<hr><p>Sub-aims:</p>
+	  	<ol>
+	  	<li class="fragment highlight-green">Track Hydra pose</li>
+	  	<li>Behavioral analysis</li>
+	  	<li>Register and track neurons</li>
+	  	<li>Record neural activity</li>
+	  </ol>
+	  </div>
+	  <div class="fragment">
+	  	<hr>
+	  	<div class="column-left">
+			<img src="assets/Adrienne-Fairhall.jpg" height="200px">
+			<p class="lcred">Adrienne Fairhall</p>
+	  	</div>
+	  	<div class="column-center">
+			<img src="assets/yuste.jpg" height="200px">
+			<p class="lcred">Rafael Yuste</p>
+		</div>
+	  	<div class="column-right">
+			<img src="assets/dupre.jpg" height="200px">
+			<p class="lcred">Chistrophe Dupre</p>
+	  	</div>
+	  </div>
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section >
+	<h2>Experiment</h2>
+	  <div id="left">
+	    <img src="assets/hydrasetup.jpg" width="50%">
+	    <p class="rcred"></p>
+	  </div>
+	  <div id="right">
+	    <img src="assets/hydrasetup3.jpg" width="100%" position="left">
+	    <p class="rcred">C. Dupre, Yuste lab</p>
+	  </div>
+	    <p>Methods</p>
+	    <ul>
+	    <li> Create Act-GCaMP6s transgenic Hydra
+		<li> Mount between coverslips separated by .1mm spacer
+		<li> Image calcium transients
+		</ul>
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+<!-- ----------------------------------------------------------------------- -->
+
+	<section>
+	<h2>Whole-body calcium imaging in Hydra</h2>
+	<video src="assets/hydra_gcamp.mp4" muted controls loop
+	 poster="assets/dst2.png" class="slideautostart" width="70%"></video>
+	 <p class="rcred">C. Dupre, Yuste lab</p>
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+
+
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section data-background-color="#000000">
+	<h2>A deformable object tracker</h2>
+	<div id="left">
+	<video src="assets/kalmanfilter_slow.mp4" muted controls
+	 poster="assets/dst2.png" class="slideautostart"></video>
+	</div>
+	<div id="right">
+		<p>Extended Kalman filter tracking
+
+			$$\begin{align}y_t &= h(x_t) +\nu_t \\
+			x_t &= f(x_{t-1}) +\epsilon_t\end{align} $$ 
+
+			Where $x_t$ is the Hydra positions and velocities, $y_t$ is the generated
+			image, $f(\cdot)$ is mass-spring dynamics, $h(\cdot)$ observation.<br> <br>
+		</p>
+		<ul>
+			<li class="fragment">High-dimensional: novel implementation using OpenGL+CUDA
+			<li class="fragment">Unstable: once tracking lost, difficult to recover
+		</ul>
+
+	</div>
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section>
+	<h2>Multi-frame optic flow image registration</h2>
+	<img src="assets/mfsf_white.svg">
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section>
+	<h2>Multi-frame optic flow image registration</h2>
+	<ul id="blanklist">
+	<li> Dense optic flow with subspace constraints (MFSF, Garg et al 2013)
+	<li> For each pixel find linear combination of basis paths, $L$, that minimize energy<br>
+	<img src="assets/energyeq.png">
+	<li> $I_f$ = image at frame $f$,
+	<li> $I_0$ = reference frame (need not be first frame of video),
+	<li> $Q_f^u$, $Q_f^v$ = basis paths at frame $f$, 
+	<li> $\alpha$ = smoothness regularizer
+	</ul>
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section data-background-color="#ffffff">
+	<h2>Tracking with optic flow: performance</h2>
+		<div id="left">
+		<p>Comparison to hand annotated neuron tracks<br>
+		Per frame:</p>
+		<ul>
+		<li> at least 52% neurons are tracked within 6px
+		<li> on average 82% neurons tracked within 6px
+		</ul>
+		Per neuron:
+		<ul>
+		<li> 42% neurons tracked within 6 px throughout all video
+		</ul>
+		</div>
+		<div id="right">
+		<img src="assets/tracking_errors.png">
+		</div>
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section>
+	<h2>Registering in longer sequences</h2>
+		<img src="assets/mfsf_stitch_white.svg" width="70%">
+		<div class="fragment">
+		How to mitigate accumulation of errors from video to video?
+		</div>
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+		Changing appearance/pose in a long sequence → multiple reference frames
+		Simplest approach: split into multiple stacks and run independently
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section>
+	<h2>Choosing which paths to associate</h2>
+	Measure image registration error
+		<img src="assets/combined.png">
+		<div>
+		<div class="column-left">Forward map $$g_{1,2}(\mathbf{x})$$</div>
+		<div class="column-center">Reverse map $$g_{2,1}(\mathbf{x})$$</div>
+		<div class="column-right">Error $$f_{1,2}(\mathbf{x}) = \left|g_{2,1}(g_{1,2}(\mathbf{x}))-\mathbf{x}\right|$$</div>
+		</div>
+		<br><img src="assets/colorwheel.png" align="left">
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section data-background-color="#ffffff">
+	<h2>Exploiting periodicity in Hydra behavior</h2>
+	<div id="left">
+	<ul> 
+	<br><br><br>
+	Stereotyped Hydra behavior:<br>elongate then contract<br><br>
+	Compute and measure optic flow error, $f_{ij}(x)$, between frames with regular spacing
+	<br><br>'interframes' &#8212; every 250 frames
+	</ul>
+	</div>
+	<div id="right" style="text-align: center;">
+		$\langle f_{ij}(x)\rangle_\Omega$
+		<img src="assets/similarity_orig.png">
+		Frame index
+	</div>
+
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section data-background-color="#ffffff">
+	<h2>Exploiting periodicity in Hydra behavior</h2>
+	<div id="left">
+	Two clusters: contracted and elongated
+	<p class="fragment"> 
+	$\Rightarrow$ By registering regions of each interframe with a ref. frame we extend paths into temporally distant but positionally related frames<br>
+	$\Rightarrow$ A mechanism to handle arbitrarily long videos without accumulation of tracking error
+	</p>
+	</div>
+	<div id="right" style="text-align: center;">
+		$\langle f_{ij}(x)\rangle_\Omega$<br>
+		<img src="assets/dendrogram.png" width="70%">
+	</div>
+		<img src="assets/dend_d1_tile_c1.png" width="80%">
+		<img src="assets/dend_d1_tile_c2.png" width="80%">
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section>
+	<h2>Segmenting regions to register with each reference frame</h2>
+		<p>For $K$ reference frames and $L$ interframes, let $f_{ij}(x)$ represent the optic flow error in using reference image $i$ to construct image $j$.<br>
+		Use total variation image segmentation:
+		$$\begin{align*}\min_{u_{kl}}\frac{1}{2}\sum_{k=1}^K\sum_{l=1}^L \int_\Omega |\nabla u_{kl}|\,dx
+			+ \frac{\lambda}{2}\sum_{k=1}^K\sum_{l=1}^L \int_{\Omega} u_{kl}(x)f_{kl}(x)\,dx\end{align*}
+		$$
+		Solve with primal-dual algorithm (Chambolle and Pock 2011), accelerated on GPU.
+		</p>
+	<p class="fragment">
+		Want number of ref frames to balance global registration vs registration error<br>
+		$\Rightarrow$ Add a group LASSO penalty for number of reference frames used:
+		$$\begin{align*}\min_{u_{kl}}\frac{1}{2}\sum_{k=1}^K\sum_{l=1}^L \int_\Omega |\nabla u_{kl}|\,dx
+			+ \frac{\lambda}{2}\sum_{k=1}^K\sum_{l=1}^L \int_{\Omega} u_{kl}(x)f_{kl}(x)\,dx+ \frac{\lambda_2}{2}\sum_{k=1}^K\left(\sum_{l=1}^L \|u_{kl}\|^2_2 \right)^{1/2}\end{align*}
+		$$
+	</p>
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section>
+	<h2>Method</h2>
+		<p> 
+			1. Select very sparse set of reference frames (ref frames)<br>
+			2. Select regular set of inter-frames<br>
+			<img src="assets/dend_d1_tile_c1_hl.png" width="90%"><br>
+			<img src="assets/dend_d1_tile_c2_hl.png" width="90%"><br>
+			3. Use optic flow+image segmentation to label regions mapping to reference frames<br>
+			<img src="assets/mfsf_extend1.png" width="90%"><br>
+		</p>
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section>
+	<h2>Method</h2>
+		<p> 
+			4. Within each interframe block run MFSF for dense registration<br>
+			<img src="assets/mfsf_extend2.png" width="90%"><br>
+		</p>
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section>
+	<h2>Method</h2>
+		<p> 
+			5. Associate each path from (4) with point in a ref frame using optic flow+segmentation (3)<br>
+			<img src="assets/mfsf_extend3.png" width="90%"><br>
+		</p>
+		<p class="fragment">
+			Thus every tracked path is associated with a point in a reference frame
+		</p>
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+		Thus every tracked path is associated with a point in a reference frame
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section>
+	<h2>Extending with $K=2; L = 8$</h2>
+	<video src="assets/mfsf_dm_combined2.mp4" muted controls loop
+	 poster="assets/dst2.png" class="slideautostart" width="55%"></video>
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+	   	We can see that this work fairly well for short sequences of video.
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section>
+	<h2>Summary</h2>
+	<ul>
+		<li> Registration between similar frames &#8212 track Hydra pose throughout extended video sequences. Can be applied to other registration/tracking problems
+		<li class="fragment"> Create larger hand annotated datasets for performance evaluation
+		<li class="fragment"> Exploit temporal continuity between adjacent blocks to relate reference frames to one another
+	</ul>
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+	    This approach has utility as a general optic flow technique that can handle occlusions &#8212; an important problem in computer vision.
+
+	    We've seen how this method can be used to track Hydra, which we believe will
+	    form an important component of determining the neural basis of its behavior.
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section>
+	  <h2>Acknowledgments</h2>
+	  	<hr>
+	  <div id="left">
+	  	<ul>
+         <li> Adrienne Fairhall</li>
+         <li> Chet Moritz</li>
+         <li> Ivana Milovanovic</li>
+         <li> Cooper Mellema</li>
+         <li> Eberhard Fetz</li>
+	  	</ul>
+   	  </div>
+	  <div id="left">
+	  	<ul>
+         <li> Fairhall lab (UW)</li><ul>
+         	<li> Anatoly Buchin </li></ul>
+         <li> Moritz lab (UW)</li><ul>
+         	<li> Charlie Matlack </li>
+         	<li> Robert Robinson</li></ul>
+         <li> Yuste lab (Columbia)</li><ul>
+         <li> Rafael Yuste</li>
+         <li> Thibault Lagache</li>
+         <li> Christophe Dupre</li>
+         <li> John Szymanski</li></ul>
+	  	</ul>
+   	  </div>
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+
+	<section>
+	<h2>Segmenting regions to extend</h2>
+	<div id="left">
+		Mumford-Shah image segmention: divide into $k$ regions of constant color, while trying to minimize perimeter of region boundaries
+	</div>
+	<div id="right"><img src="assets/butterfly_together.png"></div>
+		$$\begin{align*}\min_{(R_l),c_l}\frac{1}{2}\sum_{l=1}^k \text{Per}(R_l;\Omega)
+			+ \frac{\lambda}{2}\sum_{l=1}^k \int_{R_l} |g(x)-c_l|^2\,dx\end{align*}$$
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section>
+	<h2>Segmenting regions to extend</h2>
+	<div id="left">
+		Mumford-Shah image segmention: divide into $k$ regions of constant color, while trying to minimize perimeter of region boundaries
+	</div>
+	<div id="right"><img src="assets/butterfly_together.png"></div>
+	<p>
+		$$\begin{align*}\min_{u_l}\frac{1}{2}\sum_{l=1}^k \int_\Omega |\nabla u_l|\,dx
+			+ \frac{\lambda}{2}\sum_{l=1}^k \int_{\Omega} u_l(x)f_l(x)\,dx\end{align*}
+		$$
+		with $f_l(x) = |g(x)-c_l|^2$. Assume $c_l$ are known and $\mathbf{u}\in U$:
+		$$
+		U = \left\{u_l:\sum_l^k u_l(x) = 1, \quad u_l(x) \ge 0, \forall x\in\Omega\right\}
+		$$
+		Convex in $\mathbf{u}$<br>
+		Select color via $v(x) = \text{argmax}_l u_l(x)$ 
+	</p>
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section>
+	<h2>Mumford-Shah image segmentation</h2>
+	<p>
+		Chambolle algorithm solves problems:
+		$$\min_{x\in X}F(Kx) + G(x)$$
+		for convex $F(\cdot):Y\to [0,\infty]$ and $G(\cdot):X\to [0,\infty]$, 
+		<br>in primal-dual form:
+		$$\min_{x\in X}\max_{y\in Y} \langle Kx, y\rangle - F^*(y) + G(x)$$
+		<em>Algorithm:</em>
+	</p>
+	<ol>
+	<li> Initialization: $\tau, \sigma > 0, \theta \in [0,1], (x^0,y^0)\in X\times Y$. Set $\bar{x}^0 = x^0$
+	<li> Iterate until convergence: ($n\ge 0$)
+		$$\begin{align}
+		y^{n+1} &= \pi_{F^*}(y^n + \sigma K \bar{x}^n; \sigma)\\
+		x^{n+1} &= \pi_G(x^n - \tau K^* {y}^{n+1}; \tau)\\
+		\bar{x}^{n+1} &= x^{n+1} +\theta(x^{n+1} - x^n)
+		\end{align}$$
+	</ol>
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section>
+	<h2>Mumford-Shah image segmentation</h2>
+	<p>
+		With proximal operator
+		$$
+		\pi_G(y;\tau) = \text{argmin}_{x}\frac{\|x-y\|_2^2}{2\tau}+G(x)
+		$$
+		<br>
+		Primal-dual MS image segmentation:  
+		$$\begin{align}\min_{u=(u_l)_{l=1}^k} \max_{p=(p_l)_{l=1}^k} &\left(\sum_{l=1}^k\langle \nabla u_l, p_l \rangle +\langle u_l, f_l \rangle \right) +\delta_U(u) - \delta_P(p) \end{align}$$
+		So,
+		<ul>
+		<li> $K = \nabla$ (first order forward difference)
+		<li> $K^* = -\text{div}$ (first order backward difference)
+		<li> $F^*(p) = \delta_P(p)$ with $P=\left\{ p\in Y^k:\|p_l\|_\infty \le \frac{1}{2}\right\}$
+		<li> $G(u) = \delta_U(u)$
+		</ul>
+		Proximal operaters $\pi_{F^*}$ and $\pi_G$ are pixel-wise projection onto convex sets $P$ and $U$
+		$\Rightarrow$ Easy to implement on GPU
+	</p>
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section>
+	<h2>Segmentation of tracked regions</h2>
+
+		<p>For $K$ reference frames and $L$ iframes, let $f_{ij}(x)$ represent the optic flow error in using reference image $i$ to construct image $j$.  
+		$$\begin{align}\min_{u} \max_{p} \sum_{l=1}^L\left(\sum_{k=1}^K\langle \nabla u_{kl}, p_{kl} \rangle +\langle u_{kl}, f_{kl} \rangle \right) +\delta_U(u) - \delta_P(p) \end{align}$$
+		</p>
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section>
+	<h2>Choosing ref frames</h2>
+	<p>
+		Want number of ref frames to balance global registration vs registration error <br><br>
+		Add a group LASSO penalty for number of reference frames used:
+		$$\begin{align}\min_{u=(u_l)_{l=1}^k} \max_{p=(p_l)_{l=1}^k} &\left(\sum_{l=1}^k\langle \nabla u_l, p_l \rangle +\langle u_l, f_l \rangle \right) +\delta_U(u) - \delta_P(p) +\frac{\lambda_2}{2}\sum_{k=1}^K\left(\sum_{l=1}^L \|u_{kl}\|^2_2 \right)^{1/2} \end{align}$$
+		The proximal operator $\pi_G$ now becomes:
+		$$
+		\pi_G(y;\tau) = \text{argmin}_{x}\frac{\|x-y\|_2^2}{2\tau}+\frac{\lambda_2}{2}\sum_{k=1}^K\left(\sum_{l=1}^L \|y_{kl}\|^2_2 \right)^{1/2}+\delta_U(y)
+		$$
+		Compute $\pi_G$ with ADMM
+	</p>
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+    <!--<script src="reveal.js/js/reveal.min.js"></script>-->
+    <script src="reveal.js/js/reveal.js"></script>
+    <script src="pdfjs/compatibility.js"></script>
+    <script src="pdfjs/pdf.js"></script>
+
+    <script src="lib/js/head.min.js"></script>
+    <script>
+      head.js(
+        "lib/js/jquery.min.js",
+        "lib/js/jquery.hotkeys.js",
+        "lib/js/underscore.min.js",
+        "lib/js/swfobject.js",
+        "lib/js/dat.gui.js",
+        "lib/js/EventEmitter.js",
+
+        //"lib/js/three.js",
+        "lib/js/three/EffectComposer.js",
+        "lib/js/three/RenderPass.js",
+        "lib/js/three/BloomPass.js",
+        "lib/js/three/ShaderPass.js",
+        "lib/js/three/MaskPass.js",
+
+        // three shaders
+        "lib/js/three/shaders/CopyShader.js",
+        "lib/js/three/shaders/BasicShader.js",
+        "lib/js/three/shaders/DotScreenShader.js",
+        "lib/js/three/shaders/UnpackDepthRGBAShader.js",
+        "lib/js/three/shaders/HorizontalBlurShader.js",
+        "lib/js/three/shaders/VerticalBlurShader.js",
+
+        // js files needed for WebGL specific samples (excluding three js)
+        "lib/js/J3DI.js",
+        "lib/js/J3DIMath.js",
+        "lib/js/webgl-utils.js",
+        "lib/js/webgl-debug.js",
+
+        // App specific js
+        //"js/reveal.min.js",
+        "js/stats_bootstrap.js",
+        "js/samples.js",
+        //"js/dat.gui.bootstrap.js",
+
+		function() {
+      Reveal.initialize({
+        controls: false,
+        progress: true,
+        history: true,
+        center: false,
+        keyboard: true,
+        touch: false,
+        overview: true,
+        mouseWheel: false,
+        width: 960,
+        height: 720,
+
+        theme: false, // hardcoded with CSS import in <head>
+        transition: 'fade', // default/cube/page/concave/zoom/linear/fade/none
+        transitionSpeed: 'default', // default/fast/slow
+
+        math: {
+          mathjax: 'mathjax/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+        },
+
+        dependencies: [
+          { src: 'reveal.js/lib/js/classList.js',
+	    condition: function() { return !document.body.classList; }},
+          { src: 'reveal.js/plugin/markdown/marked.js',
+	    condition: function() { return !!document.querySelector ('[data-markdown]'); }},
+          { src: 'reveal.js/plugin/markdown/markdown.js',
+	    condition: function() { return !!document.querySelector ('[data-markdown]'); }},
+          { src: 'reveal.js/plugin/highlight/highlight.js', async: true,
+	    callback: function() { hljs.initHighlightingOnLoad (); }},
+          { src: 'reveal.js/plugin/notes/notes.js', async: true,
+	    condition: function() { return !!document.body.classList; }},
+          { src: 'mymath.js', async: true },
+	  { src: 'pdfimgs.js', async: true },
+	  { src: 'slideautostart.js', async: true },
+        ],
+      });
+    });
+    </script>
+  </body>
+</html>

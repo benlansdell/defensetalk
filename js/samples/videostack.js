@@ -103,8 +103,8 @@
           for ( var j = 0; j < pathlength-1; j++ ) {
             ropeIndices.push( j, j + 1 );
           }
-          ropeGeometry.addAttribute( 'vertexColors', new THREE.BufferAttribute( ptColors, 3 ) );
           ropeGeometry.setIndex( new THREE.BufferAttribute( new Uint16Array( ropeIndices ), 1 ) );
+          ropeGeometry.addAttribute( 'vertexColors', new THREE.BufferAttribute( ptColors, 3 ) );
           ropeGeometry.addAttribute( 'position', new THREE.BufferAttribute( new Float32Array( ropePositions ), 3 ) );
           ropeGeometry.computeBoundingSphere();
           rope = new THREE.LineSegments( ropeGeometry, ropeMaterial );
