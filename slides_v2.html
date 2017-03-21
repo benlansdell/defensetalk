@@ -53,12 +53,13 @@
 <!-- ----------------------------------------------------------------------- -->
 
 	<section>
-	  <h2>Overview</h2>
 	<hr>
 	"Progress in science depends on new techniques, new discoveries and new ideas, probably in that order" <br>
 	&#8212; Sydney Brenner
 	<hr>
 	  <div class="fragment">
+	  	<br>
+	  <h2>Overview</h2>
 	  	<ol>
 	  		<li class="fragment highlight-green"> Shifting models of primary motor encoding and concurrent-use BCIs
 	  		<li> Towards whole-animal calcium imaging in unrestrained cnidaria
@@ -88,6 +89,7 @@ The role nervous systems play in an organism’s behavior increases as we move t
 	      But, starting simply: $$y(t)\sim f(\lambda(t)) = f(g(k*x(t))),$$
 	      where $k(\tau)$ are <em>feature vectors</em>.
 	  </div>
+	  <p class="fragment" style="text-align: center; color: #00ff00">"What is <em>encoded</em> in the neural activity?"</p>
 
 	  <aside class="notes">
 	    <span style="color: red"></span> •
@@ -106,9 +108,11 @@ The role nervous systems play in an organism’s behavior increases as we move t
 	    <p class="rcred">Adapted from Aljadeff et al <em>Neuron</em> 2016</p>
 	  	<div style="text-align: left;">
 	      Let $Y(t)$ count spikes up to time $t$. 
-	      In discrete time bins, $\mathbf{t}=(0, h, 2h, \dots, T)$, let $y_i$ be number of spikes $\in(t_{i-1}, t_i]$:
+	      In discrete time bins, $\mathbf{t}=(0, h, 2h, \dots, T)$, let $y_i$ be number of spikes $\in(t_{i-1}, t_i]$:<br><br>
 	       $$\begin{align*}y_t &\sim \text{Poisson}(\lambda_t),\\
-	       \lambda_t &= g[\mathbf{x}_t, y_t] = g\left(\mu + \sum_i k_i x_{t-i} + \alpha_i y_{t-i}\right)\end{align*}$$	  </div>
+	       \lambda_t &= g[\mathbf{x}_t, y_t] = g\left(\mu + \sum_i k_i x_{t-i} + \alpha_i y_{t-i}\right)\end{align*}$$
+
+		</div>
 	  <aside class="notes">
 	    <span style="color: red"></span> •
 Roughly, we can think of these models as characterizing the input/output relationships that capture how spiking activity, generally at the single-neuron level, is related to external variables: either sensory signals or motor output. These models focus on a description of the statistical nature of this relationship without any direct attempt to establish mechanisms; rather, they provide a compact representation of the components in a stimulus that cause a neuron to spike.
@@ -185,6 +189,7 @@ In the first half of the talk today I’ll be discussing encoding models of moto
 	    <img src="assets/intrinsic_manifold_white.svg" width="70%">
 		<ul>
 			<li> e.g. Cunningham et al 2014, Sadtler et al 2014, Macke et al 2011
+			<li> Dimensionality reduction as crucial analysis tool
 		</ul>
 
 	    <aside class="notes">
@@ -254,9 +259,10 @@ In the first half of the talk today I’ll be discussing encoding models of moto
 		<div class="fragment">
 			<hr>
 	  	<p>How do these effects manifest in a BCI paradigm where control units may be constrained by their role in ongoing movement?</p>
-	  	<p>"What are the units of volitional control?"</p>
+	  	<p class="fragment" style="text-align: center; color: #00ff00">"What are the units of volitional control?"</p>
 		</div>
 		<div class="fragment">
+			<hr>
 		<div class="column4">
 			<img src="assets/Adrienne-Fairhall.jpg" height="200px">
 <p class="lcred">Adrienne Fairhall</div>
@@ -412,6 +418,17 @@ In the first half of the talk today I’ll be discussing encoding models of moto
 	  </aside>
 	</section>
 
+	<section>
+	  <h2>Overview</h2>
+	  	<ol>
+	  		<li> Shifting models of primary motor encoding and concurrent-use BCIs
+	  		<li class="fragment highlight-green"> Towards whole-animal calcium imaging in unrestrained cnidaria
+	  	</ol>
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
 
 	<section data-background-color="#000000">
 	<h2>Comprehensive measures of neural activity in cnidaria &#8212 "breaking the neural code"</h2>
@@ -487,7 +504,7 @@ In the first half of the talk today I’ll be discussing encoding models of moto
 		</div>
 	  	<div class="column-right">
 			<img src="assets/dupre.jpg" height="200px">
-			<p class="lcred">Chistrophe Dupre</p>
+			<p class="lcred">Christophe Dupre</p>
 	  	</div>
 	  </div>
 	  <aside class="notes">
@@ -803,6 +820,10 @@ In the first half of the talk today I’ll be discussing encoding models of moto
          <li> Christophe Dupre</li>
          <li> John Szymanski</li></ul>
 	  	</ul>
+   	  </div>
+   	  <div class="fragment">
+   	  <hr>
+   	  <code>github.com/benlansdell</code>
    	  </div>
 	  <aside class="notes">
 	    <span style="color: red"></span> •
