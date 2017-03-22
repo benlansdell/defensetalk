@@ -68,6 +68,13 @@
 
 	  <aside class="notes">
 	    <span style="color: red"></span> •
+	    Thank you very much for the invitation to visit and to speak with everyone here, and to have the chance to present some of my research. 
+
+I’d like to start with a quote that captures an important aspect of each of the projects I’ll be speaking about today. The quote, from Sydney Brenner, reads “Progress in science depends on new techniques, new discoveries, and new ideas, probably in that order”. It obviously just captures the notion that our data and methods constrain the theories we can test and, the stronger assertion would be, even conceive of. 
+
+In this talk I’d like to briefly overview the history of our models of motor cortex, and show how this observation is relevant. And how our models are changing owing to new methods, and how this applies to a type of concurrent use brain computer interface. 
+
+In the second half of the talk, I’d like to continue this theme and talk about developing technologies that are currently being employed to perform whole-brain, or even whole-animal, recordings of neural activity. It’s still early days for these projects, but they hold much promise to really let us theoreticians test many theories of nervous system function not previously testable. I’ll talk today in particular about a whole-animal recording in Hydra, a cnidarian.
 	    • <span style="color: green"></span>
 	  </aside>
 	</section>
@@ -93,11 +100,15 @@ The role nervous systems play in an organism’s behavior increases as we move t
 
 	  <aside class="notes">
 	    <span style="color: red"></span> •
-	    Of course, the nervous system of higher animals is vastly more structured than the nervous systems of something like a jelly fish, and it is also a lot larger. This means that determining mechanisms for particular behaviors involves many technical challenges. In general we simply don’t have the ability to simultaneously observe all relevant parts of the nervous system’s activity, at high enough temporal and spatial resolution, in order to piece things together. 
 
-		Thus, when studying the function of neural circuits in animals such as primates, an important component of determining a neuron’s role in particular behaviors is a characterization of the relationship its spiking activity with external variables, either motor outputs or sensory inputs. 
+So, starting with models of motor cortex, these whole-brain studies aside, we typically only have access to a vastly undersampled population of neurons, in conjunction with some behavior or stimulus of interest. So what are these models, and how have these approaches changed with new technologies? 
 
-		We can ask what its neural activity encodes.
+Well, in this subsampled regime, in general, and historically, a crucial component of studying the observed population and its role in the behavior or processing stage is a characterization of the statistical relationship between that population and the observed stimuli or motor output. 
+
+This is illustrated here. [explain figure]
+
+By constructing these models, we ask what it is the neural population encodes?
+
 	    • <span style="color: green"></span>
 	  </aside>
 	</section>
@@ -115,11 +126,14 @@ The role nervous systems play in an organism’s behavior increases as we move t
 		</div>
 	  <aside class="notes">
 	    <span style="color: red"></span> •
-Roughly, we can think of these models as characterizing the input/output relationships that capture how spiking activity, generally at the single-neuron level, is related to external variables: either sensory signals or motor output. These models focus on a description of the statistical nature of this relationship without any direct attempt to establish mechanisms; rather, they provide a compact representation of the components in a stimulus that cause a neuron to spike.
+So, a concrete, and common instantiation of this idea is the linear non-linear Poisson spiking model. Roughly, we think of these models as capturing the input/output relationships that describes how spiking activity, generally at the single-neuron level, is related to external variables: either sensory signals or motor output. This of course only acts as a starting point to identifying mechanisms but they provide a compact representation of the components in a stimulus that cause a neuron to spike.
 
-These models have been particularly successful in studying sensory systems, I would argue. 
+[Image GLM etc]
 
-The form of the feature vectors, nonlinearity, and history dependencies can reveal properties of the system that test theoretical concepts, such as how efficiently the stimulus is encoded by a neuron and how robust the encoding is to noise. For example, changes in the feature under different stimulus conditions can reveal the system’s ability to adapt to, or cancel out, correlations in the sensory input. Further, changes in the nonlinearity reveal how the system can modulate its dynamic range as the intensity of the stimulus evolves. While representing neuronal spiking through a predictive statistical model is only a limited aspect of neural computation, it is a fundamental first step in establishing function and guiding predictions as to the structure of neural circuitry. The key to any predictive model of a complex input/output relationship is dimensionality reduction, i.e., a simplification of the number of relevant variables that are needed to describe the stimulus.
+Right, so specifically, the form of the feature vectors, nonlinearity, and history dependencies each reveal properties of the system that let us test theoretical concepts, such as how efficiently the stimulus is encoded by a neuron and how robust the encoding is to noise. 
+
+Such models have been particularly successful in studying sensory systems, I would argue. 
+
 
 	    • <span style="color: green"></span>
 	  </aside>
@@ -144,9 +158,15 @@ The form of the feature vectors, nonlinearity, and history dependencies can reve
 	</div>
 	    <aside class="notes">
 	    <span style="color: red"></span> •
-Just a simple characterization of this relationship in motor cortex, however, becomes more controversial. 
+How do these models operate in motor systems? Well, it turns out that a straightforward characterization of the relationship of activity in motor cortex and output parameters in this fashion, is quite difficult, and somewhat controversial. 
 
-In the first half of the talk today I’ll be discussing encoding models of motor cortex in primates and their application in brain computer interfaces. In the second half I’ll be talking about efforts in lower-organisms such as cnidaria to record and measure comprehensively an organisms neural activity and its behavior, insights from which may one day be used to help study more sophisticated nervous systems, like those of mammals. 
+The original studies in the motor cortex in the 1960s studied muscles in isolation, and observed that neural activity in motor cortex was related to those muscle activations. Later, more sophisticated, multi-joint motions involved in something like Georgopolous’s center-out task revealed that, in addition to motor cortex encoding muscle activities, it also encoded movement direction. Importantly, it did so in a way that was not a simple consequence of the observed muscle activity encodings. 
+
+Thus, since then, debate has existed about the nature of this encoding, and it remains debated today. More recently, multi-electrode arrays have allowed access to high-dimensional simultaneous recordings. By having a high dimension recording in a single trial, we can replace averaging over multiple trial repeats with averaging or dimensionality reduction of the population within a single trial, which is able to reveal interesting internal dynamics. Thus contemporary theories focus on dimensionality reduction and subsequent observed dynamics. 
+
+Regardless of which aspects of which models prove most fruitful, it’s true that understanding motor encoding can inform the design of BCIs for the control of prosthetic limbs or other applications. 
+
+Further, we see the evolution of our theories follows the evolution of methods and experiments used to study the motor cortex. 
 
 	    • <span style="color: green"></span>
 	  </aside>	</section>
@@ -165,7 +185,17 @@ In the first half of the talk today I’ll be discussing encoding models of moto
 
 	    <aside class="notes">
 	    <span style="color: red"></span> •
+At the heart of the matter is, if these simple encoding models by themselves are ambiguous, then what additional information can we bring to bear? One thing is access to multi-unit cortical recordings, can this provide progress on this question? 
 
+One thing people did, after having access to high-dimensional recordings, is to augment these simple encoding models with interaction terms between recorded neurons.  
+
+Thus, perhaps some of the statistical structure observed in the population may ‘explain away’ some of the relationships observed for single neurons. And this may change our inferences about encoding properties in motor cortex.
+
+Applying this idea gives us something like the network GLM describe here. Most notably applied in this well-known Pillow reference, but also applied to motor cortex recordings, yielding some insight by people from Emory Brown’s group, and from Nicho Hatsopolous’s group.
+
+An example of these types of models was looked at in a review we participated in recently, along with Yonatan Aljadeff and David Kleinfeld, published last year in Neuron.
+
+[Describe task]
 	    • <span style="color: green"></span>
 	  </aside>	</section>
 
@@ -175,6 +205,12 @@ In the first half of the talk today I’ll be discussing encoding models of moto
 
 	    <aside class="notes">
 	    <span style="color: red"></span> •
+
+[Describe the results]
+
+We found that the inclusion of network coupling terms made little impact on the quality of predictions made by the model. This recapitulates other findings about traditional GLMs. In fact, we found that the GLM takes significant care to apply properly in these cases. 
+
+Thus, the network GLM, while providing insight in some cases, has not proven so useful in making progress. Indeed, in this case, since the spacing of the electrodes are around 400 microns, we are unlikely measuring any form of direct coupling. Thus, these are strictly to be interpreted as statistical summaries only, which makes their interpretation difficult. 
 
 	    • <span style="color: green"></span>
 	  </aside>	</section>
@@ -195,6 +231,11 @@ In the first half of the talk today I’ll be discussing encoding models of moto
 	    <aside class="notes">
 	    <span style="color: red"></span> •
 
+Indeed, most of the relation between the units is likely mediated through unobserved variables. This is made explicit in so-called latent variable models. These models have been found to better describe network activity in motor cortex (Macke et al 2011).
+
+Thus there is now a trend to include internal dynamics and models of motor cortex, in addition to observed dynamics between the nodes. 
+
+In this setting, dimensionality reduction becomes a crucial component of any theory of motor cortical function.
 	    • <span style="color: green"></span>
 	  </aside>	</section>
 
@@ -214,6 +255,22 @@ In the first half of the talk today I’ll be discussing encoding models of moto
 	    </ul>
 	  <aside class="notes">
 	    <span style="color: red"></span> •
+
+Ok, so this is the progression of our models of motor cortex. I mentioned that these models may affect design and insights into brain computer interface applications. So I’ll spend the next section of this talk describing how these ideas play out in a type of brain computer interface that I’ll describe.
+
+Well, a proper understanding of motor control principles in primates enables better design of brain-computer interfaces, which benefit individuals with stroke victims or other forms of paralysis. 
+So, how do these encoding considerations play out in the context of brain computer interfaces? 
+
+Well, it’s been known for some time, thanks to the work of Eb Fetz and others, that individual neurons can be trained to be volitionally modulated through a process of conditioning and biofeedback. And that this process can be performed largely independently of a neuron’s association with motor parameters. 
+
+On the other hand, other studies report brain control mappings which utilize activity observed during the natural motor repertoire are most effective.
+
+So what I’ll be talking about today is a type of dual control brain computer interface, that requires concurrent motor output in addition to brain control.
+
+In these cases, it’s unclear if this individual unit flexibility exists in tasks where concurrent motion is required in addition to brain control. 
+
+We can try to take advantage of this flexibility by using single unit BCIs, where output is determined as a function of only a few units. However there are few studies into their viability. I’ll spend the remainder of the first half of the talk discussing these dual-control brain computer interfaces.
+
 	    • <span style="color: green"></span>
 	  </aside>
 	</section>
@@ -230,6 +287,17 @@ In the first half of the talk today I’ll be discussing encoding models of moto
    		</ul> 
 	  <aside class="notes">
 	    <span style="color: red"></span> •
+
+Dual control BCI is one where ongoing motor output is performed in addition to control of a BCI. Right, so in our case we have one axis of a output determined through wrist torque, while another is determined through a brain control mapping.
+
+They may find application in stroke patients, who have partial loss of limb function. May allow stroke patients to regain functionality through co-opting healthy motor cortex to control a neural prosthetic in conjunction with residual movement.
+
+Right, so I’ll be talking about [Explain left figure]
+
+An important question in their design is, if the same region of cortex is required to control a BCI and is required to perform some sort of motor control, do neurons strongly associated with contra lateral motion make poor control units, due to the potential interference imposed by concurrent hand movement?
+
+This is schematized here, on the right, with the notion of a ‘hard’ and ‘easy’ diagonal. If we have a control neuron that is strongly tuned to wrist flexion. 
+
 	    • <span style="color: green"></span>
 	  </aside>
 	</section>
@@ -243,6 +311,7 @@ In the first half of the talk today I’ll be discussing encoding models of moto
 	    </ul>
 	  <aside class="notes">
 	    <span style="color: red"></span> •
+	    Well, an answer was provided to this question by a previous study with my collaborators Ivana Milovanovic and Chet Moritz. They found that performance in a dual-control task was independent of unit tuning.
 	    • <span style="color: green"></span>
 	  </aside>
 	</section>
@@ -277,6 +346,17 @@ In the first half of the talk today I’ll be discussing encoding models of moto
 
 	  <aside class="notes">
 	    <span style="color: red"></span> •
+
+What remains unclear from this study is the specificity that this flexibility is achieved at. Is this achieved specifically by dissociating control units from other units in an observed population, or does it require population wide changes in activity?
+
+Well known result from Carmena shows that different BCI tasks impose broad population level changes in tuning and activity for a number of tasks and task perturbations. While other studies do indeed show control unit specific changes in tuning, for more ‘standard’ brain control tasks.
+
+So, in a follow up study, we wanted to look at if and how these control unit specific effects manifest in a task that requires control units explicitly decouple their firing from their previous role in motor output.
+
+That is, does the dual control task cause control unit specific changes in activity, or do these changes occur for populations of units, or sub populations of units? The kind of general question we can think of ourselves as asking with this task is, “what are the units of volitional control?”
+
+This project is a collaboration between...
+
 	    • <span style="color: green"></span>
 	  </aside>
 	</section>
@@ -289,6 +369,8 @@ In the first half of the talk today I’ll be discussing encoding models of moto
 	</ul>
 	  <aside class="notes">
 	    <span style="color: red"></span> •
+
+So, the task involves a Utah MEA implanted in the hand-wrist area of primary motor cortex of a macaque monkey.
 	    • <span style="color: green"></span>
 	  </aside>
 	</section>
@@ -302,6 +384,10 @@ In the first half of the talk today I’ll be discussing encoding models of moto
 	    <img src="assets/targettask.png" width="70%">
 	  <aside class="notes">
 	    <span style="color: red"></span> •
+
+The task is a random target pursuit task.
+
+
 	    • <span style="color: green"></span>
 	  </aside>
 	</section>
@@ -318,6 +404,10 @@ In the first half of the talk today I’ll be discussing encoding models of moto
 	  	Study differences in connectivity between brain-, dual- conditions and manual condition.<p>
 	  <aside class="notes">
 	    <span style="color: red"></span> •
+
+We were looking for evidence of control units being specifically decoupled from other units as a result of being chosen to be control units. For this we used a measure of directed connectivity known as transfer entropy. We can think of this as a non-parametric measure of effective connectivity.
+
+So, we used this to measure differences in connectivity between different populations of recorded units. In the sequence of trials performed, we use the connectivity observed during the manual control trials as a baseline level of connectivity to which we compare connectivity observed during other tasks.
 	    • <span style="color: green"></span>
 	  </aside>
 	</section>
@@ -328,6 +418,15 @@ In the first half of the talk today I’ll be discussing encoding models of moto
 	    <p class="rcred"><b>Lansdell</b> et al <em>(submitted)</em></p>
 	  <aside class="notes">
 	    <span style="color: red"></span> •
+
+So, firstly, we break the changes down into the control and non-control unit populations. We find that, in both the brain and dual control tasks, connectivity selectively decreases for control units more than non-control units.
+
+We were interested in whether this decoupling occurs for sub populations of units. So we then split this population into a cotuned and non cotuned population with the control unit -- say both were wrist flexion tuning. And a cotuned and non cotuned population with a randomly selected unit. Since the dual control task is designed to explicitly decouple control unit activity from ongoing motion, we might expect the dissociation to be greater between control units and their cotuned pairs. 
+
+That is indeed what we see. In the dual control task, we observe, between non-control units that are co-tuned, no decrease in connectivity in the dual control task. However, we observed a decrease in connectivity between cotuned units with the control unit -- the dissociation is specific to control units.
+
+Conversely, in the brain control task, the dissociation occurs for control and noncontrol units alike -- there is no control unit specific dissociation of cotuned units. 
+
 	    • <span style="color: green"></span>
 	  </aside>
 	</section>
@@ -361,6 +460,11 @@ In the first half of the talk today I’ll be discussing encoding models of moto
 	  	</ul>
 	  <aside class="notes">
 	    <span style="color: red"></span> •
+
+We can summarize this as follows, in brain control there is an overall decrease in connectivity to control units, while in dual control, the functional connectivity between co-tuned units does not change, except in cases where a control unit is involved. 
+
+This suggests control unit specific changes in activity imposed by the dual control task.
+
 • <span style="color: green"></span>
 	  </aside>
 	</section>
@@ -372,6 +476,13 @@ In the first half of the talk today I’ll be discussing encoding models of moto
 
 	  <aside class="notes">
 	    <span style="color: red"></span> •
+
+So, while this provides some insight into changes that occur in motor cortical activity in a dual control task, neither the tuning analysis performed previously, or the connectivity analysis we just performed provided any insight into factors that predict dual control task performance.
+
+So, we also investigate this latent variable type analysis mentioned previously.
+
+We identify an ‘intrinsic manifold’ that captures neural covariability observed during the manual control task, and think of this as the natural patterns of cofiring between neurons. We then identify, for a given BCI setup, a brain control space, that is simply the plane parallel to the control units chosen. We can then look at how aligned these two spaces are as a measure of how ‘unnatural’ the BCI task is to the monkey. And we can see if this has any bearing on task performance.
+
 • <span style="color: green"></span>
 	  </aside>
 	</section>
@@ -385,6 +496,9 @@ In the first half of the talk today I’ll be discussing encoding models of moto
 	    <img src="assets/gpfa_perf.png" width="30%">
 	  <aside class="notes">
 	    <span style="color: red"></span> •
+
+We use GPFA to identify these spaces, and observe that, in the brain control task there is a significant relationship between how aligned these spaces are and task performance, while in the dual control task, a similar pattern exists but is not statistically significant. 
+
     • <span style="color: green"></span>
 	  </aside>
 	</section>
@@ -399,6 +513,11 @@ In the first half of the talk today I’ll be discussing encoding models of moto
 	    </ul> 
 	  <aside class="notes">
 	    <span style="color: red"></span> •
+
+Perhaps, in this case, using dimensionality reduction is not as necessary, since our brain control space is two dimensional. So, inspired by this analysis we can just examine the variance of the control units observed in manual control task, and use this as a measure for the unit’s `intrinsic variability’. We observe that in both brain control and dual control tasks, the control unit’s intrinsic variability is predictive of performance -- we observe high performance only when at least one of the units is highly varying. Other factors we examined were not predictive of performance. 
+
+Additionally, we find that, using a simple Granger causality type metric, the higher varying of the two control units contributes more to, or exerts more influence over, the cursor position. Thus this analysis is predictive of how the monkey achieves the task, in addition to predicting its performance. 
+
 	    • <span style="color: green"></span>
 	  </aside>
 	</section>
@@ -414,6 +533,15 @@ In the first half of the talk today I’ll be discussing encoding models of moto
 		<p> $\Rightarrow$ Internal and latent dynamics reveal additional information, compared with direct encoding models
 	  <aside class="notes">
 	    <span style="color: red"></span> •
+
+Thus, in summary, we have that the tuning and connectivity analysis suggest that the dual control task generates cortical activity more similar to that observed in the manual control task. 
+
+We find that the intrinsic variance of control units is the only variable found to predict performance and control unit contributions -- factors to do with motor unit tuning were not found to constrain how the task was performed.
+
+We can summarize the overall findings by saying that, provided basic neuronal constraints imposed by existing circuitry are taken into consideration, BCI design is able to leverage motor cortical adaptability for the purposes of learning a novel coordination task
+
+Further, we find that considerations to do with internal and latent dynamics reveal additional information compared with direct encoding, or tuning, models
+
 	    • <span style="color: green"></span>
 	  </aside>
 	</section>
@@ -426,6 +554,9 @@ In the first half of the talk today I’ll be discussing encoding models of moto
 	  	</ol>
 	  <aside class="notes">
 	    <span style="color: red"></span> •
+
+So, moving on to the second half of the talk. I’d like to talk about efforts along quite a different direction. The case where we do, in principle, have access to comprehensive measures of single neural activity throughout a whole brain or whole animal. This is now feasible in animals such as c elegans and zebrafish larva. Having access to such data, in conjunction with detailed measurements of its behavior, allows, in principle at least for us to really answer in a detailed fashion the relation between an animal’s behavior and environmental inputs, and its neural activity. Again to paraphrase in more grandiose language, we have in principle the data necessary to ‘break the neural code’.
+
 	    • <span style="color: green"></span>
 	  </aside>
 	</section>
@@ -447,19 +578,13 @@ In the first half of the talk today I’ll be discussing encoding models of moto
 	  </div>
 	  <aside class="notes">
 	    <span style="color: red"></span> •
-	    The Hydra has a diffuse nerve net, one of the simplest nervous systems.
 
-	    As part of a collaboration with Yuste lab at Columbia, among others, we
-	    are working on obtaining this level of knowledge in the cnidarian Hydra.
+For the remainder of the talk I will talk about a project in which we record using calcium imaging from a comprehensive population of neurons in the cnidarian Hydra. 
 
-	    For this, the Hydra has the advantages that:
-	    -it is transparent, making imaging simpler
-	    -it is small, allowing it to fit into the FOV of a traditional scope
-	    -it consists of a nerve net, meaning that neurons are spread throughout
-	    the organism and can be imaged more or less without obstructing one another
-	    -it can be constrained to lie in a 2D plane, meaning more or less the organism
-	    can be in focus all at once, without the need for z-slicing, which permits a high
-	    temporal resolution recording.
+The Hydra is a cnidarian, so is very distant, evolutionarily speaking from ourselves -- we’re separated by about 1 billions years of diverged ancestry. It possesses no bilateral symmetry, hunts animals with paralytic barbs called nematocytes, that it uses to capture prey. Jellyfish are also cnidaria.
+
+Why would we use the Hydra for such a study?
+Go through list
 
 	    • <span style="color: green"></span>
 	  </aside>
@@ -473,7 +598,9 @@ In the first half of the talk today I’ll be discussing encoding models of moto
 	  </div>
 	  <aside class="notes">
 	    <span style="color: red"></span> •
-	    Describe Hydra anatomy
+
+The Hydra has a relatively simple anatomy -- consisting of two instead of three cells layers, an endoderm and an ectoderm -- separated by a thin layer of gelatinous substance called mesoglea.
+
 
 	    • <span style="color: green"></span>
 	  </aside>
@@ -509,6 +636,11 @@ In the first half of the talk today I’ll be discussing encoding models of moto
 	  </div>
 	  <aside class="notes">
 	    <span style="color: red"></span> •
+
+We can outline the goals of this project quite simply:
+
+Go through aims and collaborators
+
 	    • <span style="color: green"></span>
 	  </aside>
 	</section>
@@ -532,6 +664,8 @@ In the first half of the talk today I’ll be discussing encoding models of moto
 	  <aside class="notes">
 	    <span style="color: red"></span> •
 
+The setup we use for this study is the following:
+
 	    • <span style="color: green"></span>
 	  </aside>
 	</section>
@@ -545,6 +679,10 @@ In the first half of the talk today I’ll be discussing encoding models of moto
 	 <p class="rcred">C. Dupre, Yuste lab</p>
 	  <aside class="notes">
 	    <span style="color: red"></span> •
+
+Play video.
+
+Note that, if we were just focused on the neuron tracking, that it in this case is difficult because we do not have separate labeling of the cells when they are not electrically active. Thus just using neuron tracking methods will, once a neuron is inactive lose track of the neuron, and, when it becomes active again, we would like to be able to reassociate the new track we obtain with the old track. This requires an accurate parameterization of the Hydra’s position through out the video.
 
 
 	    • <span style="color: green"></span>
@@ -575,6 +713,11 @@ In the first half of the talk today I’ll be discussing encoding models of moto
 	  <aside class="notes">
 	    <span style="color: red"></span> •
 
+So, first, we constructed a novel, high dimensional Kalman filter tracker, to tackle the problem. 
+
+This is a very high dimensional model, so we used a few manipulations that made accelerating it on the GPU faster. Using OpenGL in conjunction with CUDA.
+However, despite these advances, we find this tracker does not solve the problem in this case. The issue being that, by framing the problem as one of tracking, we set up an inherent instability… as soon as the tracking is lost, the method is difficult to recover. 
+
 	    • <span style="color: green"></span>
 	  </aside>
 	</section>
@@ -584,6 +727,13 @@ In the first half of the talk today I’ll be discussing encoding models of moto
 	<img src="assets/mfsf_white.svg">
 	  <aside class="notes">
 	    <span style="color: red"></span> •
+	    Thus the solution we ultimately used in this approach is one of registration instead of tracking. As the basis for our approach, we made use of multi-frame optic flow registration methods.
+
+Optic flow is a common computer vision problem, where we estimated the correspondence between two adjacent frames in a video. By estimating the correspondence between a reference frame and whole stack of frames, performing multi-frame optic flow estimation, we draw out a dense set of paths for each pixel in a reference frame throughout the video, thereby doing tracking.
+
+The method we utilized uses a low dimensional representation of the trajectory basis. 
+
+
 	    • <span style="color: green"></span>
 	  </aside>
 	</section>
@@ -601,6 +751,10 @@ In the first half of the talk today I’ll be discussing encoding models of moto
 	</ul>
 	  <aside class="notes">
 	    <span style="color: red"></span> •
+
+
+Describe equation quickly
+
 	    • <span style="color: green"></span>
 	  </aside>
 	</section>
@@ -624,6 +778,11 @@ In the first half of the talk today I’ll be discussing encoding models of moto
 		</div>
 	  <aside class="notes">
 	    <span style="color: red"></span> •
+	    
+This method, by itself, performs ok on short segments of video. If we identify a manual curated set of neuron paths and use this as ground truth representation of the Hydra’s pose we can test how well the tracking performs.
+
+We see that 42% of neurons are tracked within 6 pixels through a sequence of 200 frames. However, we see that, as the video were to be extended, this error would only increase.
+
 	    • <span style="color: green"></span>
 	  </aside>
 	</section>
@@ -636,8 +795,11 @@ In the first half of the talk today I’ll be discussing encoding models of moto
 		</div>
 	  <aside class="notes">
 	    <span style="color: red"></span> •
-		Changing appearance/pose in a long sequence → multiple reference frames
-		Simplest approach: split into multiple stacks and run independently
+
+Thus, ideally, we’d like some way of doing tracking that is independent of video length.
+
+Doing the very simple 
+
 	    • <span style="color: green"></span>
 	  </aside>
 	</section>
