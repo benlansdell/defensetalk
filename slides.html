@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Moving models of motor control forward, in theory and application</title>
+    <title>Neural encoding in application, development and beyond</title>
       <meta name="viewport"
 	  content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <!--<link rel="stylesheet" href="reveal.js/css/reveal.min.css">-->
@@ -18,6 +18,9 @@
     <script src="js/three.min.js"></script>
     <script src="js/OrbitControls.js"></script>
     <script src="js/KeyboardState.js"></script>
+    <script type="text/x-mathjax-config">
+	    MathJax.Hub.Config({TeX: {extensions: ["color.js"]}});
+    </script>
 
     <!--[if lt IE 9]>
     <script src="reveal.js/lib/js/html5shiv.js"></script>
@@ -35,73 +38,110 @@
 
   <body>
     <!-- Slides! -->
-
     <div class="reveal">
       <div class="slides">
-        <section data-background="assets/dst2_background.png">
-          <h1>Moving models of motor control forward, in theory and application</h1>
-	  <br>
-	  <p style="text-align: center; font-size: larger; text-shadow: 0px 0px 6px #000000;">Ben Lansdell<br> University of Washington - Applied Mathematics<br><br>
-	  	Flatiron Institute, March 24th 2017</p>
+        <!--<section data-background="assets/dst2_background.png">-->
+        <section data-background-color="#ffffff">
+          <h1 style="color: #000000">Neural encoding in application, development and beyond</h1>
+	  <br><hr>
+	  <p style="text-align: center; font-size: larger; text-shadow: 0px 0px 0px #0000ff;">Ben Lansdell<br> Applied Mathematics<br><br>
+	  	Final examination, May 9th 2017</p>
 	  <aside class="notes">
 	    <span style="color: red">
 	    </span> •
+
 	    • <span style="color: green"></span>
 	  </aside>
         </section>
 
 <!-- ----------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------- -->
 
+	<!-- <section data-background-color="#ffffff">
+	  	<ul>
+	  		<li> Dimensionality reduction in neuroscience
+	    <center><img src="assets/glmuncoupled.svg" width="60%"></center>
+<p class="rcred">Aljadeff, <b>Lansdell</b>, Fairhall, Kleinfeld 2016. <em>Neuron</em><br>
+Pang, <b>Lansdell</b>, Fairhall 2016 <em>Current Biology</em></p>
+	  	</ul>
 
-	<section data-background-video="assets/nervous_noaudio.mp4">
 	  <aside class="notes">
 	    <span style="color: red"></span> •
-While we often think of neurons and brains as mediating our thoughts, decisions, memories, and perceptions, ultimately nervous systems exist to control and coordinate body movements rapidly over large distances. Motor control principles are widely varied throughout the animal kingdom, of course. From nerve nets in jellyfish to finely articulated hand and finger manipulations in primates. 
+	    • <span style="color: green"></span>
+	  </aside>
+	</section> -->
 
-The role nervous systems play in an organism’s behavior increases as we move to higher-organisms. Indeed, in simple organisms such as the cnidarian Hydra, which I’ll be talking about later, its behavior, while surprisingly complicated, can still be, to a large extent, significantly characterized by whole-body contractions and relaxations -- without a large degree of fine control. As one of the most distant organisms to ourselves to possess a nervous system, it appears largely as a thin veneer of control placed over an intricate chemical signalling system. Animals more closely related to ourselves, on the other hand, become significantly more neuron centric. It’s well known that our own brains consume a disproportionate amount of energy, and that neurons have the most diverse transcriptome of any cell type. 
+	<section data-background-color="#ffffff">
+	  <h2>Neural activity represents the external world and motor behavior</h2>
+
+    <img src="assets/frog.png" width="100%">
+	<p class="rcred">Yuste 2015</p>
+
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+
+From the 1950s onward, single neuron recordings have been used to study the
+relation between neural activity and features in the outside world.
+
+An early study of this nature by Barlow, and also by Lettvin and McCulloch and Pitts
+is in frog vision. Here recordings of optic fibres from the frog retina allow recording
+on individual neurons. The authors find cells that respond strongly to small moving spots
+relative to the background. They hypothesize that these neurons act as a type of 'fly detector', 
+and that therefore individual neurons activity are functionally and even perceptually significant.
+
+From this time onward, considerable progress has been made characterizing the encoding properties
+of single neurons.
+
+However the focus and availability of single neuron recordings means there is the temptation to
+ascribe function to a neuron's tuning curve when it shouldn't be. I will spend the next section talking
+about the ambiguity in encodings in motor cortex.
+
+Perhaps if we had more comprehensive access to a neural population's activity the
+encoded relation between stimulus and activity would be explained away,
+and their function within the entire circuit would become clear. These studies
+are now possible in a number of lower-organisms -- one of which I will discuss in the
+last half of my talk.
+
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section data-background-color="#ffffff">
+	  <h2>Outline</h2>
+
+    <img src="assets/outline.svg" width="100%">
+
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+
+	    Ideas for lead in...
+
+	    The brain as a computer: representation is a key component
+	    How does the brain represent?
+
+	    Fly detector (Barlow)
+
+
 	    • <span style="color: green"></span>
 	  </aside>
 	</section>
 	
-		<section>
-    <img src="assets/monkey_activity.png" width="70%">
-	  <div style="text-align: left">
-	      In general $$y(t)\sim n[x(t)].$$
-	      But, starting simply: $$y(t)\sim n(\lambda(t)) = n(k*x(t)),$$
-	      where $k(\tau)$ are <em>feature vectors</em>.
-	  </div>
+	<section data-background-color="#ffffff">
+	  <h2>Outline</h2>
+
+    <img src="assets/outline_1.svg" width="100%">
 
 	  <aside class="notes">
 	    <span style="color: red"></span> •
-	    Of course, the nervous system of higher animals is vastly more structured than the nervous systems of something like a jelly fish, and it is also a lot larger. This means that determining mechanisms for particular behaviors involves many technical challenges. In general we simply don’t have the ability to simultaneously observe all relevant parts of the nervous system’s activity, at high enough temporal and spatial resolution, in order to piece things together. 
 
-		Thus, when studying the function of neural circuits in animals such as primates, an important component of determining a neuron’s role in particular behaviors is a characterization of the relationship its spiking activity with external variables, either motor outputs or sensory inputs. 
-
-		We can ask what its neural activity encodes.
 	    • <span style="color: green"></span>
 	  </aside>
 	</section>
 
-	<section>
-	  <h2>Linear non-linear Poisson models</h2>
-	    <img src="assets/glmuncoupled_white.svg" width="60%">
-	    <p class="rcred">Adapted from Aljadeff et al <em>Neuron</em> 2016</p>
-	  	<div style="text-align: left;">
-	      Let $Y(t)$ count spikes up to time $t$. 
-	      In discrete time bins, $\mathbf{t}=(0, h, 2h, \dots, T)$, let $y_i$ be number of spikes $\in(t_{i-1}, t_i]$:
-	       $$\begin{align*}y_t &\sim \text{Poisson}(\lambda_t),\\
-	       \lambda_t &= f[\mathbf{x}_t, y_t] = f\left(\mu + \sum_i k_i x_{t-i} + \alpha_i y_{t-i}\right)\end{align*}$$	  </div>
-	  <aside class="notes">
-	    <span style="color: red"></span> •
-Roughly, we can think of these models as characterizing the input/output relationships that capture how spiking activity, generally at the single-neuron level, is related to external variables: either sensory signals or motor output. These models focus on a description of the statistical nature of this relationship without any direct attempt to establish mechanisms; rather, they provide a compact representation of the components in a stimulus that cause a neuron to spike.
-
-These models have been particularly successful in studying sensory systems, I would argue. 
-
-The form of the feature vectors, nonlinearity, and history dependencies can reveal properties of the system that test theoretical concepts, such as how efficiently the stimulus is encoded by a neuron and how robust the encoding is to noise. For example, changes in the feature under different stimulus conditions can reveal the system’s ability to adapt to, or cancel out, correlations in the sensory input. Further, changes in the nonlinearity reveal how the system can modulate its dynamic range as the intensity of the stimulus evolves. While representing neuronal spiking through a predictive statistical model is only a limited aspect of neural computation, it is a fundamental first step in establishing function and guiding predictions as to the structure of neural circuitry. The key to any predictive model of a complex input/output relationship is dimensionality reduction, i.e., a simplification of the number of relevant variables that are needed to describe the stimulus.
-
-	    • <span style="color: green"></span>
-	  </aside>
-	</section>
+<!-- ----------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------- -->
 
 	<section data-background-color="#ffffff">
 		<h2>Encoding models and motor cortex</h2>
@@ -110,81 +150,30 @@ The form of the feature vectors, nonlinearity, and history dependencies can reve
 	    <p class="lcred">Phillips and Porter 1977</p>
 		</div>
 		<div id="right">
-<ul>
-	<li> Motor cortical neuron representations are complex: 
-		<ul><li>kinetics &#8212; single-unit recordings, stimulation evoked responses (1960s)
-		<li> kinematics &#8212; center-out task (1980s)
-		<li> dynamics &#8212; high-dimensional recordings (2000s)</ul>
-			<hr>
-	<li class="fragment"> Understanding motor encoding can inform design of BCIs for control of prosthetic limbs
-	<li class="fragment"> Models are constrained by experimental paradigms and data 
-</ul>
+		<ul>
+			<li> Motor cortical neuron representations are complex: 
+				<ul><li>kinetics &#8212; single-unit recordings, stimulation evoked responses (1960s)
+				<li> kinematics &#8212; center-out task (1980s)
+				<li> dynamics &#8212; high-dimensional recordings (2000s)</ul>
+			<li class="fragment"> Understanding motor encoding can inform design of BCIs for control of prosthetic limbs
+		</ul>
 	</div>
 	    <aside class="notes">
 	    <span style="color: red"></span> •
-Just a simple characterization of this relationship in motor cortex, however, becomes more controversial. 
 
-In the first half of the talk today I’ll be discussing encoding models of motor cortex in primates and their application in brain computer interfaces. In the second half I’ll be talking about efforts in lower-organisms such as cnidaria to record and measure comprehensively an organisms neural activity and its behavior, insights from which may one day be used to help study more sophisticated nervous systems, like those of mammals. 
 
 	    • <span style="color: green"></span>
 	  </aside>	</section>
 
 	<section data-background-color="#ffffff">
-		<h2>Encoding models and motor cortex</h2>
-		Grip and reach task in monkey (Vaadia 2013)<br>
-	    <img src="assets/glm_motor_vaadia.png" width="45%">
-	    <p class="rcred">Aljadeff, <b>Lansdell</b>, Fairhall, Kleinfeld <em>Neuron</em> 2016</p>
-	  	<div style="text-align: left;">
-	  		Network GLM (Pillow et al 2008, Kim et al 2011, Takahashi et al 2015):
-	       $$
-	       \lambda_t^j = f[\mathbf{x}_t, \mathbf{y}_t] = f\left(\mu + \sum_i k_i x_{t-i} + \sum_{j=1}^N\alpha_i^j y_{t-i}^j\right),\quad N \text{ neurons}
-	       $$
-	       </div>
-
-	    <aside class="notes">
-	    <span style="color: red"></span> •
-
-	    • <span style="color: green"></span>
-	  </aside>	</section>
-
-	<section data-background-color="#ffffff">
-		<h2>Encoding models and motor cortex</h2>
-	    <img src="assets/glm_motor.png" width="65%">
-
-	    <aside class="notes">
-	    <span style="color: red"></span> •
-
-	    • <span style="color: green"></span>
-	  </aside>	</section>
-
-	<section>
-		<h2>Latent variable models</h2>
-	    <div style="text-align: left;">
-	       $$
-	       \lambda_t^j = f[\mathbf{x}_t, \mathbf{z}_t] = f\left(\mu^j + \sum_i k_i^j x_{t-i} + \sum_{k=1}^K\beta_k^j z_{t}^k\right),\quad K\ll N
-	       $$
-	   </div>
-	    <img src="assets/intrinsic_manifold_white.svg" width="70%">
-		<ul>
-			<li> e.g. Cunningham et al 2014, Sadtler et al 2014, Macke et al 2011
-		</ul>
-
-	    <aside class="notes">
-	    <span style="color: red"></span> •
-
-	    • <span style="color: green"></span>
-	  </aside>	</section>
-
-	<section data-background-color="#000000">
 		<h2>Intracortical arrays provide state-of-the-art BCI control</h2>
 	  <div id="left">
 	    <center><img src="assets/utah.png" width="45%">
 	    <p class="rcred"></p>
 	  </div>
 	  <div id="right">
-	<video src="assets/refit_kalman.mp4" muted controls loop
-	 poster="assets/dst2.png" class="slideautostart" width="100%"></video>
 	  </div>
+	    <center><img src="assets/motorcortex.png" width="40%">
 	    <ul><li>Monkeys can be trained to volitionally control individual neurons through feedback and conditioning [Fetz 1969]
 	    	<li>Neurons chosen independently of natural movement association [Moritz and Fetz 2011]
 	    	<li>Conversely, other studies report brain-control mappings which utilize activity observed during the natural motor repertoire are most effective [Sadtler et al 2014]
@@ -224,8 +213,8 @@ In the first half of the talk today I’ll be discussing encoding models of moto
 	  </aside>
 	</section>
 
-	<section>
-		<h2>Dual-control BCIs</h2>
+	<section data-background-color="#ffffff">
+		<h2>What are the units of volitional control?</h2>
 	  <div style="text-align: left">
 	    <p>Activity of control and non-control units</p>
 	  	<ul>
@@ -234,11 +223,10 @@ In the first half of the talk today I’ll be discussing encoding models of moto
 	  	</ul> 
 
 		<div class="fragment">
-			<hr>
 	  	<p>How do these effects manifest in a BCI paradigm where control units may be constrained by their role in ongoing movement?</p>
-	  	<p>"What are the units of volitional control?"</p>
 		</div>
 		<div class="fragment">
+			<hr>
 		<div class="column4">
 			<img src="assets/Adrienne-Fairhall.jpg" height="200px">
 <p class="lcred">Adrienne Fairhall</div>
@@ -278,12 +266,13 @@ In the first half of the talk today I’ll be discussing encoding models of moto
 	    <img src="assets/targettask.png" width="70%">
 	  <aside class="notes">
 	    <span style="color: red"></span> •
+
 	    • <span style="color: green"></span>
 	  </aside>
 	</section>
 
-	<section>
-	  <h2>Changes in functional connectivity of population</h2>
+	<section data-background-color="#ffffff">
+	  <h2>Changes in effective connectivity of population</h2>
 		<p>
 	  	For a fixed network of units, compute transfer entropy between units in each condition:
 	  	$$
@@ -291,36 +280,16 @@ In the first half of the talk today I’ll be discussing encoding models of moto
 	  	$$
 	  	for Shannon entropy $I$. <br><br>
 
-	  	Study differences in connectivity between brain-, dual- conditions and manual condition.<p>
+	  	Study differences in connectivity between brain-, dual- conditions and (baseline) manual condition.<p>
 	  <aside class="notes">
 	    <span style="color: red"></span> •
+
 	    • <span style="color: green"></span>
 	  </aside>
 	</section>
 
 	<section data-background-color="#ffffff">
-	  <h2>Changes in functional connectivity of population</h2>
-	    <img src="assets/TE_part1.png" width="65%">
-	    <p class="rcred"><b>Lansdell</b> et al <em>(submitted)</em></p>
-	  <aside class="notes">
-	    <span style="color: red"></span> •
-	    • <span style="color: green"></span>
-	  </aside>
-	</section>
-
-	<section data-background-color="#ffffff">
-	  <h2>Changes in functional connectivity of population</h2>
-	    <img src="assets/TE_part2.png" width="65%">
-	    <p class="rcred"><b>Lansdell</b> et al <em>(submitted)</em></p>
-
-	  <aside class="notes">
-	    <span style="color: red"></span> •
-	    • <span style="color: green"></span>
-	  </aside>
-	</section>
-
-	<section data-background-color="#ffffff">
-	  <h2>Changes in functional connectivity of population</h2>
+	  <h2>Changes in effective connectivity of population</h2>
 	    <img src="assets/TE_part3.png" width="65%">
 	    <p class="rcred"><b>Lansdell</b> et al <em>(submitted)</em></p>
 	  <aside class="notes">
@@ -329,14 +298,16 @@ In the first half of the talk today I’ll be discussing encoding models of moto
 	  </aside>
 	</section>
 
-	<section>
-	  <h2>Changes in functional connectivity of population</h2>
+	<section data-background-color="#ffffff">
+	  <h2>Changes in effective connectivity of population</h2>
 	  	<ul>
-	  		<li> Brain-control: overall decrease in functional connectivity to control units
+	  		<li> Brain-control: overall decrease in effective connectivity to control units, regardless of co-tuning
 	  		<li> Dual-control: functional connectivity between co-tuned units does not change, except when control unit involved
 	  	</ul>
 	  <aside class="notes">
 	    <span style="color: red"></span> •
+
+
 • <span style="color: green"></span>
 	  </aside>
 	</section>
@@ -344,10 +315,12 @@ In the first half of the talk today I’ll be discussing encoding models of moto
 	<section>
 		<h2>Intrinsic variability predicts performance</h2>
 		<p>Inspired by Sadtler et al 2014</p>
-	    <img src="assets/intrinsic_manifold_white.png" width="70%">
+	    <img src="assets/intrinsic_manifold_white.png" width="75%">
 
 	  <aside class="notes">
 	    <span style="color: red"></span> •
+
+
 • <span style="color: green"></span>
 	  </aside>
 	</section>
@@ -355,54 +328,298 @@ In the first half of the talk today I’ll be discussing encoding models of moto
 	<section data-background-color="#ffffff">
 		<h2>Intrinsic variability predicts performance</h2>
 <ul>
-<li> GPFA used to identify low-dimensional subspace
+<li> Gaussian process factor analysis (GPFA) used to identify low-dimensional subspace
 <li> Identify when spaces are significantly non-orthogonal
 </ul>
-	    <img src="assets/gpfa_perf.png" width="30%">
+	    <img src="assets/gpfa_perf.png" width="40%">
 	  <aside class="notes">
 	    <span style="color: red"></span> •
     • <span style="color: green"></span>
 	  </aside>
 	</section>
 
-<!-- ----------------------------------------------------------------------- -->
-
 	<section data-background-color="#ffffff">
 	  <h2>Intrinsic variability predicts performance</h2>
 	    <img src="assets/Figure5_ver2c.png" width="60%">
+	    <!--<img src="assets/Figure5_ver2d.png" width="60%">-->
 	    <ul>
 	    	<li> High performance requires at least one unit with high intrinsic variance
 	    </ul> 
 	  <aside class="notes">
 	    <span style="color: red"></span> •
+
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section data-background-color="#ffffff">
+	  <h2>Summary</h2>
+	  	<ul>
+	  		<li> Intrinsic variance of control units only variable found to predict performance and control unit contributions &#8212; motor unit tuning does not constrain how the task is performed
+	  	</ul>
+	  	<hr>
+	  	<div class="fragment">
+	  	<p>$\Rightarrow$ Provided basic neuronal constraints imposed by existing circuitry are taken into consideration, BCI design is able to leverage motor cortical adaptability.</p>
+		<p> $\Rightarrow$ Internal and latent dynamics reveal additional information, compared with direct encoding models
+		</div>
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+<!-- ----------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------- -->
+
+	<section data-background-color="#ffffff">
+	  <h2>Outline</h2>
+      <img src="assets/outline_2.svg" width="100%">
+
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+	    Ok, so we've seen how considerations of wrist tuning do not need to be
+	    considered in a concurrent use BCI, that only factors of variance are predictive
+	    of performance.
+
+	    In the next section we will change gears a little bit and look at a model which
+	    can help describe developmental processes that are relevant to the formation of
+	    receptive fields in the retina. 
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section data-background-color="#000000">
+	  <h2>Spontaneous activity in retina drives developmental programs</h2>
+	  <div id="left">
+	  	<ul>
+	  		<li> Insight into structure of nervous system through study of developmental processes
+	  		<li> Normal development of receptive fields in visual cortex relies on spontaneous activity in retina
+	  		<li> Active or permissive role?
+	  	</ul>
+	  	<p><br></p>
+	 	<div class="fragment">
+	  	<div id="left" style="text-align: right;">
+			<img src="assets/kevinford.jpg" height="200px" style="padding-right: 20px">
+			<p class="rcred" style="padding-right: 20px">Kevin Ford </p>
+	  	</div>
+	  	<div id="right" style="text-align: left">
+			<img src="assets/nathankutz.jpg" height="200px">
+			<p class="lcred">Nathan Kutz</p>
+	  	</div>
+	  </div>
+	  </div>
+	  <div id="right">
+		<img src="assets/cajal_retina.png" width="70%">
+	 <p class="rcred">Ramón y Cajal</p>
+	</div>
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+	    Want a model that can predict specific form of pharmacoligical manipulations
+	    that may better help determine the precise role retinal waves play during development.
+
+
+Vertebrate and invertebrate animals have similar neurons, and yet their nervous
+systems function very differently. Freud and Cajal independently conjectured that it must be the
+number of neurons, and how they inter-connect, that accounts for their different functionality.
+A fundamental question is thus how does this connectivity arise? Two general developmental
+processes can be described: first, genetically determined cues provide a coarse layout of cells and
+connections and second, neural activity removes unwanted cells and refines connections. This
+activity occurs not just through external stimulation, but also through correlated, spontaneously
+generated bursts of action potentials occurring in hyperexcitable regions of the developing nervous
+system prior to external input. Such activity has been implicated in the maturation of the retina,
+spinal cord, hippocampus, cochlea, neocortex and a number of other regions [1]. To what extent
+regions of the CNS rely on this activity for their development and what information they utilize for
+this purpose is largely unknown.
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section data-background-color="#000000">
+	  <h2>Retinal waves initiated and propagated by starburst amacrine cells (SACs)</h2>
+	  <div>
+		<img src="assets/retina_section.jpg" width="90%">
+	 <p class="rcred">Josh Morgan 2005 (http://wonglab.biostr.washington.edu/research.html)</p>
+	</div>
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+
 	    • <span style="color: green"></span>
 	  </aside>
 	</section>
 
 	<section>
-	  <h2>Summary</h2>
-	  	<ul>
-	  		<li> Tuning and connectivity analysis suggest dual-control task generates cortical activity more similar to that observed in manual control task
-	  		<li> Intrinsic variance of control units only variable found to predict performance and control unit contributions &#8212; motor unit tuning does not constrain how the task is performed
-	  	</ul>
-	  	<hr>
-	  	<p>$\Rightarrow$ Provided basic neuronal constraints imposed by existing circuitry are taken into consideration, BCI design is able to leverage motor cortical adaptability.</p>
-		<p> $\Rightarrow$ Internal and latent dynamics reveal additional information, compared with direct encoding models
+	  <h2>Retinal waves initiated and propagated by starburst amacrine cells (SACs)</h2>
+	<video src="assets/Ford2011_suppmovie1.mp4" muted controls loop
+	 poster="assets/dst2.png" class="slideautostart" width="70%"></video>
+	 <p class="rcred">Ford et al 2012</p>
 	  <aside class="notes">
 	    <span style="color: red"></span> •
+
 	    • <span style="color: green"></span>
 	  </aside>
 	</section>
 
+	<section data-background-color="#ffffff">
+	  <h2>Reaction-diffusion model of retinal waves</h2>
+	  <p><br>
+	  $$\begin{align*} C_{m}V_{t} & = -{\color{red}g_{Ca}(V-V_{Ca})}-{\color{green}g_{K}(R,S)(V-V_{K})}-{\color{red}g_{L}^{M}(V-V_{L})}-\\ 
+	  & {\color{orange}g_{ACh}(V-V_{syn})}-{\color{blue}g_{n}^MN(V-V_{Ca})} \end{align*}$$
+	  <br></p>
+	  <ul>
+	  	<li class="fragment"> <p style="color:#dd0000">Morris Lecar dynamics: refractory variable $R$</p>
+	  	<li class="fragment"> <p style="color:#009900">Slow after-hyperpolarization (sAHP) current:</p> $$S_t = \gamma G(V) +S/\tau_S$$
+	  	<li class="fragment"> <p style="color:#0000bb">Noise current initiates waves spontaneously: $N$ a Bernoulli RV</p> 
+	  	<li class="fragment"> <p style="color:#ee9900">Diffusion/local coupling of ACh spreads waves:</p> $$\begin{align*} g_{ACh}(A) &= g_{ACh}^M\frac{\delta A^2}{1+\delta A^2} \\ 
+	  		A_t &= D\nabla^2 A + \beta G(V) -\frac{A}{\tau_{ACh}}
+	  		\end{align*}$$
+	  </ul>
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section data-background-color="#ffffff">
+	  <h2>Amacrine cell network as an excitable medium</h2>
+	<video src="assets/ml_default_sol.mp4" muted controls loop
+	 poster="assets/dst2.png" class="slideautostart" width="100%"></video>
+	 <p class="rcred">Lansdell, Ford and Kutz PLoS Comp Bio. 2014</p>
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section data-background-color="#ffffff">
+	  <h2>Model produces realistic cholinergic retinal waves</h2>
+	    <img src="assets/retina_figure2.png" width="75%">
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section data-background-color="#ffffff">
+	  <h2>When is the medium excitable?</h2>
+	  <ul>
+	  	<li> Non-dimensionalize, separate into fast-slow dynamics
+	  		$$\begin{align*}
+	  			v_t &= f(v,a;r)\\
+	  			a_t &= \nabla^2 a + \frac{k(v,a)}{\tilde{\tau}_{ACh}}\\
+	  		\end{align*} $$
+	  	<li> Shift to traveling frame at speed $c$: $x' = x - ct; t' = t$
+	  	<li> Heteroclinic orbit from rest to excited state is wave front
+	  		$$\begin{align*}
+	  			0 &= f(v,a;r) + cv'\\
+	  			0 &= ca' + a'' + \frac{k(v,a)}{\tilde{\tau}_{ACh}}\\
+	  		\end{align*} $$	  		
+	  </ul>
+	    <img src="assets/retina_figure3.png" width="100%">
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section data-background-color="#ffffff">
+	  <h2>When is the medium excitable?</h2>
+	  <ul>
+	  	<li> Non-dimensionalize, separate into fast-slow dynamics
+	  		$$\begin{align*}
+	  			v_t &= f(v,a;r)\\
+	  			a_t &= \nabla^2 a + \frac{k(v,a)}{\tilde{\tau}_{ACh}}\\
+	  		\end{align*} $$
+	  	<li> Shift to traveling frame at speed $c$: $x' = x - ct; t' = t$
+	  	<li> Heteroclinic orbit from rest to excited state is wave front
+	  		$$\begin{align*}
+	  			0 &= f(v,a;r) + cv'\\
+	  			0 &= ca' + a'' + \frac{k(v,a)}{\tilde{\tau}_{ACh}}\\
+	  		\end{align*} $$	  		
+	  </ul>
+	    <img src="assets/retina_figure4.png" width="40%">
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section data-background-color="#ffffff">
+	  <h2>Model predicts outcome of pharmacological manipulations</h2>
+	  <ul>
+	  	<li> Nicotinic ACh receptor agonists/antagonists affect conductance $g_{ACh}^M$
+	  		<ul>
+	  			<li> Wave speed highly sensitive to $g_{ACh}^M$.
+	  			<li> Wave frequency affected
+	  		</ul>
+	  	<li> Forskolin affects second messenger cAMP, affects sAHP
+	  		<ul>
+	  			<li> Moderate change in wave frequency
+	  			<li> No change in wave speed
+	  		</ul>
+	  </ul> 
+	    <img src="assets/retina_figure5.png" width="80%">
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section data-background-color="#ffffff">
+	  <h2>Analog to forest fire model exhibiting self-organized criticality </h2>
+	  <ul>
+	  	<li>Predicts when retinal waves exhibit power-law distributed wave sizes
+	  </ul>
+	    <img src="assets/retina_figure6.png" width="100%">
+	  <div class="fragment">
+	  <hr>
+	  <ul>
+	  	<li> Model determines spatiotemporal properties of waves
+	  	<li> Can be used as a tool to investigate role of retinal waves in development
+	  </ul>
+	  </div>
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+<!-- ---------------------------------------------------------------------- -->
+<!-- ---------------------------------------------------------------------- -->
+<!-- ---------------------------------------------------------------------- -->
+
+	<section data-background-color="#ffffff">
+	  <h2>Outline</h2>
+
+    <img src="assets/outline_3.svg" width="100%">
+
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+	    Finally, I mentioned that ambiguities in representations in primary motor
+	    cortex may become clear when we have access to a more comprehensive measure
+	    of neural activity. These projects are becoming more common in lower animals,
+	    so for the last section I would like to present work contributing to one of
+	    these projects.
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
 
 	<section data-background-color="#000000">
-	<h2>Comprehensive measures of neural activity in cnidaria</h2>
+	<h2>Comprehensive measures of neural activity in cnidaria &#8212 "cracking the neural code"</h2>
 	  <div>
 	<video src="assets/hydra_feeding_short.mp4" muted controls loop
 	 poster="assets/dst2.png" class="slideautostart" width="60%"></video>
 	 <p class="rcred">https://www.youtube.com/watch?v=dl_oVns2oa8</p>
 	 <div class="fragment">
-	<p>Why?</p>
+	<p>Why Hydra?</p>
 	 <ol>
 	 	<li> Small (0.5mm-1.5cm) &#8212; can fit into field of view of traditional microscope
 	 	<li> Translucent; nerve net, easier imaging
@@ -412,19 +629,6 @@ In the first half of the talk today I’ll be discussing encoding models of moto
 	  </div>
 	  <aside class="notes">
 	    <span style="color: red"></span> •
-	    The Hydra has a diffuse nerve net, one of the simplest nervous systems.
-
-	    As part of a collaboration with Yuste lab at Columbia, among others, we
-	    are working on obtaining this level of knowledge in the cnidarian Hydra.
-
-	    For this, the Hydra has the advantages that:
-	    -it is transparent, making imaging simpler
-	    -it is small, allowing it to fit into the FOV of a traditional scope
-	    -it consists of a nerve net, meaning that neurons are spread throughout
-	    the organism and can be imaged more or less without obstructing one another
-	    -it can be constrained to lie in a 2D plane, meaning more or less the organism
-	    can be in focus all at once, without the need for z-slicing, which permits a high
-	    temporal resolution recording.
 
 	    • <span style="color: green"></span>
 	  </aside>
@@ -438,7 +642,6 @@ In the first half of the talk today I’ll be discussing encoding models of moto
 	  </div>
 	  <aside class="notes">
 	    <span style="color: red"></span> •
-	    Describe Hydra anatomy
 
 	    • <span style="color: green"></span>
 	  </aside>
@@ -469,11 +672,12 @@ In the first half of the talk today I’ll be discussing encoding models of moto
 		</div>
 	  	<div class="column-right">
 			<img src="assets/dupre.jpg" height="200px">
-			<p class="lcred">Chistrophe Dupre</p>
+			<p class="lcred">Christophe Dupre</p>
 	  	</div>
 	  </div>
 	  <aside class="notes">
 	    <span style="color: red"></span> •
+
 	    • <span style="color: green"></span>
 	  </aside>
 	</section>
@@ -501,42 +705,11 @@ In the first half of the talk today I’ll be discussing encoding models of moto
 	  </aside>
 	</section>
 
-<!-- ----------------------------------------------------------------------- -->
-
 	<section>
 	<h2>Whole-body calcium imaging in Hydra</h2>
 	<video src="assets/hydra_gcamp.mp4" muted controls loop
 	 poster="assets/dst2.png" class="slideautostart" width="70%"></video>
 	 <p class="rcred">C. Dupre, Yuste lab</p>
-	  <aside class="notes">
-	    <span style="color: red"></span> •
-
-
-	    • <span style="color: green"></span>
-	  </aside>
-	</section>
-
-	<section data-background-color="#000000">
-	<h2>A deformable object tracker</h2>
-	<div id="left">
-	<video src="assets/kalmanfilter_slow.mp4" muted controls
-	 poster="assets/dst2.png" class="slideautostart"></video>
-	</div>
-	<div id="right">
-		<p>Extended Kalman filter tracking
-
-			$$\begin{align}y_t &= h(x_t) +\nu_t \\
-			x_t &= f(x_{t-1}) +\epsilon_t\end{align} $$ 
-
-			Where $x_t$ is the Hydra positions and velocities, $y_t$ is the generated
-			image, $f(\cdot)$ is mass-spring dynamics, $h(\cdot)$ observation.<br> <br>
-		</p>
-		<ul class="fragment">
-			<li>High-dimensional: novel implementation using OpenGL+CUDA
-			<li>Unstable: once tracking lost, difficult to recover
-		</ul>
-
-	</div>
 	  <aside class="notes">
 	    <span style="color: red"></span> •
 
@@ -549,23 +722,7 @@ In the first half of the talk today I’ll be discussing encoding models of moto
 	<img src="assets/mfsf_white.svg">
 	  <aside class="notes">
 	    <span style="color: red"></span> •
-	    • <span style="color: green"></span>
-	  </aside>
-	</section>
 
-	<section>
-	<h2>Multi-frame optic flow image registration</h2>
-	<ul id="blanklist">
-	<li> Dense optic flow with subspace constraints (MFSF, Garg et al 2013)
-	<li> For each pixel find linear combination of basis paths, $L$, that minimize energy<br>
-	<img src="assets/energyeq.png">
-	<li> $I_f$ = image at frame $f$,
-	<li> $I_0$ = reference frame (need not be first frame of video),
-	<li> $Q_f^u$, $Q_f^v$ = basis paths at frame $f$, 
-	<li> $\alpha$ = smoothness regularizer
-	</ul>
-	  <aside class="notes">
-	    <span style="color: red"></span> •
 	    • <span style="color: green"></span>
 	  </aside>
 	</section>
@@ -585,24 +742,12 @@ In the first half of the talk today I’ll be discussing encoding models of moto
 		</ul>
 		</div>
 		<div id="right">
-		<img src="assets/tracking_errors.png">
-		</div>
+<video src="assets/warp_neurons_nref100.mp4" muted controls loop
+	 poster="assets/dst2.png" class="slideautostart"></video>
+	</div>
 	  <aside class="notes">
 	    <span style="color: red"></span> •
-	    • <span style="color: green"></span>
-	  </aside>
-	</section>
-
-	<section>
-	<h2>Registering in longer sequences</h2>
-		<img src="assets/mfsf_stitch_white.svg" width="70%">
-		<div class="fragment">
-		How to mitigate accumulation of errors from video to video?
-		</div>
-	  <aside class="notes">
-	    <span style="color: red"></span> •
-		Changing appearance/pose in a long sequence → multiple reference frames
-		Simplest approach: split into multiple stacks and run independently
+	    
 	    • <span style="color: green"></span>
 	  </aside>
 	</section>
@@ -634,7 +779,7 @@ In the first half of the talk today I’ll be discussing encoding models of moto
 	</ul>
 	</div>
 	<div id="right" style="text-align: center;">
-		$\langle f_{ij}(x)\rangle_\Omega$
+		Average error: $\langle f_{ij}(x)\rangle_\Omega$
 		<img src="assets/similarity_orig.png">
 		Frame index
 	</div>
@@ -655,7 +800,7 @@ In the first half of the talk today I’ll be discussing encoding models of moto
 	</p>
 	</div>
 	<div id="right" style="text-align: center;">
-		$\langle f_{ij}(x)\rangle_\Omega$<br>
+		Average error: $\langle f_{ij}(x)\rangle_\Omega$<br>
 		<img src="assets/dendrogram.png" width="70%">
 	</div>
 		<img src="assets/dend_d1_tile_c1.png" width="80%">
@@ -727,7 +872,6 @@ In the first half of the talk today I’ll be discussing encoding models of moto
 		</p>
 	  <aside class="notes">
 	    <span style="color: red"></span> •
-		Thus every tracked path is associated with a point in a reference frame
 	    • <span style="color: green"></span>
 	  </aside>
 	</section>
@@ -738,7 +882,6 @@ In the first half of the talk today I’ll be discussing encoding models of moto
 	 poster="assets/dst2.png" class="slideautostart" width="55%"></video>
 	  <aside class="notes">
 	    <span style="color: red"></span> •
-	   	We can see that this work fairly well for short sequences of video.
 	    • <span style="color: green"></span>
 	  </aside>
 	</section>
@@ -746,35 +889,33 @@ In the first half of the talk today I’ll be discussing encoding models of moto
 	<section>
 	<h2>Summary</h2>
 	<ul>
-		<li> Registration between similar frames &#8212 track Hydra pose throughout extended video sequences. Can be applied to other registration/tracking problems
-		<li class="fragment"> Create larger hand annotated datasets for performance evaluation
-		<li class="fragment"> Exploit temporal continuity between adjacent blocks to relate reference frames to one another
+		<li> Registration between similar frames &#8212 track Hydra pose throughout extended video sequences. 
+		<li> Can be applied to other registration/tracking problems
 	</ul>
 	  <aside class="notes">
 	    <span style="color: red"></span> •
-	    This approach has utility as a general optic flow technique that can handle occlusions &#8212; an important problem in computer vision.
-
-	    We've seen how this method can be used to track Hydra, which we believe will
-	    form an important component of determining the neural basis of its behavior.
 	    • <span style="color: green"></span>
 	  </aside>
 	</section>
 
 	<section>
-	  <h2>Summary</h2>
-	<hr>
+	<p><br><br></p>
 	"Progress in science depends on new techniques, new discoveries and new ideas, probably in that order" <br>
 	&#8212; Sydney Brenner
-	<hr>
-	  <!--<div>
-		<canvas width="10%" data-sample="videostack"></canvas>
-	  </div>-->
-
 	  <aside class="notes">
 	    <span style="color: red"></span> •
+	    So, it's open question what we will learn from these whole-brain imaging studies.
+	    But, as we saw in the BCI project, properties to do with wrist encoding were only
+	    so informative, while population analyses such as functional connectivity and intrinsic
+	    manifolds were more informative. In a sense such tuning models are inspired by analyses of
+	    single-unit recordings. Thus moving forward, it's useful to keep in mind.
 	    • <span style="color: green"></span>
 	  </aside>
 	</section>
+
+<!-- ----------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------- -->
 
 	<section>
 	  <h2>Acknowledgments</h2>
@@ -783,6 +924,10 @@ In the first half of the talk today I’ll be discussing encoding models of moto
 	  	<ul>
          <li> Adrienne Fairhall</li>
          <li> Chet Moritz</li>
+         <li> Eric Shea-Brown</li>
+         <li> Emily Fox</li>
+     </ul>
+     <ul>
          <li> Ivana Milovanovic</li>
          <li> Cooper Mellema</li>
          <li> Eberhard Fetz</li>
@@ -808,6 +953,9 @@ In the first half of the talk today I’ll be discussing encoding models of moto
 	  </aside>
 	</section>
 
+<!-- ----------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------- -->
 
 	<section>
 	<h2>Segmenting regions to extend</h2>
@@ -926,6 +1074,25 @@ In the first half of the talk today I’ll be discussing encoding models of moto
 	    • <span style="color: green"></span>
 	  </aside>
 	</section>
+
+	<section>
+	<h2>Multi-frame optic flow image registration</h2>
+	<ul id="blanklist">
+	<li> Dense optic flow with subspace constraints (MFSF, Garg et al 2013)
+	<li> For each pixel find linear combination of basis paths, $L$, that minimize energy<br>
+	<img src="assets/energyeq.png">
+	<li> $I_f$ = image at frame $f$,
+	<li> $I_0$ = reference frame (need not be first frame of video),
+	<li> $Q_f^u$, $Q_f^v$ = basis paths at frame $f$, 
+	<li> $\alpha$ = smoothness regularizer
+	</ul>
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
 
     <!--<script src="reveal.js/js/reveal.min.js"></script>-->
     <script src="reveal.js/js/reveal.js"></script>
