@@ -5,8 +5,8 @@
     addListener: function(event, listener) {
       eventEmitter.addListener(event, listener);
     },
-    width: 600,
-    height: 500,
+    width: 800,
+    height: 600,
     paused: false,
     wireframe: false,
     current_normal_map: "normal_map_tile.jpg",
@@ -79,6 +79,7 @@
     "js/samples/per_vertex_lighting.js",
     "js/samples/normal_mapped_plane.js",
     "js/samples/plane.js",
+    "js/samples/neuralnetwork.js",
     "js/samples/wireframe_plane.js",
     "js/samples/load_startrek_enterprise.js",
     "js/samples/load_apache.js",
