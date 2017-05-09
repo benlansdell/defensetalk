@@ -80,6 +80,8 @@
     "js/samples/normal_mapped_plane.js",
     "js/samples/plane.js",
     "js/samples/neuralnetwork.js",
+    "js/samples/neuralnetwork2.js",
+    "js/samples/neuralnetwork3.js",
     "js/samples/wireframe_plane.js",
     "js/samples/load_startrek_enterprise.js",
     "js/samples/load_apache.js",

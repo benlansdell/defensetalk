@@ -25,7 +25,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -48,9 +48,9 @@
      fit-margin-left="0"
      fit-margin-right="0"
      fit-margin-bottom="0"
-     inkscape:zoom="0.30351035"
-     inkscape:cx="710.53711"
-     inkscape:cy="471.37045"
+     inkscape:zoom="0.26281859"
+     inkscape:cx="1055.0071"
+     inkscape:cy="491.22275"
      inkscape:window-x="43"
      inkscape:window-y="24"
      inkscape:window-maximized="1"
@@ -81,21 +81,23 @@
      y="784.479" />
   <text
      xml:space="preserve"
-     style="font-style:normal;font-weight:normal;font-size:25px;line-height:125%;font-family:Arial;-inkscape-font-specification:Arial;letter-spacing:0px;word-spacing:0px;fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     style="font-style:normal;font-weight:normal;font-size:25px;line-height:125%;font-family:Arial;-inkscape-font-specification:Arial;letter-spacing:0px;word-spacing:0px;fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
      x="550.48755"
      y="167.99771"
      id="text10243"
      sodipodi:linespacing="125%"><tspan
        sodipodi:role="line"
-       id="tspan10245"
        x="550.48755"
        y="167.99771"
-       style="font-size:50px;fill:#ff0000;fill-opacity:1">1. Models of primary motor encoding and concurrent use</tspan><tspan
+       style="font-size:50px;fill:#ff0000;fill-opacity:1;"
+       id="tspan12120">1. <tspan
+   style="font-weight:bold;fill:#ff0000;fill-opacity:1;"
+   id="tspan8005">Encoding in primary motor cortex</tspan></tspan><tspan
        sodipodi:role="line"
        x="550.48755"
        y="230.49771"
-       style="font-size:50px;fill:#ff0000;fill-opacity:1"
-       id="tspan12118">    brain-computer interfaces</tspan></text>
+       style="font-size:50px;fill:#ff0000;fill-opacity:1;"
+       id="tspan8003">    Reconfiguring motor circuits in a brain-computer interface</tspan></text>
   <text
      xml:space="preserve"
      style="font-style:normal;font-weight:normal;font-size:25px;line-height:125%;font-family:Arial;-inkscape-font-specification:Arial;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -104,15 +106,17 @@
      id="text10243-3"
      sodipodi:linespacing="125%"><tspan
        sodipodi:role="line"
-       id="tspan10245-6"
        x="550.48755"
        y="966.8512"
-       style="font-size:50px">3. Tracking an unrestrained cnidarian with whole-animal</tspan><tspan
+       style="font-size:50px"
+       id="tspan10273">3. <tspan
+   style="font-weight:bold"
+   id="tspan8001">Relating full neural activity with behavior</tspan></tspan><tspan
        sodipodi:role="line"
        x="550.48755"
        y="1029.3512"
        style="font-size:50px"
-       id="tspan10273">    calcium imaging</tspan></text>
+       id="tspan7993">    Neuron tracking in Hydra</tspan></text>
   <text
      xml:space="preserve"
      style="font-style:normal;font-weight:normal;font-size:25px;line-height:125%;font-family:Arial;-inkscape-font-specification:Arial;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -124,5 +128,12 @@
        id="tspan10245-5"
        x="550.48755"
        y="561.71832"
-       style="font-size:50px">2. Reaction-diffusion model of cholinergic retinal waves</tspan></text>
+       style="font-size:50px">2. <tspan
+   style="font-weight:bold"
+   id="tspan7999">Intrinsic population dynamics</tspan></tspan><tspan
+       sodipodi:role="line"
+       x="550.48755"
+       y="624.21832"
+       style="font-size:50px"
+       id="tspan7995">    Reaction-diffusion model of cholinergic retinal waves</tspan></text>
 </svg>

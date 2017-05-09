@@ -14,7 +14,7 @@
       'q' : 0.8, // reliability
       'A' : 1.0, // spike height [mV]
       'nn' : 13, // number of neurons
-      'syn' : randomArray(169, -1)
+      'syn' : randomArray(169, -1),
     };
 
     //for i=1:nn, syn(i,i) = 0; end
@@ -152,7 +152,7 @@
     return particles;
   }
 
-  window.samples.neuralnetwork = {
+  window.samples.neuralnetwork2 = {
 
     initialize: function(canvas) {
       var scene = new THREE.Scene();
@@ -170,6 +170,9 @@
       }
       var tf = 1;
       var dt = .4;
+      var cx = 0;
+      var cy = 0;
+      var theta = 0;
       console.log(params);
       console.log(v);
       console.log(spktms);
@@ -198,6 +201,13 @@
       //vidplane.position.y += .15;
       //scene.add( vidplane );
 
+      var gcurs = new THREE.PlaneGeometry( .05, .05 );
+      var mat = new THREE.MeshBasicMaterial( {color: 0x00ff00, side: THREE.DoubleSide} );
+      var cur = new THREE.Mesh( gcurs, mat );
+      scene.add( cur );
+      cur.position.x = 1+cx;
+      cur.position.y = .2+cy;
+
       pts = addNodes(scene);
 
       var renderer = new THREE.WebGLRenderer({canvas: canvas, antialias: true, alpha: true});
@@ -225,6 +235,14 @@
         //Extract recent activity and change size of points
         updatePoints(pts, v, params)
         renderer.render( scene, camera );
+        cx += 0.003*Math.random();
+        cy += 0.003*Math.random();
+        cx /= 1.05;
+        cy /= 1.05;
+        theta += 0.02;
+        cur.position.x = 0.8+0.05*Math.cos(theta) + 5*cx;
+        cur.position.y = .2+0.05*Math.sin(theta) + 5*cy;
+
       }
 
       animate();

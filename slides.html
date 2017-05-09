@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Neural encoding in application, development and beyond</title>
+    <title>Neural population dynamics in application, development and beyond</title>
       <meta name="viewport"
 	  content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <!--<link rel="stylesheet" href="reveal.js/css/reveal.min.css">-->
@@ -18,6 +18,7 @@
     <script src="js/three.min.js"></script>
     <script src="js/OrbitControls.js"></script>
     <script src="js/KeyboardState.js"></script>
+    <script src="js/renderers/CanvasRenderers.js"></script>
     <script type="text/x-mathjax-config">
 	    MathJax.Hub.Config({TeX: {extensions: ["color.js"]}});
     </script>
@@ -40,10 +41,11 @@
     <!-- Slides! -->
     <div class="reveal">
       <div class="slides">
-        <!--<section data-background="assets/dst2_background.png">-->
-        <section data-background-color="#ffffff">
-          <h1 style="color: #000000">Neural encoding in application, development and beyond</h1>
-	  <br><hr>
+        <section data-background="assets/brainbow2.jpg">
+        <!--<section data-background-color="#ffffff">
+          <h1 style="color: #000000">Neural population dynamics in application, development and beyond</h1>-->
+          <h1>Neural population dynamics in application, development and beyond</h1>
+	  <hr>
 	  <p style="text-align: center; font-size: larger; text-shadow: 0px 0px 0px #0000ff;">Ben Lansdell<br> Applied Mathematics<br><br>
 	  	Final examination, May 9th 2017</p>
 	  <aside class="notes">
@@ -84,9 +86,9 @@
 	<video src="assets/vrmaze.mp4" muted controls loop
 	 poster="assets/dst2.png" class="slideautostart" width="100%"></video>
 	 <p class="rcred" style="padding-right: 10px">Harvey et al 2009</p>
-	<p><br></p>
+	<!--<p><br></p>
     <img src="assets/behav.svg" width="90%" style="text-align: center">
-	<p></p>
+	<p></p>-->
 	</div>
 
 	  <aside class="notes">
@@ -100,7 +102,33 @@
 	<!--<h2>Challenges of theoretical neuroscience</h2>-->
 	  <div style="position: relative">
 		<canvas width="100%" data-sample="neuralnetwork" style = "position:absolute; top:0; left:0;"></canvas>
-	    <img src="assets/network.svg" style="width:100%;">
+	    <img src="assets/network2.svg" style="width:100%;">
+	  </div>
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section>
+	<!--<h2>Challenges of theoretical neuroscience</h2>-->
+	  <div style="position: relative">
+		<canvas width="100%" data-sample="neuralnetwork2" style = "position:absolute; top:0; left:0;"></canvas>
+	    <img src="assets/network2a.svg" style="width:100%;">
+	  </div>
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+	<section>
+
+	<!--<h2>Challenges of theoretical neuroscience</h2>-->
+	  <div style="position: relative">
+		<canvas width="100%" data-sample="neuralnetwork3" style = "position:absolute; top:0; left:0;"></canvas>
+	    <img src="assets/network3.svg" style="width:100%;">
 	  </div>
 	  <aside class="notes">
 	    <span style="color: red"></span> •
@@ -110,7 +138,7 @@
 	</section>
 
 	<section data-background-color="#ffffff">
-	  <h2>Outline</h2>
+	  <h2>Three problems</h2>
 
     <img src="assets/outline.svg" width="100%">
 
@@ -130,7 +158,7 @@
 	</section>
 	
 	<section data-background-color="#ffffff">
-	  <h2>Outline</h2>
+	  <h2>Three problems</h2>
 
     <img src="assets/outline_1.svg" width="100%">
 
@@ -145,21 +173,10 @@
 <!-- ----------------------------------------------------------------------- -->
 <!-- ----------------------------------------------------------------------- -->
 
-	<section data-background-color="#ffffff">
-		<h2>Encoding models and motor cortex</h2>
-		<div id="left">
-	    <img src="assets/motorstim.png" width="90%">
-	    <p class="lcred">Phillips and Porter 1977</p>
-		</div>
-		<div id="right">
-		<ul>
-			<li> Motor cortical neuron representations are complex: 
-				<ul><li>kinetics &#8212; single-unit recordings, stimulation evoked responses (1960s)
-				<li> kinematics &#8212; center-out task (1980s)
-				<li> dynamics &#8212; high-dimensional recordings (2000s)</ul>
-			<li class="fragment"> Understanding motor encoding can inform design of BCIs for control of prosthetic limbs
-		</ul>
-	</div>
+
+	<section>
+		<h2>Encoding in primary motor cortex</h2>
+	    <img src="assets/network_bci1a.svg" width="100%">
 	    <aside class="notes">
 	    <span style="color: red"></span> •
 
@@ -168,17 +185,52 @@
 	  </aside>	</section>
 
 	<section data-background-color="#ffffff">
-		<h2>Intracortical arrays provide state-of-the-art BCI control</h2>
+		<h2>Encoding in primary motor cortex</h2>
+		<div id="left">
+	    <img src="assets/motorstim.png" width="90%">
+	    <p class="lcred">Phillips and Porter 1977</p>
+		</div>
+		<div id="right">
+		<ul>
+			<li> Motor cortical neuron representations are complex: 
+				<ul><li>kinetics &#8212; single-unit recordings (1960s)
+				<li> kinematics &#8212; center-out task (1980s)
+				<li> dynamics &#8212; high-dimensional recordings (2000s)</ul>
+			<li class="fragment"> Understanding motor encoding can inform design of BCIs for control of prosthetic limbs
+		</ul>
+	</div>
+	    <aside class="notes">
+	    <span style="color: red"></span> •
+	    • <span style="color: green"></span>
+	  </aside>	</section>
+
+	<section>
+		<h2>Intracortical BCIs</h2>
+		<img src="assets/network_bci2a.svg" width="100%">
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section data-background-color="#ffffff">
+		<h2>Flexibility and constraint in intracortical BCIs</h2>
 	  <div id="left">
-	    <center><img src="assets/utah.png" width="45%">
+	    <center><img src="assets/utah.png" width="50%">
 	    <p class="rcred"></p>
 	  </div>
 	  <div id="right">
+	    <center><img src="assets/motorcortex.png" width="55%">
 	  </div>
-	    <center><img src="assets/motorcortex.png" width="40%">
-	    <ul><li>Monkeys can be trained to volitionally control individual neurons through feedback and conditioning [Fetz 1969]
-	    	<li>Neurons chosen independently of natural movement association [Moritz and Fetz 2011]
-	    	<li>Conversely, other studies report brain-control mappings which utilize activity observed during the natural motor repertoire are most effective [Sadtler et al 2014]
+
+	    <p><br>
+	    	Single units:</p>
+	    <ul><li>Volitional control of individual neurons through feedback and conditioning [Fetz 1969]
+	    	<li>Independent of natural movement association [Moritz and Fetz 2011]
+	    	</ul>
+	    	<p>Many units:</p>
+	    	<ul>
+	    	<li>Brain-control mappings utilizing natural motor repertoire are most effective [Sadtler et al 2014]
 	    </ul>
 	  <aside class="notes">
 	    <span style="color: red"></span> •
@@ -187,60 +239,33 @@
 	</section>
 
 	<section data-background-color="#ffffff">
-		<h2>Dual-control BCIs</h2>
+		<h2>Dual-control BCIs: probing the 'units of volitional control'</h2>
 	    <img src="assets/dualcontrolBCI.png" width="40%">
 	    <img src="assets/easyharddiag2.png" width="50%">
 	    <p class="rcred">Milovanovic et al 2015</p>
 	    <ul>
-	  		<li> Allow stroke patients to regain functionality through co-opting
-	  			healthy motor cortex to control neural prosthetic in conjunction with residual movement 
-   		<li> Do neurons strongly associated with contralateral motion make poor control units due to the potential interference imposed by concurrent hand movement?
+	  		<li> Application in stroke patients
+   			<li> Does concurrent hand movement interfere with brain control?
+	    	<li> Milovanovic et al 2015 show performance independent of unit tuning
    		</ul> 
+		<aside class="notes">
+	    <span style="color: red"></span> •
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section>
+		<h2>How does the network reconfigure for a dual-control BCI?</h2>
+		<img src="assets/network_bci1.svg" width="100%">
 	  <aside class="notes">
 	    <span style="color: red"></span> •
 	    • <span style="color: green"></span>
 	  </aside>
 	</section>
 
-	<section data-background-color="#ffffff">
-		<h2>Dual-control BCIs</h2>
-		<img src="assets/dc_perf.png" width="55%">
-		<p class="rcred">Milovanovic et al 2015</p>
-	    <ul>
-	    	<li> Previous studies show performance independent of unit tuning [Milovanovic et al 2015]
-	    </ul>
-	  <aside class="notes">
-	    <span style="color: red"></span> •
-	    • <span style="color: green"></span>
-	  </aside>
-	</section>
-
-	<section data-background-color="#ffffff">
-		<h2>What are the units of volitional control?</h2>
-	  <div style="text-align: left">
-	    <p>Activity of control and non-control units</p>
-	  	<ul>
-	  		<li> BCIs induce widespread changes in activity and tuning in variety of tasks and task perturbations [e.g. Carmena et al 2003]
-  			<li> Some studies show control unit specific changes in tuning [e.g. Law et al 2014]
-	  	</ul> 
-
-		<div class="fragment">
-	  	<p>How do these effects manifest in a BCI paradigm where control units may be constrained by their role in ongoing movement?</p>
-		</div>
-		<div class="fragment">
-			<hr>
-		<div class="column4">
-			<img src="assets/Adrienne-Fairhall.jpg" height="200px">
-<p class="lcred">Adrienne Fairhall</div>
-		<div class="column4">
-			<img src="assets/Chet-Moritz.jpg" height="200px">
-<p class="lcred">Chet Moritz</p></div>
-		<div class="column4"><img src="assets/Cooper-Mellema.jpg" height="200px">
-<p class="lcred">Cooper Mellema</p></div>
-		<div class="column4-last"><img src="assets/Ivana-Milovanovic.jpg" height="200px"><br>
-<p class="lcred">Ivana Milovanovic</p></div>
-		</div>
-
+	<section>
+		<h2>How does the network reconfigure for a dual-control BCI?</h2>
+		<img src="assets/network_bci3.svg" width="100%">
 	  <aside class="notes">
 	    <span style="color: red"></span> •
 	    • <span style="color: green"></span>
@@ -259,80 +284,70 @@
 	  </aside>
 	</section>
 
-	<section>
+	<section data-background-color='#ffffff'>
 		<h2>Random target pursuit task</h2>
 			<ul>
 				<li> Target appears randomly outside radius from cursor position
 				<li> Acquire target within fixed time, hold for 1s
 			</ul>
-	    <img src="assets/targettask.png" width="70%">
+	    <img src="assets/targettask.svg" width="70%">
 	  <aside class="notes">
 	    <span style="color: red"></span> •
 
 	    • <span style="color: green"></span>
-	  </aside>
-	</section>
-
-	<section data-background-color="#ffffff">
-	  <h2>Changes in effective connectivity of population</h2>
-		<p>
-	  	For a fixed network of units, compute transfer entropy between units in each condition:
-	  	$$
-	  	H_{X\to Y} = I(Y_t|Y_{t-1}, \dots, Y_{t-T}) - I(Y_t|Y_{t-1}, \dots, Y_{t-T},X_{t-1}, \dots, X_{t-T})
-	  	$$
-	  	for Shannon entropy $I$. <br><br>
-
-	  	Study differences in connectivity between brain-, dual- conditions and (baseline) manual condition.<p>
-	  <aside class="notes">
-	    <span style="color: red"></span> •
-
-	    • <span style="color: green"></span>
-	  </aside>
-	</section>
-
-	<section data-background-color="#ffffff">
-	  <h2>Changes in effective connectivity of population</h2>
-	    <img src="assets/TE_part3.png" width="65%">
-	    <p class="rcred"><b>Lansdell</b> et al <em>(submitted)</em></p>
-	  <aside class="notes">
-	    <span style="color: red"></span> •
-	    • <span style="color: green"></span>
-	  </aside>
-	</section>
-
-	<section data-background-color="#ffffff">
-	  <h2>Changes in effective connectivity of population</h2>
-	  	<ul>
-	  		<li> Brain-control: overall decrease in effective connectivity to control units, regardless of co-tuning
-	  		<li> Dual-control: functional connectivity between co-tuned units does not change, except when control unit involved
-	  	</ul>
-	  <aside class="notes">
-	    <span style="color: red"></span> •
-
-
-• <span style="color: green"></span>
 	  </aside>
 	</section>
 
 	<section>
-		<h2>Intrinsic variability predicts performance</h2>
-		<p>Inspired by Sadtler et al 2014</p>
-	    <img src="assets/intrinsic_manifold_white.png" width="75%">
+		<h2>Control vs non-control units</h2>
+		<img src="assets/network_bci4a.svg" width="100%">
+	    <p class="rcred"><b>Lansdell</b> et al arXiv:1702.07368</p>
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section>
+		<h2>Co-tuned units: control vs non-control</h2>
+		<img src="assets/network_bci5.svg" width="100%">
+	    <p class="rcred"><b>Lansdell</b> et al arXiv:1702.07368</p>
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section>
+	  <h2>How does the network reconfigure for a dual-control BCI?</h2>
+	  	<ul>
+	  		<li> Brain-control: overall decrease in effective connectivity to control units, regardless of co-tuning
+	  		<li> Dual-control: effective connectivity between co-tuned units does not change, except when control unit involved
+	  	</ul>
 
 	  <aside class="notes">
 	    <span style="color: red"></span> •
+		• <span style="color: green"></span>
+	  </aside>
+	</section>
 
+	<section data-background-color='#ffffff'>
+		<h2>Intrinsic variability predicts performance</h2>
+		<p>Inspired by Sadtler et al 2014</p>
+	    <img src="assets/intrinsic_manifold.svg" width="75%">
 
-• <span style="color: green"></span>
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+		• <span style="color: green"></span>
 	  </aside>
 	</section>
 
 	<section data-background-color="#ffffff">
 		<h2>Intrinsic variability predicts performance</h2>
-<ul>
-<li> Gaussian process factor analysis (GPFA) used to identify low-dimensional subspace
-<li> Identify when spaces are significantly non-orthogonal
-</ul>
+			<ul>
+			<li> Gaussian process factor analysis (GPFA) used to identify low-dimensional subspace
+			<li> Identify when spaces are significantly non-orthogonal
+			</ul>
 	    <img src="assets/gpfa_perf.png" width="40%">
 	  <aside class="notes">
 	    <span style="color: red"></span> •
@@ -357,12 +372,12 @@
 	<section data-background-color="#ffffff">
 	  <h2>Summary</h2>
 	  	<ul>
-	  		<li> Intrinsic variance of control units only variable found to predict performance and control unit contributions &#8212; motor unit tuning does not constrain how the task is performed
+	  		<li> Intrinsic variance of control units only variable predictive of performance &#8212; motor unit tuning does not constrain how task performed
 	  	</ul>
-	  	<hr>
 	  	<div class="fragment">
-	  	<p>$\Rightarrow$ Provided basic neuronal constraints imposed by existing circuitry are taken into consideration, BCI design is able to leverage motor cortical adaptability.</p>
-		<p> $\Rightarrow$ Internal and latent dynamics reveal additional information, compared with direct encoding models
+	  	<hr>
+	  	<p>$\Rightarrow$ Provided constraints of existing circuitry are considered, BCI design can utilize motor cortical adaptability</p>
+		<p> $\Rightarrow$ Internal and latent dynamics important
 		</div>
 	  <aside class="notes">
 	    <span style="color: red"></span> •
@@ -376,7 +391,7 @@
 <!-- ----------------------------------------------------------------------- -->
 
 	<section data-background-color="#ffffff">
-	  <h2>Outline</h2>
+	  <h2>Three problems</h2>
       <img src="assets/outline_2.svg" width="100%">
 
 	  <aside class="notes">
@@ -393,29 +408,8 @@
 	</section>
 
 	<section data-background-color="#000000">
-	  <h2>Spontaneous activity in retina drives developmental programs</h2>
-	  <div id="left">
-	  	<ul>
-	  		<li> Insight into structure of nervous system through study of developmental processes
-	  		<li> Normal development of receptive fields in visual cortex relies on spontaneous activity in retina
-	  		<li> Active or permissive role?
-	  	</ul>
-	  	<p><br></p>
-	 	<div class="fragment">
-	  	<div id="left" style="text-align: right;">
-			<img src="assets/kevinford.jpg" height="200px" style="padding-right: 20px">
-			<p class="rcred" style="padding-right: 20px">Kevin Ford </p>
-	  	</div>
-	  	<div id="right" style="text-align: left">
-			<img src="assets/nathankutz.jpg" height="200px">
-			<p class="lcred">Nathan Kutz</p>
-	  	</div>
-	  </div>
-	  </div>
-	  <div id="right">
-		<img src="assets/cajal_retina.png" width="70%">
-	 <p class="rcred">Ramón y Cajal</p>
-	</div>
+	  <h2>Intrinsic population dynamics</h2>
+      <img src="assets/network_retina.svg" width="100%">
 	  <aside class="notes">
 	    <span style="color: red"></span> •
 	    Want a model that can predict specific form of pharmacoligical manipulations
@@ -466,11 +460,11 @@ this purpose is largely unknown.
 	<section data-background-color="#ffffff">
 	  <h2>Reaction-diffusion model of retinal waves</h2>
 	  <p><br>
-	  $$\begin{align*} C_{m}V_{t} & = -{\color{red}g_{Ca}(V-V_{Ca})}-{\color{green}g_{K}(R,S)(V-V_{K})}-{\color{red}g_{L}^{M}(V-V_{L})}-\\ 
+	  $$\begin{align*} C_{m}V_{t} & = -{\color{red}g_{Ca}(V-V_{Ca})}-{\color{green}g_{K}(R,S)}{\color{red}(V-V_{K})}-{\color{red}g_{L}^{M}(V-V_{L})}-\\ 
 	  & {\color{orange}g_{ACh}(V-V_{syn})}-{\color{blue}g_{n}^MN(V-V_{Ca})} \end{align*}$$
 	  <br></p>
 	  <ul>
-	  	<li class="fragment"> <p style="color:#dd0000">Morris Lecar dynamics: refractory variable $R$</p>
+	  	<li class="fragment"> <p style="color:#dd0000">Morris Lecar dynamics</p>
 	  	<li class="fragment"> <p style="color:#009900">Slow after-hyperpolarization (sAHP) current:</p> $$S_t = \gamma G(V) +S/\tau_S$$
 	  	<li class="fragment"> <p style="color:#0000bb">Noise current initiates waves spontaneously: $N$ a Bernoulli RV</p> 
 	  	<li class="fragment"> <p style="color:#ee9900">Diffusion/local coupling of ACh spreads waves:</p> $$\begin{align*} g_{ACh}(A) &= g_{ACh}^M\frac{\delta A^2}{1+\delta A^2} \\ 
@@ -577,14 +571,14 @@ this purpose is largely unknown.
 	<section data-background-color="#ffffff">
 	  <h2>Analog to forest fire model exhibiting self-organized criticality </h2>
 	  <ul>
-	  	<li>Predicts when retinal waves exhibit power-law distributed wave sizes
+	  	<li>Predict occurance of power-law distributed wave sizes
 	  </ul>
 	    <img src="assets/retina_figure6.png" width="100%">
 	  <div class="fragment">
 	  <hr>
 	  <ul>
 	  	<li> Model determines spatiotemporal properties of waves
-	  	<li> Can be used as a tool to investigate role of retinal waves in development
+	  	<li> Tool to probe role of retinal waves in development
 	  </ul>
 	  </div>
 	  <aside class="notes">
@@ -599,7 +593,7 @@ this purpose is largely unknown.
 <!-- ---------------------------------------------------------------------- -->
 
 	<section data-background-color="#ffffff">
-	  <h2>Outline</h2>
+	  <h2>Three problems</h2>
 
     <img src="assets/outline_3.svg" width="100%">
 
@@ -614,8 +608,18 @@ this purpose is largely unknown.
 	  </aside>
 	</section>
 
+	<section>
+	<h2>Relating full neural activity with behavior</h2>
+    <img src="assets/network_hydra.svg" width="100%">
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
 	<section data-background-color="#000000">
-	<h2>Comprehensive measures of neural activity in cnidaria &#8212 "cracking the neural code"</h2>
+	<h2>Relating full neural activity with behavior</h2>
 	  <div>
 	<video src="assets/hydra_feeding_short.mp4" muted controls loop
 	 poster="assets/dst2.png" class="slideautostart" width="60%"></video>
@@ -624,23 +628,10 @@ this purpose is largely unknown.
 	<p>Why Hydra?</p>
 	 <ol>
 	 	<li> Small (0.5mm-1.5cm) &#8212; can fit into field of view of traditional microscope
-	 	<li> Translucent; nerve net, easier imaging
+	 	<li> Translucent, nerve net &#8212; easier imaging
 	 	<li> Does not age, and can regenerate
 	 </ol>
 	</div>
-	  </div>
-	  <aside class="notes">
-	    <span style="color: red"></span> •
-
-	    • <span style="color: green"></span>
-	  </aside>
-	</section>
-
-	<section>
-	<h2>Hydra anatomy</h2>
-	  <div>
-	    <img src="assets/hydra_layers_white.png" width="100%" position="left">
-	    <p class="rcred">Adapted from Technau and Steele 2011</p>
 	  </div>
 	  <aside class="notes">
 	    <span style="color: red"></span> •
@@ -732,13 +723,7 @@ this purpose is largely unknown.
 	<section data-background-color="#ffffff">
 	<h2>Tracking with optic flow: performance</h2>
 		<div id="left">
-		<p>Comparison to hand annotated neuron tracks<br>
-		Per frame:</p>
-		<ul>
-		<li> at least 52% neurons are tracked within 6px
-		<li> on average 82% neurons tracked within 6px
-		</ul>
-		Per neuron:
+		<p>Comparison to hand annotated neuron tracks:
 		<ul>
 		<li> 42% neurons tracked within 6 px throughout all video
 		</ul>
@@ -775,9 +760,9 @@ this purpose is largely unknown.
 	<div id="left">
 	<ul> 
 	<br><br><br>
-	Stereotyped Hydra behavior:<br>elongate then contract<br><br>
-	Compute and measure optic flow error, $f_{ij}(x)$, between frames with regular spacing
-	<br><br>'interframes' &#8212; every 250 frames
+	Hydra behavior:<br>elongate then contract<br><br>
+	Measure optic flow error, $f_{ij}(x)$, for 
+	'interframes' &#8212; every 250 frames
 	</ul>
 	</div>
 	<div id="right" style="text-align: center;">
@@ -797,8 +782,8 @@ this purpose is largely unknown.
 	<div id="left">
 	Two clusters: contracted and elongated
 	<p class="fragment"> 
-	$\Rightarrow$ By registering regions of each interframe with a ref. frame we extend paths into temporally distant but positionally related frames<br>
-	$\Rightarrow$ A mechanism to handle arbitrarily long videos without accumulation of tracking error
+	$\Rightarrow$ Register each interframe with a ref. frame: extend paths to temporally distant, positionally related frames<br>
+	$\Rightarrow$ Handle long videos without accumulation of tracking error
 	</p>
 	</div>
 	<div id="right" style="text-align: center;">
@@ -815,15 +800,16 @@ this purpose is largely unknown.
 
 	<section>
 	<h2>Segmenting regions to register with each reference frame</h2>
-		<p>For $K$ reference frames and $L$ interframes, let $f_{ij}(x)$ represent the optic flow error in using reference image $i$ to construct image $j$.<br>
-		Use total variation image segmentation:
+		<ul>
+		<li>Register pixel in interframe $i$ with reference frame $j$ using error $f_{ij}(x)$
+		<li>Total variation image segmentation:
 		$$\begin{align*}\min_{u_{kl}}\frac{1}{2}\sum_{k=1}^K\sum_{l=1}^L \int_\Omega |\nabla u_{kl}|\,dx
 			+ \frac{\lambda}{2}\sum_{k=1}^K\sum_{l=1}^L \int_{\Omega} u_{kl}(x)f_{kl}(x)\,dx\end{align*}
 		$$
-		Solve with primal-dual algorithm (Chambolle and Pock 2011), accelerated on GPU.
-		</p>
+		<li>Primal-dual algorithm (Chambolle and Pock 2011), accelerated on GPU.
+		</ul>
 	<p class="fragment">
-		Want number of ref frames to balance global registration vs registration error<br>
+		Number of ref frames trades global registration for registration error<br>
 		$\Rightarrow$ Add a group LASSO penalty for number of reference frames used:
 		$$\begin{align*}\min_{u_{kl}}\frac{1}{2}\sum_{k=1}^K\sum_{l=1}^L \int_\Omega |\nabla u_{kl}|\,dx
 			+ \frac{\lambda}{2}\sum_{k=1}^K\sum_{l=1}^L \int_{\Omega} u_{kl}(x)f_{kl}(x)\,dx+ \frac{\lambda_2}{2}\sum_{k=1}^K\left(\sum_{l=1}^L \|u_{kl}\|^2_2 \right)^{1/2}\end{align*}
@@ -902,7 +888,7 @@ this purpose is largely unknown.
 
 	<section>
 	<p><br><br></p>
-	"Progress in science depends on new techniques, new discoveries and new ideas, probably in that order" <br>
+	"Progress in science depends on new techniques, new discoveries and new ideas, probably in that order." <br>
 	&#8212; Sydney Brenner
 	  <aside class="notes">
 	    <span style="color: red"></span> •
@@ -919,27 +905,33 @@ this purpose is largely unknown.
 <!-- ----------------------------------------------------------------------- -->
 <!-- ----------------------------------------------------------------------- -->
 
-	<section>
+	<section data-background-image="./assets/brainbow2.jpg">
 	  <h2>Acknowledgments</h2>
 	  	<hr>
 	  <div id="left">
 	  	<ul>
-         <li> Adrienne Fairhall</li>
+	  		<li> Committee
+         <ul><li> Adrienne Fairhall</li>
+         <li> Nathan Kutz</li>
          <li> Chet Moritz</li>
          <li> Eric Shea-Brown</li>
-         <li> Emily Fox</li>
+         <li> Emily Fox</li></ul>
      </ul>
+	  	<ul>
+        <li> AMATH staff, faculty, students
+        </ul>
      <ul>
-         <li> Ivana Milovanovic</li>
-         <li> Cooper Mellema</li>
-         <li> Eberhard Fetz</li>
+         <li> Fairhall lab</li><ul>
+         	<li> Anatoly Buchin </li>
+         	<li> Rich Pang</li>
+         	<li> Alison Duffy</li></ul>
 	  	</ul>
    	  </div>
 	  <div id="left">
 	  	<ul>
-         <li> Fairhall lab (UW)</li><ul>
-         	<li> Anatoly Buchin </li></ul>
-         <li> Moritz lab (UW)</li><ul>
+         <li> Moritz lab</li><ul>
+            <li> Ivana Milovanovic</li>
+            <li> Cooper Mellema</li>
          	<li> Charlie Matlack </li>
          	<li> Robert Robinson</li></ul>
          <li> Yuste lab (Columbia)</li><ul>
@@ -947,6 +939,10 @@ this purpose is largely unknown.
          <li> Thibault Lagache</li>
          <li> Christophe Dupre</li>
          <li> John Szymanski</li></ul>
+         <li> Kevin Ford</li>
+         <li> Eberhard Fetz</li>
+         <li> David Kleinfeld (UCSD)</li>
+         <li> Yonatan Aljadeff (U. Chicago)</li>
 	  	</ul>
    	  </div>
 	  <aside class="notes">

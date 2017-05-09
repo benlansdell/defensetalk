@@ -14,7 +14,8 @@
       'q' : 0.8, // reliability
       'A' : 1.0, // spike height [mV]
       'nn' : 13, // number of neurons
-      'syn' : randomArray(169, -1)
+      'syn' : randomArray(169, -1),
+      'rec' : [false, false, true, false, true, false, true, false, true, false, true, false, false]
     };
 
     //for i=1:nn, syn(i,i) = 0; end
@@ -70,9 +71,16 @@
     for (i = 0; i < params.nn; i++) {
       var color = new THREE.Color();
       t = Math.min(Math.max(v[i]/params.theta, 0), 1);
-      var vx = 1; //Math.random();
-      var vy = 1-t; //Math.random();
-      var vz = 1-t; //Math.random();
+      if (params.rec[i] == true) {
+        var vx = 1; //Math.random();
+        var vy = 1-t; //Math.random();
+        var vz = 1-t; //Math.random();
+      }
+      else {
+        var vx = .3+0.4*(1-t); //Math.random();
+        var vy = .3+0.4*(1-t); //Math.random();
+        var vz = .3+0.4*(1-t); //Math.random();
+      }
       color.setRGB( vx, vy, vz );
       colors[ i ] = color;
     }
@@ -152,7 +160,7 @@
     return particles;
   }
 
-  window.samples.neuralnetwork = {
+  window.samples.neuralnetwork3 = {
 
     initialize: function(canvas) {
       var scene = new THREE.Scene();
@@ -170,7 +178,9 @@
       }
       var tf = 1;
       var dt = .4;
-      console.log(params);
+      var cx = 0;
+      var cy = 0;
+      var theta = 0;      console.log(params);
       console.log(v);
       console.log(spktms);
 
@@ -197,6 +207,13 @@
       //vidplane.position.x += .7;
       //vidplane.position.y += .15;
       //scene.add( vidplane );
+
+      var gcurs = new THREE.PlaneGeometry( .05, .05 );
+      var mat = new THREE.MeshBasicMaterial( {color: 0x00ff00, side: THREE.DoubleSide} );
+      var cur = new THREE.Mesh( gcurs, mat );
+      scene.add( cur );
+      cur.position.x = 1+cx;
+      cur.position.y = .2+cy;
 
       pts = addNodes(scene);
 
@@ -225,6 +242,15 @@
         //Extract recent activity and change size of points
         updatePoints(pts, v, params)
         renderer.render( scene, camera );
+
+        cx += 0.003*Math.random();
+        cy += 0.003*Math.random();
+        cx /= 1.05;
+        cy /= 1.05;
+        theta += 0.02;
+        cur.position.x = 0.8+0.05*Math.cos(theta) + 5*cx;
+        cur.position.y = .2+0.05*Math.sin(theta) + 5*cy;
+
       }
 
       animate();
