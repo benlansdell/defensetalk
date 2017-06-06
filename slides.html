@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Neural population dynamics in motor control and development</title>
+    <title>Neural population dynamics in development and motor control</title>
       <meta name="viewport"
 	  content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <!--<link rel="stylesheet" href="reveal.js/css/reveal.min.css">-->
@@ -44,18 +44,13 @@
         <section data-background="assets/brainbow2.jpg">
         <!--<section data-background-color="#ffffff">
           <h1 style="color: #000000">Neural population dynamics in application, development and beyond</h1>-->
-          <h1>Neural population dynamics in motor control and development</h1>
+          <h1>Neural population dynamics in development and motor control</h1>
 	  <hr>
-	  <p style="text-align: center; font-size: larger; text-shadow: 0px 0px 0px #0000ff;">Ben Lansdell<br> Applied Mathematics, UW<br><br>
-	  	May 30th 2017</p>
+	  <p style="text-align: center; font-size: larger; text-shadow: 0px 0px 0px #0000ff;">Ben Lansdell<br>Applied Mathematics, UW<br><br>
+	  	June 5th 2017</p>
 	  <aside class="notes">
 	    <span style="color: red">
 	    </span> •
-	    Thank committee members:
-	    Emily Fox, Eric Shea-Brown. Chet Moritz, for welcoming me into his lab. Nathan Kutz, for
-	    introducing me to the field of computational neuroscience, and of course my advisor, Adrienne,
-	    who has been great and very supportive throughout my studies. Has provided me with many exciting opportunities that I appreciate.
-
 	    • <span style="color: green"></span>
 	  </aside>
         </section>
@@ -144,19 +139,10 @@
 	<section data-background-color="#ffffff">
 	  <h2>Three problems</h2>
 
-    <img src="assets/outline.svg" width="100%">
+    <img src="assets/outlineA.svg" width="100%">
 
 	  <aside class="notes">
 	    <span style="color: red"></span> •
-
-	    Ideas for lead in...
-
-	    The brain as a computer: representation is a key component
-	    How does the brain represent?
-
-	    Fly detector (Barlow)
-
-
 	    • <span style="color: green"></span>
 	  </aside>
 	</section>
@@ -164,7 +150,7 @@
 	<section data-background-color="#ffffff">
 	  <h2>Three problems</h2>
 
-    <img src="assets/outline_1.svg" width="100%">
+    <img src="assets/outlineA_1.svg" width="100%">
 
 	  <aside class="notes">
 	    <span style="color: red"></span> •
@@ -177,6 +163,208 @@
 <!-- ----------------------------------------------------------------------- -->
 <!-- ----------------------------------------------------------------------- -->
 
+	<section data-background-color="#000000">
+	  <h2>Intrinsic population dynamics</h2>
+      <img src="assets/network_retina.svg" width="100%">
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+	    Want a model that can predict specific form of pharmacoligical manipulations
+	    that may better help determine the precise role retinal waves play during development.
+
+
+Vertebrate and invertebrate animals have similar neurons, and yet their nervous
+systems function very differently. Freud and Cajal independently conjectured that it must be the
+number of neurons, and how they inter-connect, that accounts for their different functionality.
+A fundamental question is thus how does this connectivity arise? Two general developmental
+processes can be described: first, genetically determined cues provide a coarse layout of cells and
+connections and second, neural activity removes unwanted cells and refines connections. This
+activity occurs not just through external stimulation, but also through correlated, spontaneously
+generated bursts of action potentials occurring in hyperexcitable regions of the developing nervous
+system prior to external input. Such activity has been implicated in the maturation of the retina,
+spinal cord, hippocampus, cochlea, neocortex and a number of other regions [1]. To what extent
+regions of the CNS rely on this activity for their development and what information they utilize for
+this purpose is largely unknown.
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section data-background-color="#000000">
+	  <h2>Retinal waves initiated and propagated by starburst amacrine cells (SACs)</h2>
+	  <div>
+		<img src="assets/retina_section.jpg" width="90%">
+	 <p class="rcred">Josh Morgan 2005 (http://wonglab.biostr.washington.edu/research.html)</p>
+	</div>
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section>
+	  <h2>Retinal waves initiated and propagated by starburst amacrine cells (SACs)</h2>
+	<video src="assets/Ford2011_suppmovie1.mp4" muted controls loop
+	 poster="assets/dst2.png" class="slideautostart" width="70%"></video>
+	 <p class="rcred">Ford et al 2012</p>
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section data-background-color="#ffffff">
+	  <h2>Reaction-diffusion model of retinal waves</h2>
+	  <p><br>
+	  $$\begin{align*} C_{m}V_{t} & = -{\color{red}g_{Ca}(V-V_{Ca})}-{\color{green}g_{K}(R,S)}{\color{red}(V-V_{K})}-{\color{red}g_{L}^{M}(V-V_{L})}-\\ 
+	  & {\color{orange}g_{ACh}(V-V_{syn})}-{\color{blue}g_{n}^MN(V-V_{Ca})} \end{align*}$$
+	  <br></p>
+	  <ul>
+	  	<li class="fragment"> <p style="color:#dd0000">Morris Lecar dynamics</p>
+	  	<li class="fragment"> <p style="color:#009900">Slow after-hyperpolarization (sAHP) current:</p> $$S_t = \gamma G(V) +S/\tau_S$$
+	  	<li class="fragment"> <p style="color:#0000bb">Noise current initiates waves spontaneously: $N$ a Bernoulli RV</p> 
+	  	<li class="fragment"> <p style="color:#ee9900">Diffusion/local coupling of ACh spreads waves:</p> $$\begin{align*} g_{ACh}(A) &= g_{ACh}^M\frac{\delta A^2}{1+\delta A^2} \\ 
+	  		A_t &= D\nabla^2 A + \beta G(V) -\frac{A}{\tau_{ACh}}
+	  		\end{align*}$$
+	  </ul>
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section data-background-color="#ffffff">
+	  <h2>Amacrine cell network as an excitable medium</h2>
+	<video src="assets/ml_default_sol.mp4" muted controls loop
+	 poster="assets/dst2.png" class="slideautostart" width="100%"></video>
+	 <p class="rcred">Lansdell, Ford and Kutz PLoS Comp Bio. 2014</p>
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section data-background-color="#ffffff">
+	  <h2>Model produces realistic cholinergic retinal waves</h2>
+	    <img src="assets/retina_figure2.png" width="75%">
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section data-background-color="#ffffff">
+	  <h2>When is the medium excitable?</h2>
+	  <ul>
+	  	<li> Non-dimensionalize, separate into fast-slow dynamics
+	  		$$\begin{align*}
+	  			v_t &= f(v,a;r)\\
+	  			a_t &= \nabla^2 a + \frac{k(v,a)}{\tilde{\tau}_{ACh}}\\
+	  		\end{align*} $$
+	  	<li> Shift to traveling frame at speed $c$: $x' = x - ct; t' = t$
+	  	<li> Heteroclinic orbit from rest to excited state is wave front
+	  		$$\begin{align*}
+	  			0 &= f(v,a;r) + cv'\\
+	  			0 &= ca' + a'' + \frac{k(v,a)}{\tilde{\tau}_{ACh}}\\
+	  		\end{align*} $$	  		
+	  </ul>
+	    <img src="assets/retina_figure3.png" width="100%">
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section data-background-color="#ffffff">
+	  <h2>When is the medium excitable?</h2>
+	  <ul>
+	  	<li> Non-dimensionalize, separate into fast-slow dynamics
+	  		$$\begin{align*}
+	  			v_t &= f(v,a;r)\\
+	  			a_t &= \nabla^2 a + \frac{k(v,a)}{\tilde{\tau}_{ACh}}\\
+	  		\end{align*} $$
+	  	<li> Shift to traveling frame at speed $c$: $x' = x - ct; t' = t$
+	  	<li> Heteroclinic orbit from rest to excited state is wave front
+	  		$$\begin{align*}
+	  			0 &= f(v,a;r) + cv'\\
+	  			0 &= ca' + a'' + \frac{k(v,a)}{\tilde{\tau}_{ACh}}\\
+	  		\end{align*} $$	  		
+	  </ul>
+	    <img src="assets/retina_figure4.png" width="40%">
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section data-background-color="#ffffff">
+	  <h2>Model predicts outcome of pharmacological manipulations</h2>
+	  <ul>
+	  	<li> Nicotinic ACh receptor agonists/antagonists affect conductance $g_{ACh}^M$
+	  		<ul>
+	  			<li> Wave speed highly sensitive to $g_{ACh}^M$.
+	  			<li> Wave frequency affected
+	  		</ul>
+	  	<li> Forskolin affects second messenger cAMP, affects sAHP
+	  		<ul>
+	  			<li> Moderate change in wave frequency
+	  			<li> No change in wave speed
+	  		</ul>
+	  </ul> 
+	    <img src="assets/retina_figure5.png" width="80%">
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+	<section data-background-color="#ffffff">
+	  <h2>Analog to forest fire model exhibiting self-organized criticality </h2>
+	  <ul>
+	  	<li>Predict occurance of power-law distributed wave sizes
+	  </ul>
+	    <img src="assets/retina_figure6.png" width="100%">
+	  <div class="fragment">
+	  <hr>
+	  <ul>
+	  	<li> Model determines spatiotemporal properties of waves
+	  	<li> Tool to probe role of retinal waves in development
+	  </ul>
+	  </div>
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
+
+<!-- ----------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------- -->
+
+
+	<section data-background-color="#ffffff">
+	  <h2>Three problems</h2>
+      <img src="assets/outline_2.svg" width="100%">
+
+	  <aside class="notes">
+	    <span style="color: red"></span> •
+	    Ok, so we've seen how considerations of wrist tuning do not need to be
+	    considered in a concurrent use BCI, that only factors of variance are predictive
+	    of performance.
+
+	    In the next section we will change gears a little bit and look at a model which
+	    can help describe developmental processes that are relevant to the formation of
+	    receptive fields in the retina. 
+	    • <span style="color: green"></span>
+	  </aside>
+	</section>
 
 	<section>
 		<h2>Encoding in primary motor cortex</h2>
@@ -405,208 +593,6 @@
 	  </aside>
 	</section>
 
-<!-- ----------------------------------------------------------------------- -->
-<!-- ----------------------------------------------------------------------- -->
-<!-- ----------------------------------------------------------------------- -->
-
-	<section data-background-color="#ffffff">
-	  <h2>Three problems</h2>
-      <img src="assets/outline_2.svg" width="100%">
-
-	  <aside class="notes">
-	    <span style="color: red"></span> •
-	    Ok, so we've seen how considerations of wrist tuning do not need to be
-	    considered in a concurrent use BCI, that only factors of variance are predictive
-	    of performance.
-
-	    In the next section we will change gears a little bit and look at a model which
-	    can help describe developmental processes that are relevant to the formation of
-	    receptive fields in the retina. 
-	    • <span style="color: green"></span>
-	  </aside>
-	</section>
-
-	<section data-background-color="#000000">
-	  <h2>Intrinsic population dynamics</h2>
-      <img src="assets/network_retina.svg" width="100%">
-	  <aside class="notes">
-	    <span style="color: red"></span> •
-	    Want a model that can predict specific form of pharmacoligical manipulations
-	    that may better help determine the precise role retinal waves play during development.
-
-
-Vertebrate and invertebrate animals have similar neurons, and yet their nervous
-systems function very differently. Freud and Cajal independently conjectured that it must be the
-number of neurons, and how they inter-connect, that accounts for their different functionality.
-A fundamental question is thus how does this connectivity arise? Two general developmental
-processes can be described: first, genetically determined cues provide a coarse layout of cells and
-connections and second, neural activity removes unwanted cells and refines connections. This
-activity occurs not just through external stimulation, but also through correlated, spontaneously
-generated bursts of action potentials occurring in hyperexcitable regions of the developing nervous
-system prior to external input. Such activity has been implicated in the maturation of the retina,
-spinal cord, hippocampus, cochlea, neocortex and a number of other regions [1]. To what extent
-regions of the CNS rely on this activity for their development and what information they utilize for
-this purpose is largely unknown.
-	    • <span style="color: green"></span>
-	  </aside>
-	</section>
-
-	<section data-background-color="#000000">
-	  <h2>Retinal waves initiated and propagated by starburst amacrine cells (SACs)</h2>
-	  <div>
-		<img src="assets/retina_section.jpg" width="90%">
-	 <p class="rcred">Josh Morgan 2005 (http://wonglab.biostr.washington.edu/research.html)</p>
-	</div>
-	  <aside class="notes">
-	    <span style="color: red"></span> •
-
-	    • <span style="color: green"></span>
-	  </aside>
-	</section>
-
-	<section>
-	  <h2>Retinal waves initiated and propagated by starburst amacrine cells (SACs)</h2>
-	<video src="assets/Ford2011_suppmovie1.mp4" muted controls loop
-	 poster="assets/dst2.png" class="slideautostart" width="70%"></video>
-	 <p class="rcred">Ford et al 2012</p>
-	  <aside class="notes">
-	    <span style="color: red"></span> •
-
-	    • <span style="color: green"></span>
-	  </aside>
-	</section>
-
-	<section data-background-color="#ffffff">
-	  <h2>Reaction-diffusion model of retinal waves</h2>
-	  <p><br>
-	  $$\begin{align*} C_{m}V_{t} & = -{\color{red}g_{Ca}(V-V_{Ca})}-{\color{green}g_{K}(R,S)}{\color{red}(V-V_{K})}-{\color{red}g_{L}^{M}(V-V_{L})}-\\ 
-	  & {\color{orange}g_{ACh}(V-V_{syn})}-{\color{blue}g_{n}^MN(V-V_{Ca})} \end{align*}$$
-	  <br></p>
-	  <ul>
-	  	<li class="fragment"> <p style="color:#dd0000">Morris Lecar dynamics</p>
-	  	<li class="fragment"> <p style="color:#009900">Slow after-hyperpolarization (sAHP) current:</p> $$S_t = \gamma G(V) +S/\tau_S$$
-	  	<li class="fragment"> <p style="color:#0000bb">Noise current initiates waves spontaneously: $N$ a Bernoulli RV</p> 
-	  	<li class="fragment"> <p style="color:#ee9900">Diffusion/local coupling of ACh spreads waves:</p> $$\begin{align*} g_{ACh}(A) &= g_{ACh}^M\frac{\delta A^2}{1+\delta A^2} \\ 
-	  		A_t &= D\nabla^2 A + \beta G(V) -\frac{A}{\tau_{ACh}}
-	  		\end{align*}$$
-	  </ul>
-	  <aside class="notes">
-	    <span style="color: red"></span> •
-
-	    • <span style="color: green"></span>
-	  </aside>
-	</section>
-
-	<section data-background-color="#ffffff">
-	  <h2>Amacrine cell network as an excitable medium</h2>
-	<video src="assets/ml_default_sol.mp4" muted controls loop
-	 poster="assets/dst2.png" class="slideautostart" width="100%"></video>
-	 <p class="rcred">Lansdell, Ford and Kutz PLoS Comp Bio. 2014</p>
-	  <aside class="notes">
-	    <span style="color: red"></span> •
-
-	    • <span style="color: green"></span>
-	  </aside>
-	</section>
-
-	<section data-background-color="#ffffff">
-	  <h2>Model produces realistic cholinergic retinal waves</h2>
-	    <img src="assets/retina_figure2.png" width="75%">
-	  <aside class="notes">
-	    <span style="color: red"></span> •
-
-	    • <span style="color: green"></span>
-	  </aside>
-	</section>
-
-	<section data-background-color="#ffffff">
-	  <h2>When is the medium excitable?</h2>
-	  <ul>
-	  	<li> Non-dimensionalize, separate into fast-slow dynamics
-	  		$$\begin{align*}
-	  			v_t &= f(v,a;r)\\
-	  			a_t &= \nabla^2 a + \frac{k(v,a)}{\tilde{\tau}_{ACh}}\\
-	  		\end{align*} $$
-	  	<li> Shift to traveling frame at speed $c$: $x' = x - ct; t' = t$
-	  	<li> Heteroclinic orbit from rest to excited state is wave front
-	  		$$\begin{align*}
-	  			0 &= f(v,a;r) + cv'\\
-	  			0 &= ca' + a'' + \frac{k(v,a)}{\tilde{\tau}_{ACh}}\\
-	  		\end{align*} $$	  		
-	  </ul>
-	    <img src="assets/retina_figure3.png" width="100%">
-	  <aside class="notes">
-	    <span style="color: red"></span> •
-
-	    • <span style="color: green"></span>
-	  </aside>
-	</section>
-
-	<section data-background-color="#ffffff">
-	  <h2>When is the medium excitable?</h2>
-	  <ul>
-	  	<li> Non-dimensionalize, separate into fast-slow dynamics
-	  		$$\begin{align*}
-	  			v_t &= f(v,a;r)\\
-	  			a_t &= \nabla^2 a + \frac{k(v,a)}{\tilde{\tau}_{ACh}}\\
-	  		\end{align*} $$
-	  	<li> Shift to traveling frame at speed $c$: $x' = x - ct; t' = t$
-	  	<li> Heteroclinic orbit from rest to excited state is wave front
-	  		$$\begin{align*}
-	  			0 &= f(v,a;r) + cv'\\
-	  			0 &= ca' + a'' + \frac{k(v,a)}{\tilde{\tau}_{ACh}}\\
-	  		\end{align*} $$	  		
-	  </ul>
-	    <img src="assets/retina_figure4.png" width="40%">
-	  <aside class="notes">
-	    <span style="color: red"></span> •
-
-	    • <span style="color: green"></span>
-	  </aside>
-	</section>
-
-	<section data-background-color="#ffffff">
-	  <h2>Model predicts outcome of pharmacological manipulations</h2>
-	  <ul>
-	  	<li> Nicotinic ACh receptor agonists/antagonists affect conductance $g_{ACh}^M$
-	  		<ul>
-	  			<li> Wave speed highly sensitive to $g_{ACh}^M$.
-	  			<li> Wave frequency affected
-	  		</ul>
-	  	<li> Forskolin affects second messenger cAMP, affects sAHP
-	  		<ul>
-	  			<li> Moderate change in wave frequency
-	  			<li> No change in wave speed
-	  		</ul>
-	  </ul> 
-	    <img src="assets/retina_figure5.png" width="80%">
-	  <aside class="notes">
-	    <span style="color: red"></span> •
-
-	    • <span style="color: green"></span>
-	  </aside>
-	</section>
-
-	<section data-background-color="#ffffff">
-	  <h2>Analog to forest fire model exhibiting self-organized criticality </h2>
-	  <ul>
-	  	<li>Predict occurance of power-law distributed wave sizes
-	  </ul>
-	    <img src="assets/retina_figure6.png" width="100%">
-	  <div class="fragment">
-	  <hr>
-	  <ul>
-	  	<li> Model determines spatiotemporal properties of waves
-	  	<li> Tool to probe role of retinal waves in development
-	  </ul>
-	  </div>
-	  <aside class="notes">
-	    <span style="color: red"></span> •
-
-	    • <span style="color: green"></span>
-	  </aside>
-	</section>
-
 <!-- ---------------------------------------------------------------------- -->
 <!-- ---------------------------------------------------------------------- -->
 <!-- ---------------------------------------------------------------------- -->
@@ -629,99 +615,24 @@ this purpose is largely unknown.
 
 	<section>
 	<h2>Relating full neural activity with behavior</h2>
-    <img src="assets/network_hydra.svg" width="100%">
-	  <aside class="notes">
-	    <span style="color: red"></span> •
-
-	    • <span style="color: green"></span>
-	  </aside>
-	</section>
-
-	<section data-background-color="#000000">
-	<h2>Relating full neural activity with behavior</h2>
-	  <div>
-	<video src="assets/hydra_feeding_short.mp4" muted controls loop
-	 poster="assets/dst2.png" class="slideautostart" width="60%"></video>
-	 <p class="rcred">https://www.youtube.com/watch?v=dl_oVns2oa8</p>
-	 <div class="fragment">
-	<p>Why Hydra?</p>
-	 <ol>
-	 	<li> Small (0.5mm-1.5cm) &#8212; can fit into field of view of traditional microscope
-	 	<li> Translucent, nerve net &#8212; easier imaging
-	 	<li> Does not age, and can regenerate
-	 </ol>
+	<div id="left">
+    <img src="assets/network_hydra2.svg" width="100%">
 	</div>
-	  </div>
-	  <aside class="notes">
-	    <span style="color: red"></span> •
-
-	    • <span style="color: green"></span>
-	  </aside>
-	</section>
-
-	<section>
-	<h2>Aims</h2>
-<hr>Understand (and control) neuronal basis of simple behavior such as contracting/elongating and expelling
-	    fluid (egestion)</p>
-	     <div>
-<hr><p>Sub-aims:</p>
-	  	<ol>
-	  	<li class="fragment highlight-green">Track Hydra pose</li>
-	  	<li>Behavioral analysis</li>
-	  	<li>Register and track neurons</li>
-	  	<li>Record neural activity</li>
-	  </ol>
-	  </div>
-	  <div class="fragment">
-	  	<hr>
-	  	<div class="column-left">
-			<img src="assets/Adrienne-Fairhall.jpg" height="200px">
-			<p class="lcred">Adrienne Fairhall</p>
-	  	</div>
-	  	<div class="column-center">
-			<img src="assets/yuste.jpg" height="200px">
-			<p class="lcred">Rafael Yuste</p>
-		</div>
-	  	<div class="column-right">
-			<img src="assets/dupre.jpg" height="200px">
-			<p class="lcred">Christophe Dupre</p>
-	  	</div>
-	  </div>
-	  <aside class="notes">
-	    <span style="color: red"></span> •
-
-	    • <span style="color: green"></span>
-	  </aside>
-	</section>
-
-	<section >
-	<h2>Experiment</h2>
-	  <div id="left">
-	    <img src="assets/hydrasetup.jpg" width="50%">
-	    <p class="rcred"></p>
-	  </div>
-	  <div id="right">
-	    <img src="assets/hydrasetup3.jpg" width="100%" position="left">
-	    <p class="rcred">C. Dupre, Yuste lab</p>
-	  </div>
-	    <p>Methods</p>
-	    <ul>
-	    <li> Create Act-GCaMP6s transgenic Hydra
-		<li> Mount between coverslips separated by .1mm spacer
-		<li> Image calcium transients
-		</ul>
-	  <aside class="notes">
-	    <span style="color: red"></span> •
-
-	    • <span style="color: green"></span>
-	  </aside>
-	</section>
-
-	<section>
-	<h2>Whole-body calcium imaging in Hydra</h2>
+	<div id="right">
+	<div class="fragment">
 	<video src="assets/hydra_gcamp.mp4" muted controls loop
-	 poster="assets/dst2.png" class="slideautostart" width="70%"></video>
+	 poster="assets/dst2.png" class="slideautostart" width="100%"></video>
 	 <p class="rcred">C. Dupre, Yuste lab</p>
+	</div>
+	<div class="fragment">
+	<p>Why Hydra?</p>
+	<ol>
+	 	<li> Small (0.5mm-1.5cm)
+	 	<li> Translucent, nerve net
+	 	<li> Does not age
+	</ol>
+	</div>
+	</div>
 	  <aside class="notes">
 	    <span style="color: red"></span> •
 
@@ -740,112 +651,11 @@ this purpose is largely unknown.
 	  </aside>
 	</section>
 
-	<section data-background-color="#ffffff">
-	<h2>Tracking with optic flow: performance</h2>
-		<div id="left">
-		<p>Comparison to hand annotated neuron tracks:
-		<ul>
-		<li> 42% neurons tracked within 6 px throughout all video
-		</ul>
-		</div>
-		<div id="right">
-<video src="assets/warp_neurons_nref100.mp4" muted controls loop
-	 poster="assets/dst2.png" class="slideautostart"></video>
-	</div>
-	  <aside class="notes">
-	    <span style="color: red"></span> •
-	    
-	    • <span style="color: green"></span>
-	  </aside>
-	</section>
-
-	<section>
-	<h2>Choosing which paths to associate</h2>
-	Measure image registration error
-		<img src="assets/combined.png">
-		<div>
-		<div class="column-left">Forward map $$g_{1,2}(\mathbf{x})$$</div>
-		<div class="column-center">Reverse map $$g_{2,1}(\mathbf{x})$$</div>
-		<div class="column-right">Error $$f_{1,2}(\mathbf{x}) = \left|g_{2,1}(g_{1,2}(\mathbf{x}))-\mathbf{x}\right|$$</div>
-		</div>
-		<br><img src="assets/colorwheel.png" align="left">
-	  <aside class="notes">
-	    <span style="color: red"></span> •
-	    • <span style="color: green"></span>
-	  </aside>
-	</section>
-
-	<section data-background-color="#ffffff">
-	<h2>Exploiting periodicity in Hydra behavior</h2>
-	<div id="left">
-	<ul> 
-	<br><br><br>
-	Hydra behavior:<br>elongate then contract<br><br>
-	Measure optic flow error, $f_{ij}(x)$, for 
-	'interframes' &#8212; every 250 frames
-	</ul>
-	</div>
-	<div id="right" style="text-align: center;">
-		Average error: $\langle f_{ij}(x)\rangle_\Omega$
-		<img src="assets/similarity_orig.png">
-		Frame index
-	</div>
-
-	  <aside class="notes">
-	    <span style="color: red"></span> •
-	    • <span style="color: green"></span>
-	  </aside>
-	</section>
-
-	<section data-background-color="#ffffff">
-	<h2>Exploiting periodicity in Hydra behavior</h2>
-	<div id="left">
-	Two clusters: contracted and elongated
-	<p class="fragment"> 
-	$\Rightarrow$ Register each interframe with a ref. frame: extend paths to temporally distant, positionally related frames<br>
-	$\Rightarrow$ Handle long videos without accumulation of tracking error
-	</p>
-	</div>
-	<div id="right" style="text-align: center;">
-		Average error: $\langle f_{ij}(x)\rangle_\Omega$<br>
-		<img src="assets/dendrogram.png" width="70%">
-	</div>
-		<img src="assets/dend_d1_tile_c1.png" width="80%">
-		<img src="assets/dend_d1_tile_c2.png" width="80%">
-	  <aside class="notes">
-	    <span style="color: red"></span> •
-	    • <span style="color: green"></span>
-	  </aside>
-	</section>
-
-	<section>
-	<h2>Segmenting regions to register with each reference frame</h2>
-		<ul>
-		<li>Register pixel in interframe $i$ with reference frame $j$ using error $f_{ij}(x)$
-		<li>Total variation image segmentation:
-		$$\begin{align*}\min_{u_{kl}}\frac{1}{2}\sum_{k=1}^K\sum_{l=1}^L \int_\Omega |\nabla u_{kl}|\,dx
-			+ \frac{\lambda}{2}\sum_{k=1}^K\sum_{l=1}^L \int_{\Omega} u_{kl}(x)f_{kl}(x)\,dx\end{align*}
-		$$
-		<li>Primal-dual algorithm (Chambolle and Pock 2011), accelerated on GPU.
-		</ul>
-	<p class="fragment">
-		Number of ref frames trades global registration for registration error<br>
-		$\Rightarrow$ Add a group LASSO penalty for number of reference frames used:
-		$$\begin{align*}\min_{u_{kl}}\frac{1}{2}\sum_{k=1}^K\sum_{l=1}^L \int_\Omega |\nabla u_{kl}|\,dx
-			+ \frac{\lambda}{2}\sum_{k=1}^K\sum_{l=1}^L \int_{\Omega} u_{kl}(x)f_{kl}(x)\,dx+ \frac{\lambda_2}{2}\sum_{k=1}^K\left(\sum_{l=1}^L \|u_{kl}\|^2_2 \right)^{1/2}\end{align*}
-		$$
-	</p>
-	  <aside class="notes">
-	    <span style="color: red"></span> •
-	    • <span style="color: green"></span>
-	  </aside>
-	</section>
-
 	<section>
 	<h2>Method</h2>
 		<p> 
-			1. Select very sparse set of reference frames (ref frames)<br>
 			2. Select regular set of inter-frames<br>
+			1. Select very sparse set of reference frames<br>
 			<img src="assets/dend_d1_tile_c1_hl.png" width="90%"><br>
 			<img src="assets/dend_d1_tile_c2_hl.png" width="90%"><br>
 			3. Use optic flow+image segmentation to label regions mapping to reference frames<br>
@@ -885,7 +695,7 @@ this purpose is largely unknown.
 	</section>
 
 	<section>
-	<h2>Extending with $K=2; L = 8$</h2>
+	<h2>Long term path association</h2>
 	<video src="assets/mfsf_dm_combined2.mp4" muted controls loop
 	 poster="assets/dst2.png" class="slideautostart" width="55%"></video>
 	  <aside class="notes">
@@ -909,24 +719,6 @@ this purpose is largely unknown.
 	    • <span style="color: green"></span>
 	  </aside>
 	</section>
-
-	<!--<section>
-	<p><br><br></p>
-	"Progress in science depends on new techniques, new discoveries and new ideas, probably in that order." <br>
-	&#8212; Sydney Brenner
-	  <aside class="notes">
-	    <span style="color: red"></span> •
-	    This talk has provided an overview of the progression of neuroscience in the last half century or so.
-	    From single unit recordings with some behavior of interest, to population studies involving calcium
-	    imaging. To, in the past five years or so, these whole-brain imaging studies.
-
-	    It's an open problem what progressions in theory these technologies will enable,
-	    in a sense neuroscience is a discipline in need of general theories and principles,
-	    and we're still in a data exploration stage. Thus, in moving forward, I think it's helpful
-	    to keep in the mind the following quote from biologist Sydney Brenner. 
-	    • <span style="color: green"></span>
-	  </aside>
-	</section>-->
 
 <!-- ----------------------------------------------------------------------- -->
 <!-- ----------------------------------------------------------------------- -->
@@ -974,143 +766,6 @@ this purpose is largely unknown.
 <!-- ----------------------------------------------------------------------- -->
 <!-- ----------------------------------------------------------------------- -->
 <!-- ----------------------------------------------------------------------- -->
-
-	<section>
-	<h2>Segmenting regions to extend</h2>
-	<div id="left">
-		Mumford-Shah image segmention: divide into $k$ regions of constant color, while trying to minimize perimeter of region boundaries
-	</div>
-	<div id="right"><img src="assets/butterfly_together.png"></div>
-		$$\begin{align*}\min_{(R_l),c_l}\frac{1}{2}\sum_{l=1}^k \text{Per}(R_l;\Omega)
-			+ \frac{\lambda}{2}\sum_{l=1}^k \int_{R_l} |g(x)-c_l|^2\,dx\end{align*}$$
-	  <aside class="notes">
-	    <span style="color: red"></span> •
-	    • <span style="color: green"></span>
-	  </aside>
-	</section>
-
-	<section>
-	<h2>Segmenting regions to extend</h2>
-	<div id="left">
-		Mumford-Shah image segmention: divide into $k$ regions of constant color, while trying to minimize perimeter of region boundaries
-	</div>
-	<div id="right"><img src="assets/butterfly_together.png"></div>
-	<p>
-		$$\begin{align*}\min_{u_l}\frac{1}{2}\sum_{l=1}^k \int_\Omega |\nabla u_l|\,dx
-			+ \frac{\lambda}{2}\sum_{l=1}^k \int_{\Omega} u_l(x)f_l(x)\,dx\end{align*}
-		$$
-		with $f_l(x) = |g(x)-c_l|^2$. Assume $c_l$ are known and $\mathbf{u}\in U$:
-		$$
-		U = \left\{u_l:\sum_l^k u_l(x) = 1, \quad u_l(x) \ge 0, \forall x\in\Omega\right\}
-		$$
-		Convex in $\mathbf{u}$<br>
-		Select color via $v(x) = \text{argmax}_l u_l(x)$ 
-	</p>
-	  <aside class="notes">
-	    <span style="color: red"></span> •
-	    • <span style="color: green"></span>
-	  </aside>
-	</section>
-
-	<section>
-	<h2>Mumford-Shah image segmentation</h2>
-	<p>
-		Chambolle algorithm solves problems:
-		$$\min_{x\in X}F(Kx) + G(x)$$
-		for convex $F(\cdot):Y\to [0,\infty]$ and $G(\cdot):X\to [0,\infty]$, 
-		<br>in primal-dual form:
-		$$\min_{x\in X}\max_{y\in Y} \langle Kx, y\rangle - F^*(y) + G(x)$$
-		<em>Algorithm:</em>
-	</p>
-	<ol>
-	<li> Initialization: $\tau, \sigma > 0, \theta \in [0,1], (x^0,y^0)\in X\times Y$. Set $\bar{x}^0 = x^0$
-	<li> Iterate until convergence: ($n\ge 0$)
-		$$\begin{align}
-		y^{n+1} &= \pi_{F^*}(y^n + \sigma K \bar{x}^n; \sigma)\\
-		x^{n+1} &= \pi_G(x^n - \tau K^* {y}^{n+1}; \tau)\\
-		\bar{x}^{n+1} &= x^{n+1} +\theta(x^{n+1} - x^n)
-		\end{align}$$
-	</ol>
-	  <aside class="notes">
-	    <span style="color: red"></span> •
-	    • <span style="color: green"></span>
-	  </aside>
-	</section>
-
-	<section>
-	<h2>Mumford-Shah image segmentation</h2>
-	<p>
-		With proximal operator
-		$$
-		\pi_G(y;\tau) = \text{argmin}_{x}\frac{\|x-y\|_2^2}{2\tau}+G(x)
-		$$
-		<br>
-		Primal-dual MS image segmentation:  
-		$$\begin{align}\min_{u=(u_l)_{l=1}^k} \max_{p=(p_l)_{l=1}^k} &\left(\sum_{l=1}^k\langle \nabla u_l, p_l \rangle +\langle u_l, f_l \rangle \right) +\delta_U(u) - \delta_P(p) \end{align}$$
-		So,
-		<ul>
-		<li> $K = \nabla$ (first order forward difference)
-		<li> $K^* = -\text{div}$ (first order backward difference)
-		<li> $F^*(p) = \delta_P(p)$ with $P=\left\{ p\in Y^k:\|p_l\|_\infty \le \frac{1}{2}\right\}$
-		<li> $G(u) = \delta_U(u)$
-		</ul>
-		Proximal operaters $\pi_{F^*}$ and $\pi_G$ are pixel-wise projection onto convex sets $P$ and $U$
-		$\Rightarrow$ Easy to implement on GPU
-	</p>
-	  <aside class="notes">
-	    <span style="color: red"></span> •
-	    • <span style="color: green"></span>
-	  </aside>
-	</section>
-
-	<section>
-	<h2>Segmentation of tracked regions</h2>
-
-		<p>For $K$ reference frames and $L$ iframes, let $f_{ij}(x)$ represent the optic flow error in using reference image $i$ to construct image $j$.  
-		$$\begin{align}\min_{u} \max_{p} \sum_{l=1}^L\left(\sum_{k=1}^K\langle \nabla u_{kl}, p_{kl} \rangle +\langle u_{kl}, f_{kl} \rangle \right) +\delta_U(u) - \delta_P(p) \end{align}$$
-		</p>
-	  <aside class="notes">
-	    <span style="color: red"></span> •
-	    • <span style="color: green"></span>
-	  </aside>
-	</section>
-
-	<section>
-	<h2>Choosing ref frames</h2>
-	<p>
-		Want number of ref frames to balance global registration vs registration error <br><br>
-		Add a group LASSO penalty for number of reference frames used:
-		$$\begin{align}\min_{u=(u_l)_{l=1}^k} \max_{p=(p_l)_{l=1}^k} &\left(\sum_{l=1}^k\langle \nabla u_l, p_l \rangle +\langle u_l, f_l \rangle \right) +\delta_U(u) - \delta_P(p) +\frac{\lambda_2}{2}\sum_{k=1}^K\left(\sum_{l=1}^L \|u_{kl}\|^2_2 \right)^{1/2} \end{align}$$
-		The proximal operator $\pi_G$ now becomes:
-		$$
-		\pi_G(y;\tau) = \text{argmin}_{x}\frac{\|x-y\|_2^2}{2\tau}+\frac{\lambda_2}{2}\sum_{k=1}^K\left(\sum_{l=1}^L \|y_{kl}\|^2_2 \right)^{1/2}+\delta_U(y)
-		$$
-		Compute $\pi_G$ with ADMM
-	</p>
-	  <aside class="notes">
-	    <span style="color: red"></span> •
-	    • <span style="color: green"></span>
-	  </aside>
-	</section>
-
-	<section>
-	<h2>Multi-frame optic flow image registration</h2>
-	<ul id="blanklist">
-	<li> Dense optic flow with subspace constraints (MFSF, Garg et al 2013)
-	<li> For each pixel find linear combination of basis paths, $L$, that minimize energy<br>
-	<img src="assets/energyeq.png">
-	<li> $I_f$ = image at frame $f$,
-	<li> $I_0$ = reference frame (need not be first frame of video),
-	<li> $Q_f^u$, $Q_f^v$ = basis paths at frame $f$, 
-	<li> $\alpha$ = smoothness regularizer
-	</ul>
-	  <aside class="notes">
-	    <span style="color: red"></span> •
-
-	    • <span style="color: green"></span>
-	  </aside>
-	</section>
-
 
     <!--<script src="reveal.js/js/reveal.min.js"></script>-->
     <script src="reveal.js/js/reveal.js"></script>
